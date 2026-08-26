@@ -1,0 +1,4446 @@
+{
+  "version": "2.17",
+  "children": [
+    {
+      "type": "frame",
+      "id": "bi8Au",
+      "x": 0,
+      "y": 0,
+      "name": "Cal.com Design System",
+      "clip": true,
+      "width": 1600,
+      "height": 5600,
+      "fill": "$colors.canvas",
+      "layout": "vertical",
+      "gap": "$spacing.section",
+      "padding": 64,
+      "children": [
+        {
+          "type": "frame",
+          "id": "U7irav",
+          "name": "Header",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 16,
+          "children": [
+            {
+              "type": "text",
+              "id": "lpjHp",
+              "name": "Title",
+              "fill": "$colors.ink",
+              "content": "Cal.com Marketing Design System",
+              "lineHeight": 1.1,
+              "fontFamily": "$font.display",
+              "fontSize": "$type.display-lg",
+              "fontWeight": "600",
+              "letterSpacing": -1.5
+            },
+            {
+              "type": "text",
+              "id": "i7zXl",
+              "name": "Subtitle",
+              "fill": "$colors.body",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "White canvas, black CTAs, display headlines with negative tracking, light-gray cards with product chrome, and a single dark footer close.",
+              "lineHeight": 1.5,
+              "fontFamily": "$font.ui",
+              "fontSize": "$type.body-md"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "HIgID",
+          "name": "Color Tokens",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 24,
+          "children": [
+            {
+              "type": "text",
+              "id": "P1Ptt",
+              "name": "Colors Heading",
+              "fill": "$colors.ink",
+              "content": "Color Tokens",
+              "lineHeight": 1.15,
+              "fontFamily": "$font.display",
+              "fontSize": "$type.display-md",
+              "fontWeight": "600",
+              "letterSpacing": -1
+            },
+            {
+              "type": "frame",
+              "id": "k3PPtL",
+              "name": "Color Grid",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "L4CNgC",
+                  "name": "Color Row 1",
+                  "width": "fill_container",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "O95ucp",
+                      "name": "Primary Card",
+                      "width": 232,
+                      "fill": "$colors.surface-card",
+                      "cornerRadius": "$rounded.lg",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": "$rounded.md",
+                          "id": "B8q0Hq",
+                          "name": "Primary Swatch",
+                          "fill": "$colors.primary",
+                          "width": "fill_container",
+                          "height": 64,
+                          "stroke": "$colors.hairline",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "UXR6V",
+                          "name": "Primary Label",
+                          "fill": "$colors.ink",
+                          "content": "Primary",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.body-sm",
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "krXUl",
+                          "name": "Primary Token",
+                          "fill": "$colors.muted",
+                          "content": "$colors.primary",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.caption",
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "cLUFk",
+                      "name": "Canvas Card",
+                      "width": 232,
+                      "fill": "$colors.surface-card",
+                      "cornerRadius": "$rounded.lg",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": "$rounded.md",
+                          "id": "WoIkT",
+                          "name": "Canvas Swatch",
+                          "fill": "$colors.canvas",
+                          "width": "fill_container",
+                          "height": 64,
+                          "stroke": "$colors.hairline",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "uf4wd",
+                          "name": "Canvas Label",
+                          "fill": "$colors.ink",
+                          "content": "Canvas",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.body-sm",
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "pIy48",
+                          "name": "Canvas Token",
+                          "fill": "$colors.muted",
+                          "content": "$colors.canvas",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.caption",
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Unoqh",
+                      "name": "Surface Card Card",
+                      "width": 232,
+                      "fill": "$colors.surface-card",
+                      "cornerRadius": "$rounded.lg",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": "$rounded.md",
+                          "id": "jIQWh",
+                          "name": "Surface Card Swatch",
+                          "fill": "$colors.surface-card",
+                          "width": "fill_container",
+                          "height": 64,
+                          "stroke": "$colors.hairline",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "Poytr",
+                          "name": "Surface Card Label",
+                          "fill": "$colors.ink",
+                          "content": "Surface Card",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.body-sm",
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "llgFg",
+                          "name": "Surface Card Token",
+                          "fill": "$colors.muted",
+                          "content": "$colors.surface-card",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.caption",
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "U9EEXa",
+                      "name": "Surface Soft Card",
+                      "width": 232,
+                      "fill": "$colors.surface-card",
+                      "cornerRadius": "$rounded.lg",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": "$rounded.md",
+                          "id": "BFo4v",
+                          "name": "Surface Soft Swatch",
+                          "fill": "$colors.surface-soft",
+                          "width": "fill_container",
+                          "height": 64,
+                          "stroke": "$colors.hairline",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "dcMMX",
+                          "name": "Surface Soft Label",
+                          "fill": "$colors.ink",
+                          "content": "Surface Soft",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.body-sm",
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Im79l",
+                          "name": "Surface Soft Token",
+                          "fill": "$colors.muted",
+                          "content": "$colors.surface-soft",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.caption",
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "iF2CB",
+                      "name": "Hairline Card",
+                      "width": 232,
+                      "fill": "$colors.surface-card",
+                      "cornerRadius": "$rounded.lg",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": "$rounded.md",
+                          "id": "yCZOb",
+                          "name": "Hairline Swatch",
+                          "fill": "$colors.hairline",
+                          "width": "fill_container",
+                          "height": 64,
+                          "stroke": "$colors.hairline",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "tr7qM",
+                          "name": "Hairline Label",
+                          "fill": "$colors.ink",
+                          "content": "Hairline",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.body-sm",
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "qY7K3",
+                          "name": "Hairline Token",
+                          "fill": "$colors.muted",
+                          "content": "$colors.hairline",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.caption",
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "mL8Xg",
+                      "name": "Brand Accent Card",
+                      "width": 232,
+                      "fill": "$colors.surface-card",
+                      "cornerRadius": "$rounded.lg",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": "$rounded.md",
+                          "id": "eSO7p",
+                          "name": "Brand Accent Swatch",
+                          "fill": "$colors.brand-accent",
+                          "width": "fill_container",
+                          "height": 64,
+                          "stroke": "$colors.hairline",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "UAJX7",
+                          "name": "Brand Accent Label",
+                          "fill": "$colors.ink",
+                          "content": "Brand Accent",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.body-sm",
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "d9mSu",
+                          "name": "Brand Accent Token",
+                          "fill": "$colors.muted",
+                          "content": "$colors.brand-accent",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.caption",
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "gxdA5",
+                  "name": "Color Row 2",
+                  "width": "fill_container",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "b097fp",
+                      "name": "Body Card",
+                      "width": 232,
+                      "fill": "$colors.surface-card",
+                      "cornerRadius": "$rounded.lg",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": "$rounded.md",
+                          "id": "f8l06",
+                          "name": "Body Swatch",
+                          "fill": "$colors.body",
+                          "width": "fill_container",
+                          "height": 64,
+                          "stroke": "$colors.hairline",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "MQhKG",
+                          "name": "Body Label",
+                          "fill": "$colors.ink",
+                          "content": "Body",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.body-sm",
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "G8V48",
+                          "name": "Body Token",
+                          "fill": "$colors.muted",
+                          "content": "$colors.body",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.caption",
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "VbAJp",
+                      "name": "Muted Card",
+                      "width": 232,
+                      "fill": "$colors.surface-card",
+                      "cornerRadius": "$rounded.lg",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": "$rounded.md",
+                          "id": "WrI77",
+                          "name": "Muted Swatch",
+                          "fill": "$colors.muted",
+                          "width": "fill_container",
+                          "height": 64,
+                          "stroke": "$colors.hairline",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "Knx97",
+                          "name": "Muted Label",
+                          "fill": "$colors.ink",
+                          "content": "Muted",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.body-sm",
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "z94wK",
+                          "name": "Muted Token",
+                          "fill": "$colors.muted",
+                          "content": "$colors.muted",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.caption",
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "P5qFs",
+                      "name": "Success Card",
+                      "width": 232,
+                      "fill": "$colors.surface-card",
+                      "cornerRadius": "$rounded.lg",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": "$rounded.md",
+                          "id": "T2Tfqd",
+                          "name": "Success Swatch",
+                          "fill": "$colors.success",
+                          "width": "fill_container",
+                          "height": 64,
+                          "stroke": "$colors.hairline",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "t0TSJ",
+                          "name": "Success Label",
+                          "fill": "$colors.ink",
+                          "content": "Success",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.body-sm",
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "u0qKH",
+                          "name": "Success Token",
+                          "fill": "$colors.muted",
+                          "content": "$colors.success",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.caption",
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "q42wJg",
+                      "name": "Warning Card",
+                      "width": 232,
+                      "fill": "$colors.surface-card",
+                      "cornerRadius": "$rounded.lg",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": "$rounded.md",
+                          "id": "GdhSY",
+                          "name": "Warning Swatch",
+                          "fill": "$colors.warning",
+                          "width": "fill_container",
+                          "height": 64,
+                          "stroke": "$colors.hairline",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "F92yBc",
+                          "name": "Warning Label",
+                          "fill": "$colors.ink",
+                          "content": "Warning",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.body-sm",
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "KBpTN",
+                          "name": "Warning Token",
+                          "fill": "$colors.muted",
+                          "content": "$colors.warning",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.caption",
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "E5iFp3",
+                      "name": "Error Card",
+                      "width": 232,
+                      "fill": "$colors.surface-card",
+                      "cornerRadius": "$rounded.lg",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": "$rounded.md",
+                          "id": "FWqXj",
+                          "name": "Error Swatch",
+                          "fill": "$colors.error",
+                          "width": "fill_container",
+                          "height": 64,
+                          "stroke": "$colors.hairline",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "CA6q5",
+                          "name": "Error Label",
+                          "fill": "$colors.ink",
+                          "content": "Error",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.body-sm",
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "KEgpT",
+                          "name": "Error Token",
+                          "fill": "$colors.muted",
+                          "content": "$colors.error",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.caption",
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "C7LdT4",
+                      "name": "Surface Dark Card",
+                      "width": 232,
+                      "fill": "$colors.surface-card",
+                      "cornerRadius": "$rounded.lg",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": "$rounded.md",
+                          "id": "KHYXr",
+                          "name": "Surface Dark Swatch",
+                          "fill": "$colors.surface-dark",
+                          "width": "fill_container",
+                          "height": 64,
+                          "stroke": "$colors.hairline",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "xGRLY",
+                          "name": "Surface Dark Label",
+                          "fill": "$colors.ink",
+                          "content": "Surface Dark",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.body-sm",
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Gcavw",
+                          "name": "Surface Dark Token",
+                          "fill": "$colors.muted",
+                          "content": "$colors.surface-dark",
+                          "fontFamily": "$font.ui",
+                          "fontSize": "$type.caption",
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "zq94r",
+          "name": "Typography",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 24,
+          "children": [
+            {
+              "type": "text",
+              "id": "R3uCem",
+              "name": "Typography Heading",
+              "fill": "$colors.ink",
+              "content": "Typography System",
+              "fontFamily": "$font.display",
+              "fontSize": "$type.display-md",
+              "fontWeight": "600",
+              "letterSpacing": -1
+            },
+            {
+              "type": "text",
+              "id": "E5AEG",
+              "name": "Typography Note",
+              "fill": "$colors.body",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Display role uses Inter 600 as Cal Sans substitute with negative tracking. Body/UI role uses Inter 400-600 with neutral tracking.",
+              "fontFamily": "$font.ui",
+              "fontSize": "$type.body-md",
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "hlUF0",
+              "name": "Type Samples",
+              "width": "fill_container",
+              "fill": "$colors.surface-card",
+              "cornerRadius": "$rounded.lg",
+              "layout": "vertical",
+              "gap": 14,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "enHmf",
+                  "name": "Display XL",
+                  "fill": "$colors.ink",
+                  "content": "Display XL 64/600 -2px",
+                  "lineHeight": 1.05,
+                  "fontFamily": "$font.display",
+                  "fontSize": "$type.display-xl",
+                  "fontWeight": "600",
+                  "letterSpacing": -2
+                },
+                {
+                  "type": "text",
+                  "id": "QJht0",
+                  "name": "Display LG",
+                  "fill": "$colors.ink",
+                  "content": "Display LG 48/600 -1.5px",
+                  "lineHeight": 1.1,
+                  "fontFamily": "$font.display",
+                  "fontSize": "$type.display-lg",
+                  "fontWeight": "600",
+                  "letterSpacing": -1.5
+                },
+                {
+                  "type": "text",
+                  "id": "lZXbc",
+                  "name": "Display MD",
+                  "fill": "$colors.ink",
+                  "content": "Display MD 36/600 -1px",
+                  "lineHeight": 1.15,
+                  "fontFamily": "$font.display",
+                  "fontSize": "$type.display-md",
+                  "fontWeight": "600",
+                  "letterSpacing": -1
+                },
+                {
+                  "type": "text",
+                  "id": "iLJPV",
+                  "name": "Body MD",
+                  "fill": "$colors.body",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Body MD 16/400. Scheduling made simple, predictable, and fast.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "$font.ui",
+                  "fontSize": "$type.body-md"
+                },
+                {
+                  "type": "text",
+                  "id": "hMwCP",
+                  "name": "Caption",
+                  "fill": "$colors.muted",
+                  "content": "Caption 13/500 for badges and metadata",
+                  "fontFamily": "$font.ui",
+                  "fontSize": "$type.caption",
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "w0TtZl",
+          "name": "Components",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 24,
+          "children": [
+            {
+              "type": "text",
+              "id": "OqCHl",
+              "name": "Components Heading",
+              "fill": "$colors.ink",
+              "content": "Core Components",
+              "fontFamily": "$font.display",
+              "fontSize": "$type.display-md",
+              "fontWeight": "600",
+              "letterSpacing": -1
+            },
+            {
+              "type": "frame",
+              "id": "oWjUm",
+              "name": "top-nav",
+              "reusable": true,
+              "width": "fill_container",
+              "fill": "$colors.canvas",
+              "cornerRadius": "$rounded.md",
+              "stroke": "$colors.hairline-soft",
+              "strokeWidth": 1,
+              "padding": [
+                12,
+                16
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "EHPkO",
+                  "name": "Brand Cluster",
+                  "gap": 10,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "CJnnc",
+                      "name": "Brand Dot",
+                      "fill": "$colors.primary",
+                      "width": 18,
+                      "height": 18
+                    },
+                    {
+                      "type": "text",
+                      "id": "geLcT",
+                      "name": "Wordmark",
+                      "fill": "$colors.ink",
+                      "content": "Cal.com",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 18,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "nTLAu",
+                  "name": "Menu",
+                  "gap": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "H1YCyM",
+                      "name": "Product Link",
+                      "fill": "$colors.body",
+                      "content": "Product",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Mi1w7",
+                      "name": "Solutions Link",
+                      "fill": "$colors.body",
+                      "content": "Solutions",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "SKUes",
+                      "name": "Resources Link",
+                      "fill": "$colors.body",
+                      "content": "Resources",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "g41BP",
+                      "name": "Pricing Link",
+                      "fill": "$colors.body",
+                      "content": "Pricing",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "obcJH",
+                      "name": "Enterprise Link",
+                      "fill": "$colors.body",
+                      "content": "Enterprise",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "B6b8Sh",
+                  "name": "Actions",
+                  "gap": 12,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "aJ4vp",
+                      "name": "Sign In",
+                      "fill": "$colors.ink",
+                      "content": "Sign in",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "f5W6K",
+                      "name": "button-primary",
+                      "reusable": true,
+                      "width": 128,
+                      "height": 40,
+                      "fill": "$colors.primary",
+                      "cornerRadius": "$rounded.md",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "pLf5k",
+                          "name": "Primary Label",
+                          "fill": "$colors.on-primary",
+                          "content": "Sign up free",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "JXGUj",
+              "name": "nav-pill-group",
+              "reusable": true,
+              "fill": "$colors.surface-soft",
+              "cornerRadius": "$rounded.pill",
+              "gap": 6,
+              "padding": 6,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "z8uMP",
+                  "name": "category-tab-active",
+                  "fill": "$colors.canvas",
+                  "cornerRadius": "$rounded.md",
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#00000014",
+                    "offset": {
+                      "x": 0,
+                      "y": 1
+                    },
+                    "blur": 3
+                  },
+                  "padding": [
+                    8,
+                    14
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "m5C7S1",
+                      "name": "Active Label",
+                      "fill": "$colors.ink",
+                      "content": "Personal",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "N52wkK",
+                  "name": "Teams Tab",
+                  "cornerRadius": "$rounded.md",
+                  "padding": [
+                    8,
+                    14
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "LBWLU",
+                      "name": "Teams Label",
+                      "fill": "$colors.muted",
+                      "content": "Teams",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "wfDCu",
+                  "name": "Enterprise Tab",
+                  "cornerRadius": "$rounded.md",
+                  "padding": [
+                    8,
+                    14
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "BlRM9",
+                      "name": "Enterprise Label",
+                      "fill": "$colors.muted",
+                      "content": "Enterprise",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "wm21y",
+              "name": "Buttons Row",
+              "width": "fill_container",
+              "gap": 16,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "a68Qt7",
+                  "name": "Primary CTA",
+                  "reusable": true,
+                  "width": 160,
+                  "height": 40,
+                  "fill": "$colors.primary",
+                  "cornerRadius": "$rounded.md",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Orli3",
+                      "name": "Primary CTA Label",
+                      "fill": "$colors.on-primary",
+                      "content": "Start for free",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "R9Nq6C",
+                  "name": "Secondary CTA",
+                  "reusable": true,
+                  "width": 160,
+                  "height": 40,
+                  "fill": "$colors.canvas",
+                  "cornerRadius": "$rounded.md",
+                  "stroke": "$colors.hairline",
+                  "strokeWidth": 1,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "qEX5O",
+                      "name": "Secondary CTA Label",
+                      "fill": "$colors.ink",
+                      "content": "View demo",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Q7M1w",
+                  "name": "button-icon-circular",
+                  "reusable": true,
+                  "width": 36,
+                  "height": 36,
+                  "fill": "$colors.canvas",
+                  "cornerRadius": "$rounded.full",
+                  "stroke": "$colors.hairline",
+                  "strokeWidth": 1,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "e6vCd",
+                      "name": "Arrow Icon",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "arrow-right",
+                      "library": "lucide",
+                      "fill": "$colors.ink"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "c1L3V",
+          "name": "Cards Showcase",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 24,
+          "children": [
+            {
+              "type": "text",
+              "id": "jtUJ9",
+              "name": "Cards Heading",
+              "fill": "$colors.ink",
+              "content": "Cards and Product Fragments",
+              "fontFamily": "$font.display",
+              "fontSize": "$type.display-md",
+              "fontWeight": "600",
+              "letterSpacing": -1
+            },
+            {
+              "type": "frame",
+              "id": "u5C1d6",
+              "name": "Cards Row",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "KkEZX",
+                  "name": "feature-card",
+                  "reusable": true,
+                  "width": 360,
+                  "fill": "$colors.surface-card",
+                  "cornerRadius": "$rounded.lg",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "FXOgH",
+                      "name": "Feature Icon",
+                      "width": 24,
+                      "height": 24,
+                      "icon": "calendar",
+                      "library": "lucide",
+                      "fill": "$colors.ink"
+                    },
+                    {
+                      "type": "text",
+                      "id": "JGDaE",
+                      "name": "Feature Title",
+                      "fill": "$colors.ink",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "With us, appointment scheduling is easy",
+                      "fontFamily": "$font.ui",
+                      "fontSize": "$type.title-md",
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "y5HWA",
+                      "name": "Feature Body",
+                      "fill": "$colors.body",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Route meeting types, automate reminders, and keep every booking in one predictable workflow.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font.ui",
+                      "fontSize": "$type.body-md",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "UJzet",
+                  "name": "product-mockup-card",
+                  "reusable": true,
+                  "width": 360,
+                  "fill": "$colors.canvas",
+                  "cornerRadius": "$rounded.lg",
+                  "stroke": "$colors.hairline",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "RwtUW",
+                      "name": "Product Title",
+                      "fill": "$colors.ink",
+                      "content": "Booking widget fragment",
+                      "fontFamily": "$font.ui",
+                      "fontSize": "$type.title-sm",
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "z9DtQL",
+                      "name": "Widget Surface",
+                      "width": "fill_container",
+                      "fill": "$colors.surface-card",
+                      "cornerRadius": "$rounded.md",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 12,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "HfuVW",
+                          "name": "Calendar Row A",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "DkiyM",
+                              "name": "M Day Cell",
+                              "width": 34,
+                              "height": 36,
+                              "fill": "$colors.canvas",
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "cfij3",
+                                  "name": "M Day Label",
+                                  "fill": "$colors.muted",
+                                  "content": "M",
+                                  "fontFamily": "$font.ui",
+                                  "fontSize": 13,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "v6eSr",
+                              "name": "T Day Cell",
+                              "width": 34,
+                              "height": 36,
+                              "fill": "$colors.canvas",
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "UR31m",
+                                  "name": "T Day Label",
+                                  "fill": "$colors.muted",
+                                  "content": "T",
+                                  "fontFamily": "$font.ui",
+                                  "fontSize": 13,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "NnufE",
+                              "name": "W Day Cell",
+                              "width": 34,
+                              "height": 36,
+                              "fill": "$colors.canvas",
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "XAUoV",
+                                  "name": "W Day Label",
+                                  "fill": "$colors.muted",
+                                  "content": "W",
+                                  "fontFamily": "$font.ui",
+                                  "fontSize": 13,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "pzbl5",
+                              "name": "T Day Cell",
+                              "width": 34,
+                              "height": 36,
+                              "fill": "$colors.canvas",
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "YTuDN",
+                                  "name": "T Day Label",
+                                  "fill": "$colors.muted",
+                                  "content": "T",
+                                  "fontFamily": "$font.ui",
+                                  "fontSize": 13,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "KjDkt",
+                              "name": "F Day Cell",
+                              "width": 34,
+                              "height": 36,
+                              "fill": "$colors.canvas",
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "zaso4",
+                                  "name": "F Day Label",
+                                  "fill": "$colors.muted",
+                                  "content": "F",
+                                  "fontFamily": "$font.ui",
+                                  "fontSize": 13,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "B81F2",
+                              "name": "S Day Cell",
+                              "width": 34,
+                              "height": 36,
+                              "fill": "$colors.canvas",
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "v6rp6",
+                                  "name": "S Day Label",
+                                  "fill": "$colors.muted",
+                                  "content": "S",
+                                  "fontFamily": "$font.ui",
+                                  "fontSize": 13,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "VRyCF",
+                              "name": "S Day Cell",
+                              "width": 34,
+                              "height": 36,
+                              "fill": "$colors.canvas",
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "XCAlp",
+                                  "name": "S Day Label",
+                                  "fill": "$colors.muted",
+                                  "content": "S",
+                                  "fontFamily": "$font.ui",
+                                  "fontSize": 13,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "tQ50x",
+                          "name": "Time Slots",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "fw3tg",
+                              "name": "09:00 Slot",
+                              "width": "fill_container",
+                              "height": 34,
+                              "fill": "$colors.canvas",
+                              "cornerRadius": 6,
+                              "stroke": "$colors.hairline",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "fO6sh",
+                                  "name": "09:00 Slot Label",
+                                  "fill": "$colors.ink",
+                                  "content": "09:00",
+                                  "fontFamily": "$font.ui",
+                                  "fontSize": 13,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "QUSRB",
+                              "name": "09:30 Slot",
+                              "width": "fill_container",
+                              "height": 34,
+                              "fill": "$colors.canvas",
+                              "cornerRadius": 6,
+                              "stroke": "$colors.hairline",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "i3dNAi",
+                                  "name": "09:30 Slot Label",
+                                  "fill": "$colors.ink",
+                                  "content": "09:30",
+                                  "fontFamily": "$font.ui",
+                                  "fontSize": 13,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "r7wb8I",
+                              "name": "10:00 Slot",
+                              "width": "fill_container",
+                              "height": 34,
+                              "fill": "$colors.canvas",
+                              "cornerRadius": 6,
+                              "stroke": "$colors.hairline",
+                              "strokeWidth": 1,
+                              "padding": [
+                                0,
+                                10
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "dwcJu",
+                                  "name": "10:00 Slot Label",
+                                  "fill": "$colors.ink",
+                                  "content": "10:00",
+                                  "fontFamily": "$font.ui",
+                                  "fontSize": 13,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "PHzhP",
+                          "name": "Confirm Button",
+                          "width": "fill_container",
+                          "height": 36,
+                          "fill": "$colors.primary",
+                          "cornerRadius": "$rounded.md",
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "r5Z8JL",
+                              "name": "Confirm Label",
+                              "fill": "$colors.on-primary",
+                              "content": "Confirm",
+                              "fontFamily": "$font.ui",
+                              "fontSize": 14,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "e6VuVH",
+                  "name": "testimonial-card",
+                  "reusable": true,
+                  "width": 360,
+                  "fill": "$colors.surface-card",
+                  "cornerRadius": "$rounded.lg",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "DMJK2",
+                      "name": "Testimonial Head",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "Ng8ny",
+                          "name": "avatar-circle",
+                          "fill": "$colors.badge-pink",
+                          "width": 36,
+                          "height": 36
+                        },
+                        {
+                          "type": "text",
+                          "id": "EuZzc",
+                          "name": "Author",
+                          "fill": "$colors.ink",
+                          "content": "Sam Jordan, VP Ops",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "cPsE3",
+                      "name": "rating-stars",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "W5hZwy",
+                          "name": "Star 1",
+                          "width": 14,
+                          "height": 14,
+                          "icon": "star",
+                          "library": "lucide",
+                          "fill": "$colors.badge-orange"
+                        },
+                        {
+                          "type": "icon",
+                          "id": "Ho48I",
+                          "name": "Star 2",
+                          "width": 14,
+                          "height": 14,
+                          "icon": "star",
+                          "library": "lucide",
+                          "fill": "$colors.badge-orange"
+                        },
+                        {
+                          "type": "icon",
+                          "id": "jqdEG",
+                          "name": "Star 3",
+                          "width": 14,
+                          "height": 14,
+                          "icon": "star",
+                          "library": "lucide",
+                          "fill": "$colors.badge-orange"
+                        },
+                        {
+                          "type": "icon",
+                          "id": "pS8wQ",
+                          "name": "Star 4",
+                          "width": 14,
+                          "height": 14,
+                          "icon": "star",
+                          "library": "lucide",
+                          "fill": "$colors.badge-orange"
+                        },
+                        {
+                          "type": "icon",
+                          "id": "tfScN",
+                          "name": "Star 5",
+                          "width": 14,
+                          "height": 14,
+                          "icon": "star",
+                          "library": "lucide",
+                          "fill": "$colors.badge-orange"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "G0GMp",
+                      "name": "Quote",
+                      "fill": "$colors.body",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Cal removed friction from our booking lifecycle and helped our team ship meeting workflows faster.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$font.ui",
+                      "fontSize": "$type.body-md",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "cUaj6",
+          "name": "Pricing",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 24,
+          "children": [
+            {
+              "type": "text",
+              "id": "irzPm",
+              "name": "Pricing Heading",
+              "fill": "$colors.ink",
+              "content": "Pricing Tier Cards",
+              "fontFamily": "$font.display",
+              "fontSize": "$type.display-md",
+              "fontWeight": "600",
+              "letterSpacing": -1
+            },
+            {
+              "type": "frame",
+              "id": "lhsRm",
+              "name": "Pricing Row",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "FYq9P",
+                  "name": "pricing-tier-card",
+                  "width": 280,
+                  "fill": "$colors.canvas",
+                  "cornerRadius": "$rounded.lg",
+                  "stroke": "$colors.hairline",
+                  "strokeWidth": 1,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#00000014",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 12
+                  },
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "AJZjV",
+                      "name": "Free Name",
+                      "fill": "$colors.ink",
+                      "content": "Free",
+                      "fontFamily": "$font.ui",
+                      "fontSize": "$type.title-lg",
+                      "fontWeight": "600",
+                      "letterSpacing": -0.3
+                    },
+                    {
+                      "type": "text",
+                      "id": "mkO4W",
+                      "name": "Free Price",
+                      "fill": "$colors.ink",
+                      "content": "$0",
+                      "fontFamily": "$font.display",
+                      "fontSize": "$type.display-sm",
+                      "fontWeight": "600",
+                      "letterSpacing": -0.5
+                    },
+                    {
+                      "type": "text",
+                      "id": "m2lGx",
+                      "name": "Free Routing forms",
+                      "fill": "$colors.body",
+                      "content": "• Routing forms",
+                      "fontFamily": "$font.ui",
+                      "fontSize": "$type.body-sm",
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "XqbmQ",
+                      "name": "Free Round-robin",
+                      "fill": "$colors.body",
+                      "content": "• Round-robin",
+                      "fontFamily": "$font.ui",
+                      "fontSize": "$type.body-sm",
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "QotLY",
+                      "name": "Free Calendar sync",
+                      "fill": "$colors.body",
+                      "content": "• Calendar sync",
+                      "fontFamily": "$font.ui",
+                      "fontSize": "$type.body-sm",
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Ewf4T",
+                      "name": "Free Button",
+                      "width": "fill_container",
+                      "height": 40,
+                      "fill": "$colors.primary",
+                      "cornerRadius": "$rounded.md",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "fIXuD",
+                          "name": "Free Button Label",
+                          "fill": "$colors.on-primary",
+                          "content": "Get started",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "eNdcu",
+                  "name": "pricing-tier-card-featured",
+                  "width": 280,
+                  "fill": "$colors.surface-dark",
+                  "cornerRadius": "$rounded.lg",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "QQezY",
+                      "name": "Teams Name",
+                      "fill": "$colors.on-dark",
+                      "content": "Teams",
+                      "fontFamily": "$font.ui",
+                      "fontSize": "$type.title-lg",
+                      "fontWeight": "600",
+                      "letterSpacing": -0.3
+                    },
+                    {
+                      "type": "text",
+                      "id": "g7QDey",
+                      "name": "Teams Price",
+                      "fill": "$colors.on-dark",
+                      "content": "$15",
+                      "fontFamily": "$font.display",
+                      "fontSize": "$type.display-sm",
+                      "fontWeight": "600",
+                      "letterSpacing": -0.5
+                    },
+                    {
+                      "type": "text",
+                      "id": "YFY4I",
+                      "name": "Teams Routing forms",
+                      "fill": "$colors.on-dark-soft",
+                      "content": "• Routing forms",
+                      "fontFamily": "$font.ui",
+                      "fontSize": "$type.body-sm",
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "XsxkP",
+                      "name": "Teams Round-robin",
+                      "fill": "$colors.on-dark-soft",
+                      "content": "• Round-robin",
+                      "fontFamily": "$font.ui",
+                      "fontSize": "$type.body-sm",
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "fNeoG",
+                      "name": "Teams Calendar sync",
+                      "fill": "$colors.on-dark-soft",
+                      "content": "• Calendar sync",
+                      "fontFamily": "$font.ui",
+                      "fontSize": "$type.body-sm",
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "S5cJWa",
+                      "name": "Teams Button",
+                      "width": "fill_container",
+                      "height": 40,
+                      "fill": "$colors.canvas",
+                      "cornerRadius": "$rounded.md",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "UFpbB",
+                          "name": "Teams Button Label",
+                          "fill": "$colors.ink",
+                          "content": "Get started",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ZJEYH",
+                  "name": "pricing-tier-card",
+                  "width": 280,
+                  "fill": "$colors.canvas",
+                  "cornerRadius": "$rounded.lg",
+                  "stroke": "$colors.hairline",
+                  "strokeWidth": 1,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#00000014",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 12
+                  },
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "rLXwm",
+                      "name": "Scale Name",
+                      "fill": "$colors.ink",
+                      "content": "Scale",
+                      "fontFamily": "$font.ui",
+                      "fontSize": "$type.title-lg",
+                      "fontWeight": "600",
+                      "letterSpacing": -0.3
+                    },
+                    {
+                      "type": "text",
+                      "id": "Fi5AC",
+                      "name": "Scale Price",
+                      "fill": "$colors.ink",
+                      "content": "$39",
+                      "fontFamily": "$font.display",
+                      "fontSize": "$type.display-sm",
+                      "fontWeight": "600",
+                      "letterSpacing": -0.5
+                    },
+                    {
+                      "type": "text",
+                      "id": "QAeKA",
+                      "name": "Scale Routing forms",
+                      "fill": "$colors.body",
+                      "content": "• Routing forms",
+                      "fontFamily": "$font.ui",
+                      "fontSize": "$type.body-sm",
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "WFNnx",
+                      "name": "Scale Round-robin",
+                      "fill": "$colors.body",
+                      "content": "• Round-robin",
+                      "fontFamily": "$font.ui",
+                      "fontSize": "$type.body-sm",
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "U4c1K",
+                      "name": "Scale Calendar sync",
+                      "fill": "$colors.body",
+                      "content": "• Calendar sync",
+                      "fontFamily": "$font.ui",
+                      "fontSize": "$type.body-sm",
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "OCOnA",
+                      "name": "Scale Button",
+                      "width": "fill_container",
+                      "height": 40,
+                      "fill": "$colors.primary",
+                      "cornerRadius": "$rounded.md",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "n5rfr1",
+                          "name": "Scale Button Label",
+                          "fill": "$colors.on-primary",
+                          "content": "Get started",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "b8Ft7d",
+                  "name": "pricing-tier-card",
+                  "width": 280,
+                  "fill": "$colors.canvas",
+                  "cornerRadius": "$rounded.lg",
+                  "stroke": "$colors.hairline",
+                  "strokeWidth": 1,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#00000014",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 12
+                  },
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "O1RYL",
+                      "name": "Enterprise Name",
+                      "fill": "$colors.ink",
+                      "content": "Enterprise",
+                      "fontFamily": "$font.ui",
+                      "fontSize": "$type.title-lg",
+                      "fontWeight": "600",
+                      "letterSpacing": -0.3
+                    },
+                    {
+                      "type": "text",
+                      "id": "aZg0x",
+                      "name": "Enterprise Price",
+                      "fill": "$colors.ink",
+                      "content": "Custom",
+                      "fontFamily": "$font.display",
+                      "fontSize": "$type.display-sm",
+                      "fontWeight": "600",
+                      "letterSpacing": -0.5
+                    },
+                    {
+                      "type": "text",
+                      "id": "VYs0c",
+                      "name": "Enterprise Routing forms",
+                      "fill": "$colors.body",
+                      "content": "• Routing forms",
+                      "fontFamily": "$font.ui",
+                      "fontSize": "$type.body-sm",
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "kK772",
+                      "name": "Enterprise Round-robin",
+                      "fill": "$colors.body",
+                      "content": "• Round-robin",
+                      "fontFamily": "$font.ui",
+                      "fontSize": "$type.body-sm",
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "FlnDl",
+                      "name": "Enterprise Calendar sync",
+                      "fill": "$colors.body",
+                      "content": "• Calendar sync",
+                      "fontFamily": "$font.ui",
+                      "fontSize": "$type.body-sm",
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ncQtq",
+                      "name": "Enterprise Button",
+                      "width": "fill_container",
+                      "height": 40,
+                      "fill": "$colors.primary",
+                      "cornerRadius": "$rounded.md",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "yxqFf",
+                          "name": "Enterprise Button Label",
+                          "fill": "$colors.on-primary",
+                          "content": "Get started",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "ZzhtF",
+          "name": "footer",
+          "width": "fill_container",
+          "fill": "$colors.surface-dark",
+          "cornerRadius": "$rounded.lg",
+          "layout": "vertical",
+          "gap": 24,
+          "padding": 48,
+          "children": [
+            {
+              "type": "text",
+              "id": "dVSUx",
+              "name": "Footer Wordmark",
+              "fill": "$colors.on-dark",
+              "content": "Cal.com",
+              "fontFamily": "$font.ui",
+              "fontSize": 22,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "G2iDdw",
+              "name": "Footer Columns",
+              "width": "fill_container",
+              "gap": 16,
+              "justifyContent": "space_between",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "x5IgB",
+                  "name": "Product Column",
+                  "width": 280,
+                  "layout": "vertical",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "OpNJi",
+                      "name": "Product Title",
+                      "fill": "$colors.on-dark",
+                      "content": "Product",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "kBbN8",
+                      "name": "Scheduling Link",
+                      "fill": "$colors.on-dark-soft",
+                      "content": "Scheduling",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "EIIqf",
+                      "name": "Routing Link",
+                      "fill": "$colors.on-dark-soft",
+                      "content": "Routing",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "VyyQ4",
+                      "name": "Workflows Link",
+                      "fill": "$colors.on-dark-soft",
+                      "content": "Workflows",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "h6VDM",
+                  "name": "Solutions Column",
+                  "width": 280,
+                  "layout": "vertical",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "vTVBf",
+                      "name": "Solutions Title",
+                      "fill": "$colors.on-dark",
+                      "content": "Solutions",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "sJoBW",
+                      "name": "Sales Link",
+                      "fill": "$colors.on-dark-soft",
+                      "content": "Sales",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "vo421",
+                      "name": "Support Link",
+                      "fill": "$colors.on-dark-soft",
+                      "content": "Support",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "Eixbo",
+                      "name": "Education Link",
+                      "fill": "$colors.on-dark-soft",
+                      "content": "Education",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "lGWsX",
+                  "name": "Company Column",
+                  "width": 280,
+                  "layout": "vertical",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "thkIb",
+                      "name": "Company Title",
+                      "fill": "$colors.on-dark",
+                      "content": "Company",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "UFuoa",
+                      "name": "About Link",
+                      "fill": "$colors.on-dark-soft",
+                      "content": "About",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "rA6up",
+                      "name": "Careers Link",
+                      "fill": "$colors.on-dark-soft",
+                      "content": "Careers",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "K5HrPh",
+                      "name": "Contact Link",
+                      "fill": "$colors.on-dark-soft",
+                      "content": "Contact",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "o28HUM",
+                  "name": "Resources Column",
+                  "width": 280,
+                  "layout": "vertical",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "nTDJa",
+                      "name": "Resources Title",
+                      "fill": "$colors.on-dark",
+                      "content": "Resources",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "j8xmC",
+                      "name": "Docs Link",
+                      "fill": "$colors.on-dark-soft",
+                      "content": "Docs",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "Y1OsM",
+                      "name": "Blog Link",
+                      "fill": "$colors.on-dark-soft",
+                      "content": "Blog",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "g7yETg",
+                      "name": "Changelog Link",
+                      "fill": "$colors.on-dark-soft",
+                      "content": "Changelog",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "kMhxg",
+              "name": "Footer Note",
+              "fill": "$colors.on-dark-soft",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Only footer and featured tier use dark surfaces. Everything above remains white + light-gray cards.",
+              "fontFamily": "$font.ui",
+              "fontSize": 13,
+              "fontWeight": "500"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "k7rLr",
+          "name": "Responsive Rules",
+          "width": "fill_container",
+          "fill": "$colors.surface-soft",
+          "cornerRadius": "$rounded.lg",
+          "layout": "vertical",
+          "gap": 12,
+          "padding": 24,
+          "children": [
+            {
+              "type": "text",
+              "id": "P8UQI",
+              "name": "Responsive Title",
+              "fill": "$colors.ink",
+              "content": "Responsive Breakpoints",
+              "fontFamily": "$font.display",
+              "fontSize": "$type.title-lg",
+              "fontWeight": "600"
+            },
+            {
+              "type": "text",
+              "id": "LsJJk",
+              "name": "Mobile < 768: stacked he",
+              "fill": "$colors.body",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Mobile < 768: stacked hero, 1-up features/pricing, footer 1 column.",
+              "fontFamily": "$font.ui",
+              "fontSize": "$type.body-sm",
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "YxYGW",
+              "name": "Tablet 768-1024: 2-up fe",
+              "fill": "$colors.body",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Tablet 768-1024: 2-up feature/pricing grids; nav-pill can wrap.",
+              "fontFamily": "$font.ui",
+              "fontSize": "$type.body-sm",
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "CXlID",
+              "name": "Desktop 1024+: 3-up feat",
+              "fill": "$colors.body",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Desktop 1024+: 3-up features, 4-up pricing, full nav.",
+              "fontFamily": "$font.ui",
+              "fontSize": "$type.body-sm",
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "eE2EW",
+              "name": "Wide > 1440: same struct",
+              "fill": "$colors.body",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Wide > 1440: same structure, max content width ~1200.",
+              "fontFamily": "$font.ui",
+              "fontSize": "$type.body-sm",
+              "fontWeight": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "ggPJh",
+      "x": 1680,
+      "y": 0,
+      "name": "HU-01 Dashboard Principal",
+      "clip": true,
+      "width": 430,
+      "height": 932,
+      "fill": "$colors.canvas",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": [
+        24,
+        20
+      ],
+      "children": [
+        {
+          "type": "frame",
+          "id": "x7t8Z",
+          "name": "Top Bar",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 6,
+          "children": [
+            {
+              "type": "text",
+              "id": "y10JKA",
+              "name": "Saludo",
+              "fill": "$colors.ink",
+              "content": "Hola, Camila",
+              "fontFamily": "$font.display",
+              "fontSize": 36,
+              "fontWeight": "600",
+              "letterSpacing": -1
+            },
+            {
+              "type": "text",
+              "id": "Dlwxj",
+              "name": "Subtitulo",
+              "fill": "$colors.body",
+              "content": "Retoma donde lo dejaste.",
+              "fontFamily": "$font.ui",
+              "fontSize": 16
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "WsBgi",
+          "name": "Ultima Asistencia",
+          "width": "fill_container",
+          "fill": "$colors.surface-soft",
+          "cornerRadius": "$rounded.md",
+          "stroke": "$colors.hairline-soft",
+          "strokeWidth": 1,
+          "padding": [
+            12,
+            14
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "ANnKf",
+              "name": "Etiqueta Asistencia",
+              "fill": "$colors.muted",
+              "content": "Ultima asistencia",
+              "fontFamily": "$font.ui",
+              "fontSize": 14,
+              "fontWeight": "500"
+            },
+            {
+              "type": "text",
+              "id": "pNIWb",
+              "name": "Fecha Asistencia",
+              "fill": "$colors.ink",
+              "content": "24 Ago 2026",
+              "fontFamily": "$font.ui",
+              "fontSize": 14,
+              "fontWeight": "600"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Kj1ej",
+          "name": "Card Contador Pasos",
+          "width": "fill_container",
+          "fill": "$colors.surface-card",
+          "cornerRadius": "$rounded.lg",
+          "layout": "vertical",
+          "gap": 12,
+          "padding": 16,
+          "children": [
+            {
+              "type": "frame",
+              "id": "rG4bD",
+              "name": "Header Pasos",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "z5tree",
+                  "name": "Info Pasos",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "MRbv0",
+                      "name": "Titulo Pasos",
+                      "fill": "$colors.ink",
+                      "content": "Pasos de hoy",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "x9ep6",
+                      "name": "Cantidad Pasos",
+                      "fill": "$colors.ink",
+                      "content": "8.420",
+                      "fontFamily": "$font.display",
+                      "fontSize": 36,
+                      "fontWeight": "600",
+                      "letterSpacing": -1
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "h7Wqk",
+                  "name": "Badge Progreso Pasos",
+                  "fill": "$colors.canvas",
+                  "cornerRadius": "$rounded.pill",
+                  "stroke": "$colors.hairline",
+                  "strokeWidth": 1,
+                  "padding": [
+                    6,
+                    10
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "uzjiA",
+                      "name": "Texto Progreso Pasos",
+                      "fill": "$colors.muted",
+                      "content": "70% meta",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Lua77",
+              "name": "Meta Pasos",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "cvfnu",
+                  "name": "Objetivo Pasos",
+                  "fill": "$colors.muted",
+                  "content": "Objetivo: 12.000",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 13,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "fHiaI",
+                  "name": "Restante Pasos",
+                  "fill": "$colors.muted",
+                  "content": "Faltan 3.580",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 13,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "qzeo1",
+              "name": "Barra Pasos Track",
+              "clip": true,
+              "width": "fill_container",
+              "height": 10,
+              "fill": "$colors.surface-strong",
+              "cornerRadius": "$rounded.pill",
+              "children": [
+                {
+                  "type": "rectangle",
+                  "cornerRadius": "$rounded.pill",
+                  "id": "DaUxD",
+                  "name": "Barra Pasos Fill",
+                  "fill": "$colors.primary",
+                  "width": 273,
+                  "height": 10
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "zZ1ho",
+          "name": "Seccion Proxima Rutina",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 12,
+          "children": [
+            {
+              "type": "text",
+              "id": "R4EY49",
+              "name": "Titulo Seccion",
+              "fill": "$colors.ink",
+              "content": "Proxima rutina",
+              "fontFamily": "$font.display",
+              "fontSize": 28,
+              "fontWeight": "600",
+              "letterSpacing": -0.5
+            },
+            {
+              "type": "frame",
+              "id": "BbwqG",
+              "name": "Tarjeta Proxima Rutina",
+              "width": "fill_container",
+              "fill": "$colors.surface-card",
+              "cornerRadius": "$rounded.lg",
+              "layout": "vertical",
+              "gap": 14,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "YtOLg",
+                  "name": "Imagen Rutina",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 180,
+                  "fill": "$colors.surface-strong",
+                  "cornerRadius": "$rounded.md",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "xshwd",
+                      "layoutPosition": "absolute",
+                      "x": 191,
+                      "y": 66,
+                      "name": "Icono Rutina",
+                      "width": 48,
+                      "height": 48,
+                      "icon": "dumbbell",
+                      "library": "lucide",
+                      "fill": "$colors.ink"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "XVEQJ",
+                  "name": "Info Rutina",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "YNAkN",
+                      "name": "Nombre Rutina",
+                      "fill": "$colors.ink",
+                      "content": "Fuerza Tren Superior",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 18,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "nTRIj",
+                      "name": "Meta Rutina",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "k6weR",
+                          "name": "Icono Reloj",
+                          "width": 16,
+                          "height": 16,
+                          "icon": "clock-3",
+                          "library": "lucide",
+                          "fill": "$colors.muted"
+                        },
+                        {
+                          "type": "text",
+                          "id": "QXebN",
+                          "name": "Duracion Rutina",
+                          "fill": "$colors.body",
+                          "content": "45 min estimados",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 14,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "EmHCq",
+                  "name": "Boton Iniciar",
+                  "width": "fill_container",
+                  "height": 40,
+                  "fill": "$colors.primary",
+                  "cornerRadius": "$rounded.md",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "yDMbj",
+                      "name": "Texto Iniciar",
+                      "fill": "$colors.on-primary",
+                      "content": "Iniciar rutina",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "DyDtn",
+          "name": "Spacer",
+          "width": "fill_container",
+          "height": 24
+        },
+        {
+          "type": "frame",
+          "id": "oUNeq",
+          "name": "Barra Navegacion",
+          "width": "fill_container",
+          "fill": "$colors.canvas",
+          "cornerRadius": "$rounded.lg",
+          "stroke": "$colors.hairline",
+          "strokeWidth": 1,
+          "padding": [
+            12,
+            14
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "WUBS1",
+              "name": "Nav Inicio",
+              "fill": "$colors.surface-soft",
+              "cornerRadius": "$rounded.md",
+              "gap": 6,
+              "padding": [
+                8,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "KZRkv",
+                  "name": "Icono Inicio",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "house",
+                  "library": "lucide",
+                  "fill": "$colors.ink"
+                },
+                {
+                  "type": "text",
+                  "id": "yVfNZ",
+                  "name": "Texto Inicio",
+                  "fill": "$colors.ink",
+                  "content": "Inicio",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "uLWEZ",
+              "name": "Nav Ver Rutinas",
+              "cornerRadius": "$rounded.md",
+              "gap": 6,
+              "padding": [
+                8,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "qaRTc",
+                  "name": "Icono Rutinas",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "list",
+                  "library": "lucide",
+                  "fill": "$colors.muted"
+                },
+                {
+                  "type": "text",
+                  "id": "D6eKiU",
+                  "name": "Texto Ver Rutinas",
+                  "fill": "$colors.muted",
+                  "content": "Ver rutinas",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "j5ZJy",
+      "x": 2190,
+      "y": 0,
+      "name": "US-02 Catalogo y Gestion de Rutinas",
+      "clip": true,
+      "width": 430,
+      "height": 1160,
+      "fill": "$colors.canvas",
+      "layout": "vertical",
+      "gap": 18,
+      "padding": [
+        24,
+        20
+      ],
+      "children": [
+        {
+          "type": "frame",
+          "id": "t4dphF",
+          "name": "Header Catalogo",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 8,
+          "children": [
+            {
+              "type": "text",
+              "id": "c7BJw",
+              "name": "Titulo Catalogo",
+              "fill": "$colors.ink",
+              "content": "Mis rutinas",
+              "fontFamily": "$font.display",
+              "fontSize": 34,
+              "fontWeight": "600",
+              "letterSpacing": -1
+            },
+            {
+              "type": "text",
+              "id": "g6pMq",
+              "name": "Subtitulo Catalogo",
+              "fill": "$colors.body",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Explora, edita y abre rapidamente cualquier rutina por grupo muscular o split.",
+              "fontFamily": "$font.ui",
+              "fontSize": 14
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "y5n9rl",
+          "name": "Filtro Split",
+          "width": "fill_container",
+          "fill": "$colors.surface-soft",
+          "cornerRadius": "$rounded.pill",
+          "gap": 6,
+          "padding": 6,
+          "children": [
+            {
+              "type": "frame",
+              "id": "eCvQw",
+              "name": "Filtro Activo",
+              "fill": "$colors.canvas",
+              "cornerRadius": "$rounded.md",
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#00000014",
+                "offset": {
+                  "x": 0,
+                  "y": 1
+                },
+                "blur": 3
+              },
+              "padding": [
+                8,
+                12
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "z3YIS",
+                  "name": "Texto Activo",
+                  "fill": "$colors.ink",
+                  "content": "Todas",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "x223k",
+              "name": "Filtro Push",
+              "cornerRadius": "$rounded.md",
+              "padding": [
+                8,
+                12
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "ByLo2",
+                  "name": "Texto Push",
+                  "fill": "$colors.muted",
+                  "content": "Push",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 13,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "LtUDY",
+              "name": "Filtro Pull",
+              "cornerRadius": "$rounded.md",
+              "padding": [
+                8,
+                12
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "IkwYE",
+                  "name": "Texto Pull",
+                  "fill": "$colors.muted",
+                  "content": "Pull",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 13,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Ra2Fw",
+              "name": "Filtro Legs",
+              "cornerRadius": "$rounded.md",
+              "padding": [
+                8,
+                12
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "pQ0LP",
+                  "name": "Texto Legs",
+                  "fill": "$colors.muted",
+                  "content": "Legs",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 13,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "ms4YX",
+          "name": "Leyenda Interaccion",
+          "width": "fill_container",
+          "fill": "$colors.surface-soft",
+          "cornerRadius": "$rounded.md",
+          "gap": 8,
+          "padding": [
+            8,
+            10
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "icon",
+              "id": "Fpb37",
+              "name": "Icono Tap",
+              "width": 14,
+              "height": 14,
+              "icon": "hand",
+              "library": "lucide",
+              "fill": "$colors.muted"
+            },
+            {
+              "type": "text",
+              "id": "RiDAZ",
+              "name": "Texto Leyenda",
+              "fill": "$colors.muted",
+              "content": "Toca cualquier card para abrir Ver Rutina (Detalle)",
+              "fontFamily": "$font.ui",
+              "fontSize": 13,
+              "fontWeight": "500"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "FnzF2",
+          "name": "Lista Rutinas",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 12,
+          "children": [
+            {
+              "type": "frame",
+              "id": "zBWi4",
+              "name": "Card Chest",
+              "context": "onTap -> View Routine Detail",
+              "width": "fill_container",
+              "fill": "$colors.surface-card",
+              "cornerRadius": "$rounded.lg",
+              "stroke": "$colors.hairline-soft",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 10,
+              "padding": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "sQ2P6",
+                  "name": "Chest Banner",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 118,
+                  "fill": "#e5e7eb",
+                  "cornerRadius": "$rounded.md",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "ObBtk",
+                      "layoutPosition": "absolute",
+                      "x": 188,
+                      "y": 42,
+                      "name": "Chest Banner Icon",
+                      "width": 34,
+                      "height": 34,
+                      "icon": "dumbbell",
+                      "library": "lucide",
+                      "fill": "$colors.ink"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "SWwHl",
+                  "name": "Chest Row",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "RfuIW",
+                      "name": "Chest Labels",
+                      "layout": "vertical",
+                      "gap": 3,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "YM7c1",
+                          "name": "Chest Nombre",
+                          "fill": "$colors.ink",
+                          "content": "Chest",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 16,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "v9FSEh",
+                          "name": "Chest Hint",
+                          "fill": "$colors.muted",
+                          "content": "Tap para ver detalle",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "STY8A",
+                      "name": "Chest Boton Editar",
+                      "fill": "$colors.canvas",
+                      "cornerRadius": "$rounded.md",
+                      "stroke": "$colors.hairline",
+                      "strokeWidth": 1,
+                      "gap": 6,
+                      "padding": [
+                        8,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "UYdC2",
+                          "name": "Chest Edit Icon",
+                          "width": 14,
+                          "height": 14,
+                          "icon": "pencil",
+                          "library": "lucide",
+                          "fill": "$colors.ink"
+                        },
+                        {
+                          "type": "text",
+                          "id": "gp1wq",
+                          "name": "Chest Edit Text",
+                          "fill": "$colors.ink",
+                          "content": "Editar",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Nbqf5",
+              "name": "Card Legs",
+              "context": "onTap -> View Routine Detail",
+              "width": "fill_container",
+              "fill": "$colors.surface-card",
+              "cornerRadius": "$rounded.lg",
+              "stroke": "$colors.hairline-soft",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 10,
+              "padding": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "hhEdS",
+                  "name": "Legs Banner",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 118,
+                  "fill": "#dbeafe",
+                  "cornerRadius": "$rounded.md",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "okN8q",
+                      "layoutPosition": "absolute",
+                      "x": 188,
+                      "y": 42,
+                      "name": "Legs Banner Icon",
+                      "width": 34,
+                      "height": 34,
+                      "icon": "dumbbell",
+                      "library": "lucide",
+                      "fill": "$colors.ink"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "cf5Ho",
+                  "name": "Legs Row",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "N8tf9g",
+                      "name": "Legs Labels",
+                      "layout": "vertical",
+                      "gap": 3,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "CUBrd",
+                          "name": "Legs Nombre",
+                          "fill": "$colors.ink",
+                          "content": "Legs",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 16,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "WadZf",
+                          "name": "Legs Hint",
+                          "fill": "$colors.muted",
+                          "content": "Tap para ver detalle",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "m7eAcQ",
+                      "name": "Legs Boton Editar",
+                      "fill": "$colors.canvas",
+                      "cornerRadius": "$rounded.md",
+                      "stroke": "$colors.hairline",
+                      "strokeWidth": 1,
+                      "gap": 6,
+                      "padding": [
+                        8,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "R6wkp",
+                          "name": "Legs Edit Icon",
+                          "width": 14,
+                          "height": 14,
+                          "icon": "pencil",
+                          "library": "lucide",
+                          "fill": "$colors.ink"
+                        },
+                        {
+                          "type": "text",
+                          "id": "R1Tsa",
+                          "name": "Legs Edit Text",
+                          "fill": "$colors.ink",
+                          "content": "Editar",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "vKgdx",
+              "name": "Card Biceps/Triceps",
+              "context": "onTap -> View Routine Detail",
+              "width": "fill_container",
+              "fill": "$colors.surface-card",
+              "cornerRadius": "$rounded.lg",
+              "stroke": "$colors.hairline-soft",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 10,
+              "padding": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "BUdVA",
+                  "name": "Biceps/Triceps Banner",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 118,
+                  "fill": "#dcfce7",
+                  "cornerRadius": "$rounded.md",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "sSVbp",
+                      "layoutPosition": "absolute",
+                      "x": 188,
+                      "y": 42,
+                      "name": "Biceps/Triceps Banner Icon",
+                      "width": 34,
+                      "height": 34,
+                      "icon": "dumbbell",
+                      "library": "lucide",
+                      "fill": "$colors.ink"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Bdbc2",
+                  "name": "Biceps/Triceps Row",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "K5q4J",
+                      "name": "Biceps/Triceps Labels",
+                      "layout": "vertical",
+                      "gap": 3,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "RnIsT",
+                          "name": "Biceps/Triceps Nombre",
+                          "fill": "$colors.ink",
+                          "content": "Biceps/Triceps",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 16,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "m43Yt",
+                          "name": "Biceps/Triceps Hint",
+                          "fill": "$colors.muted",
+                          "content": "Tap para ver detalle",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "cjgQh",
+                      "name": "Biceps/Triceps Boton Editar",
+                      "fill": "$colors.canvas",
+                      "cornerRadius": "$rounded.md",
+                      "stroke": "$colors.hairline",
+                      "strokeWidth": 1,
+                      "gap": 6,
+                      "padding": [
+                        8,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "JU1po",
+                          "name": "Biceps/Triceps Edit Icon",
+                          "width": 14,
+                          "height": 14,
+                          "icon": "pencil",
+                          "library": "lucide",
+                          "fill": "$colors.ink"
+                        },
+                        {
+                          "type": "text",
+                          "id": "AqUvf",
+                          "name": "Biceps/Triceps Edit Text",
+                          "fill": "$colors.ink",
+                          "content": "Editar",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Icne2",
+              "name": "Card Shoulders",
+              "context": "onTap -> View Routine Detail",
+              "width": "fill_container",
+              "fill": "$colors.surface-card",
+              "cornerRadius": "$rounded.lg",
+              "stroke": "$colors.hairline-soft",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 10,
+              "padding": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "i1JAs9",
+                  "name": "Shoulders Banner",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 118,
+                  "fill": "#fae8ff",
+                  "cornerRadius": "$rounded.md",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "AlJ6y",
+                      "layoutPosition": "absolute",
+                      "x": 188,
+                      "y": 42,
+                      "name": "Shoulders Banner Icon",
+                      "width": 34,
+                      "height": 34,
+                      "icon": "dumbbell",
+                      "library": "lucide",
+                      "fill": "$colors.ink"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "qLUFM",
+                  "name": "Shoulders Row",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "YxEBx",
+                      "name": "Shoulders Labels",
+                      "layout": "vertical",
+                      "gap": 3,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "l5GmP5",
+                          "name": "Shoulders Nombre",
+                          "fill": "$colors.ink",
+                          "content": "Shoulders",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 16,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Z2zDl",
+                          "name": "Shoulders Hint",
+                          "fill": "$colors.muted",
+                          "content": "Tap para ver detalle",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "fsb2K",
+                      "name": "Shoulders Boton Editar",
+                      "fill": "$colors.canvas",
+                      "cornerRadius": "$rounded.md",
+                      "stroke": "$colors.hairline",
+                      "strokeWidth": 1,
+                      "gap": 6,
+                      "padding": [
+                        8,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "tFzn3",
+                          "name": "Shoulders Edit Icon",
+                          "width": 14,
+                          "height": 14,
+                          "icon": "pencil",
+                          "library": "lucide",
+                          "fill": "$colors.ink"
+                        },
+                        {
+                          "type": "text",
+                          "id": "t5kbZK",
+                          "name": "Shoulders Edit Text",
+                          "fill": "$colors.ink",
+                          "content": "Editar",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "VOn8J",
+          "name": "Nota Responsive",
+          "width": "fill_container",
+          "fill": "$colors.surface-soft",
+          "cornerRadius": "$rounded.md",
+          "layout": "vertical",
+          "gap": 6,
+          "padding": 12,
+          "children": [
+            {
+              "type": "text",
+              "id": "MLZ5z",
+              "name": "Titulo Responsive",
+              "fill": "$colors.ink",
+              "content": "Comportamiento responsive",
+              "fontFamily": "$font.ui",
+              "fontSize": 13,
+              "fontWeight": "600"
+            },
+            {
+              "type": "text",
+              "id": "vyR6M",
+              "name": "Texto Responsive",
+              "fill": "$colors.muted",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Movil: lista 1 columna. Tablet/Desktop: grid de 2 columnas con la misma anatomia de card.",
+              "fontFamily": "$font.ui",
+              "fontSize": 12,
+              "fontWeight": "500"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "YBV1y",
+      "x": 2700,
+      "y": 0,
+      "name": "US-03 Detalle de Rutina y Ejercicios",
+      "clip": true,
+      "width": 430,
+      "height": 1280,
+      "fill": "$colors.canvas",
+      "layout": "vertical",
+      "gap": 16,
+      "padding": [
+        24,
+        20
+      ],
+      "children": [
+        {
+          "type": "frame",
+          "id": "N2oQEQ",
+          "name": "Header Detalle Rutina",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 8,
+          "children": [
+            {
+              "type": "text",
+              "id": "k0bHn",
+              "name": "Titulo Rutina",
+              "fill": "$colors.ink",
+              "content": "Chest Day",
+              "fontFamily": "$font.display",
+              "fontSize": 34,
+              "fontWeight": "600",
+              "letterSpacing": -1
+            },
+            {
+              "type": "text",
+              "id": "MZNn8",
+              "name": "Subtitulo Rutina",
+              "fill": "$colors.body",
+              "content": "Detalle de rutina",
+              "fontFamily": "$font.ui",
+              "fontSize": 14,
+              "fontWeight": "500"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "QdOmP",
+          "name": "Metadata Rutina",
+          "width": "fill_container",
+          "fill": "$colors.surface-card",
+          "cornerRadius": "$rounded.lg",
+          "layout": "vertical",
+          "gap": 10,
+          "padding": 14,
+          "children": [
+            {
+              "type": "frame",
+              "id": "ExFvh",
+              "name": "Meta Fila 1",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "J9r8W6",
+                  "name": "Meta Focus Label",
+                  "fill": "$colors.muted",
+                  "content": "Enfoque",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 13,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "W6GdZ",
+                  "name": "Meta Focus Value",
+                  "fill": "$colors.ink",
+                  "content": "Pecho y triceps",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "cC9nn",
+              "name": "Meta Fila 2",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "uSr3p",
+                  "name": "Meta Time Label",
+                  "fill": "$colors.muted",
+                  "content": "Tiempo estimado",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 13,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "zxv8Z",
+                  "name": "Meta Time Value",
+                  "fill": "$colors.ink",
+                  "content": "55 min",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "zWL4M",
+          "name": "Seccion Ejercicios",
+          "fill": "$colors.ink",
+          "content": "Ejercicios",
+          "fontFamily": "$font.display",
+          "fontSize": 28,
+          "fontWeight": "600",
+          "letterSpacing": -0.5
+        },
+        {
+          "type": "frame",
+          "id": "C9qyR",
+          "name": "Lista Ejercicios",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 12,
+          "children": [
+            {
+              "type": "frame",
+              "id": "s1aRdi",
+              "name": "Card Flat Bench Press",
+              "width": "fill_container",
+              "fill": "$colors.surface-card",
+              "cornerRadius": "$rounded.lg",
+              "stroke": "$colors.hairline-soft",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 10,
+              "padding": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "EvfvT",
+                  "name": "Flat Bench Press Imagen",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 112,
+                  "fill": "#e5e7eb",
+                  "cornerRadius": "$rounded.md",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "dw1Ye",
+                      "layoutPosition": "absolute",
+                      "x": 189,
+                      "y": 40,
+                      "name": "Flat Bench Press Icon",
+                      "width": 32,
+                      "height": 32,
+                      "icon": "dumbbell",
+                      "library": "lucide",
+                      "fill": "$colors.ink"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "S0QYGu",
+                  "name": "Flat Bench Press Nombre",
+                  "fill": "$colors.ink",
+                  "content": "Flat Bench Press",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 16,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "P0jWO",
+                  "name": "Flat Bench Press Grid",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Xldk1",
+                      "name": "Flat Bench Press Meta A",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "SryVt",
+                          "name": "Flat Bench Press Sets Label",
+                          "fill": "$colors.muted",
+                          "content": "Series",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "ANoP7",
+                          "name": "Flat Bench Press Sets Value",
+                          "fill": "$colors.ink",
+                          "content": "4 sets",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "XdbMp",
+                      "name": "Flat Bench Press Meta B",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "a8sBg",
+                          "name": "Flat Bench Press Reps Label",
+                          "fill": "$colors.muted",
+                          "content": "Repeticiones",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "v8NgvS",
+                          "name": "Flat Bench Press Reps Value",
+                          "fill": "$colors.ink",
+                          "content": "8-12 reps",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "L4lvG",
+                      "name": "Flat Bench Press Meta C",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "ZwgjK",
+                          "name": "Flat Bench Press Weight Label",
+                          "fill": "$colors.muted",
+                          "content": "Peso objetivo",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "TjJjW",
+                          "name": "Flat Bench Press Weight Value",
+                          "fill": "$colors.ink",
+                          "content": "80 kg / 175 lbs",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "yxInV",
+                      "name": "Flat Bench Press Meta D",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "U4CO4l",
+                          "name": "Flat Bench Press Rest Label",
+                          "fill": "$colors.muted",
+                          "content": "Descanso",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "GtEIp",
+                          "name": "Flat Bench Press Rest Value",
+                          "fill": "$colors.ink",
+                          "content": "90s",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Of0Nc",
+              "name": "Card Incline Dumbbell Press",
+              "width": "fill_container",
+              "fill": "$colors.surface-card",
+              "cornerRadius": "$rounded.lg",
+              "stroke": "$colors.hairline-soft",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 10,
+              "padding": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "RERhw",
+                  "name": "Incline Dumbbell Press Imagen",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 112,
+                  "fill": "#dbeafe",
+                  "cornerRadius": "$rounded.md",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "xtGIe",
+                      "layoutPosition": "absolute",
+                      "x": 189,
+                      "y": 40,
+                      "name": "Incline Dumbbell Press Icon",
+                      "width": 32,
+                      "height": 32,
+                      "icon": "dumbbell",
+                      "library": "lucide",
+                      "fill": "$colors.ink"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "vKFbb",
+                  "name": "Incline Dumbbell Press Nombre",
+                  "fill": "$colors.ink",
+                  "content": "Incline Dumbbell Press",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 16,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "avxym",
+                  "name": "Incline Dumbbell Press Grid",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "PX6FM",
+                      "name": "Incline Dumbbell Press Meta A",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "w6yM9",
+                          "name": "Incline Dumbbell Press Sets Label",
+                          "fill": "$colors.muted",
+                          "content": "Series",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "E6ltdo",
+                          "name": "Incline Dumbbell Press Sets Value",
+                          "fill": "$colors.ink",
+                          "content": "4 sets",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "cd6na",
+                      "name": "Incline Dumbbell Press Meta B",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "R01NJ",
+                          "name": "Incline Dumbbell Press Reps Label",
+                          "fill": "$colors.muted",
+                          "content": "Repeticiones",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "H2hfWE",
+                          "name": "Incline Dumbbell Press Reps Value",
+                          "fill": "$colors.ink",
+                          "content": "10-12 reps",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "AcwJe",
+                      "name": "Incline Dumbbell Press Meta C",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "GbV49",
+                          "name": "Incline Dumbbell Press Weight Label",
+                          "fill": "$colors.muted",
+                          "content": "Peso objetivo",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "iYivD",
+                          "name": "Incline Dumbbell Press Weight Value",
+                          "fill": "$colors.ink",
+                          "content": "30 kg / 66 lbs",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "nNQTl",
+                      "name": "Incline Dumbbell Press Meta D",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "yFuVR",
+                          "name": "Incline Dumbbell Press Rest Label",
+                          "fill": "$colors.muted",
+                          "content": "Descanso",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Zgj63",
+                          "name": "Incline Dumbbell Press Rest Value",
+                          "fill": "$colors.ink",
+                          "content": "75s",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "qSoE5",
+              "name": "Card Cable Fly",
+              "width": "fill_container",
+              "fill": "$colors.surface-card",
+              "cornerRadius": "$rounded.lg",
+              "stroke": "$colors.hairline-soft",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 10,
+              "padding": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "TCCxO",
+                  "name": "Cable Fly Imagen",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 112,
+                  "fill": "#dcfce7",
+                  "cornerRadius": "$rounded.md",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "Sf9LM",
+                      "layoutPosition": "absolute",
+                      "x": 189,
+                      "y": 40,
+                      "name": "Cable Fly Icon",
+                      "width": 32,
+                      "height": 32,
+                      "icon": "dumbbell",
+                      "library": "lucide",
+                      "fill": "$colors.ink"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "QvO1J",
+                  "name": "Cable Fly Nombre",
+                  "fill": "$colors.ink",
+                  "content": "Cable Fly",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 16,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "vDp5n",
+                  "name": "Cable Fly Grid",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "SHey6",
+                      "name": "Cable Fly Meta A",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "dnTsC",
+                          "name": "Cable Fly Sets Label",
+                          "fill": "$colors.muted",
+                          "content": "Series",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "lY7lk",
+                          "name": "Cable Fly Sets Value",
+                          "fill": "$colors.ink",
+                          "content": "3 sets",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "jIvxK",
+                      "name": "Cable Fly Meta B",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "zhBgY",
+                          "name": "Cable Fly Reps Label",
+                          "fill": "$colors.muted",
+                          "content": "Repeticiones",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "T7FiO",
+                          "name": "Cable Fly Reps Value",
+                          "fill": "$colors.ink",
+                          "content": "12-15 reps",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "f7TcXz",
+                      "name": "Cable Fly Meta C",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "EtYdI",
+                          "name": "Cable Fly Weight Label",
+                          "fill": "$colors.muted",
+                          "content": "Peso objetivo",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "S15XZ",
+                          "name": "Cable Fly Weight Value",
+                          "fill": "$colors.ink",
+                          "content": "22 kg / 48 lbs",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "irpKM",
+                      "name": "Cable Fly Meta D",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "P31Wsr",
+                          "name": "Cable Fly Rest Label",
+                          "fill": "$colors.muted",
+                          "content": "Descanso",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "x3251",
+                          "name": "Cable Fly Rest Value",
+                          "fill": "$colors.ink",
+                          "content": "60s",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "hl1CV",
+          "name": "Contenedor Accion",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 8,
+          "children": [
+            {
+              "type": "text",
+              "id": "RkJji",
+              "name": "Hint Gestion",
+              "fill": "$colors.muted",
+              "content": "Ajusta parametros o agrega/quita ejercicios",
+              "fontFamily": "$font.ui",
+              "fontSize": 12,
+              "fontWeight": "500"
+            },
+            {
+              "type": "frame",
+              "id": "wDkoI",
+              "name": "Boton Modificar Rutina",
+              "width": "fill_container",
+              "height": 42,
+              "fill": "$colors.primary",
+              "cornerRadius": "$rounded.md",
+              "gap": 8,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "OyROG",
+                  "name": "Icono Modificar",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "pencil",
+                  "library": "lucide",
+                  "fill": "$colors.on-primary"
+                },
+                {
+                  "type": "text",
+                  "id": "Snbf0",
+                  "name": "Texto Modificar",
+                  "fill": "$colors.on-primary",
+                  "content": "Modificar rutina",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "colors.primary": {
+      "type": "color",
+      "value": "#111111"
+    },
+    "colors.primary-active": {
+      "type": "color",
+      "value": "#242424"
+    },
+    "colors.brand-accent": {
+      "type": "color",
+      "value": "#3b82f6"
+    },
+    "colors.badge-orange": {
+      "type": "color",
+      "value": "#fb923c"
+    },
+    "colors.badge-pink": {
+      "type": "color",
+      "value": "#ec4899"
+    },
+    "colors.badge-violet": {
+      "type": "color",
+      "value": "#8b5cf6"
+    },
+    "colors.badge-emerald": {
+      "type": "color",
+      "value": "#34d399"
+    },
+    "colors.canvas": {
+      "type": "color",
+      "value": "#ffffff"
+    },
+    "colors.surface-soft": {
+      "type": "color",
+      "value": "#f8f9fa"
+    },
+    "colors.surface-card": {
+      "type": "color",
+      "value": "#f5f5f5"
+    },
+    "colors.surface-strong": {
+      "type": "color",
+      "value": "#e5e7eb"
+    },
+    "colors.surface-dark": {
+      "type": "color",
+      "value": "#101010"
+    },
+    "colors.surface-dark-elevated": {
+      "type": "color",
+      "value": "#1a1a1a"
+    },
+    "colors.hairline": {
+      "type": "color",
+      "value": "#e5e7eb"
+    },
+    "colors.hairline-soft": {
+      "type": "color",
+      "value": "#f3f4f6"
+    },
+    "colors.ink": {
+      "type": "color",
+      "value": "#111111"
+    },
+    "colors.body": {
+      "type": "color",
+      "value": "#374151"
+    },
+    "colors.muted": {
+      "type": "color",
+      "value": "#6b7280"
+    },
+    "colors.muted-soft": {
+      "type": "color",
+      "value": "#898989"
+    },
+    "colors.on-primary": {
+      "type": "color",
+      "value": "#ffffff"
+    },
+    "colors.on-dark": {
+      "type": "color",
+      "value": "#ffffff"
+    },
+    "colors.on-dark-soft": {
+      "type": "color",
+      "value": "#a1a1aa"
+    },
+    "colors.success": {
+      "type": "color",
+      "value": "#10b981"
+    },
+    "colors.warning": {
+      "type": "color",
+      "value": "#f59e0b"
+    },
+    "colors.error": {
+      "type": "color",
+      "value": "#ef4444"
+    },
+    "spacing.xxs": {
+      "type": "number",
+      "value": 4
+    },
+    "spacing.xs": {
+      "type": "number",
+      "value": 8
+    },
+    "spacing.sm": {
+      "type": "number",
+      "value": 12
+    },
+    "spacing.md": {
+      "type": "number",
+      "value": 16
+    },
+    "spacing.lg": {
+      "type": "number",
+      "value": 24
+    },
+    "spacing.xl": {
+      "type": "number",
+      "value": 32
+    },
+    "spacing.xxl": {
+      "type": "number",
+      "value": 48
+    },
+    "spacing.section": {
+      "type": "number",
+      "value": 96
+    },
+    "rounded.xs": {
+      "type": "number",
+      "value": 4
+    },
+    "rounded.sm": {
+      "type": "number",
+      "value": 6
+    },
+    "rounded.md": {
+      "type": "number",
+      "value": 8
+    },
+    "rounded.lg": {
+      "type": "number",
+      "value": 12
+    },
+    "rounded.xl": {
+      "type": "number",
+      "value": 16
+    },
+    "rounded.pill": {
+      "type": "number",
+      "value": 9999
+    },
+    "rounded.full": {
+      "type": "number",
+      "value": 9999
+    },
+    "font.display": {
+      "type": "string",
+      "value": "Inter"
+    },
+    "font.ui": {
+      "type": "string",
+      "value": "Inter"
+    },
+    "type.display-xl": {
+      "type": "number",
+      "value": 64
+    },
+    "type.display-lg": {
+      "type": "number",
+      "value": 48
+    },
+    "type.display-md": {
+      "type": "number",
+      "value": 36
+    },
+    "type.display-sm": {
+      "type": "number",
+      "value": 28
+    },
+    "type.title-lg": {
+      "type": "number",
+      "value": 22
+    },
+    "type.title-md": {
+      "type": "number",
+      "value": 18
+    },
+    "type.title-sm": {
+      "type": "number",
+      "value": 16
+    },
+    "type.body-md": {
+      "type": "number",
+      "value": 16
+    },
+    "type.body-sm": {
+      "type": "number",
+      "value": 14
+    },
+    "type.caption": {
+      "type": "number",
+      "value": 13
+    }
+  },
+  "fileToken": "5d293eb5-986c-4009-881d-4c5dd467e427"
+}

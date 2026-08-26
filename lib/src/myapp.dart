@@ -16,7 +16,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/login': (BuildContext context) =>
             const MyHomePage(title: 'Login Page'),
-        '/landing': (BuildContext context) => const LandingPage(),
+        '/landing': (BuildContext context) =>
+            const LandingPage(title: "Landing Page"),
       },
 
       theme: ThemeData(
