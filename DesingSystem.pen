@@ -45,7 +45,8 @@
               "content": "White canvas, black CTAs, display headlines with negative tracking, light-gray cards with product chrome, and a single dark footer close.",
               "lineHeight": 1.5,
               "fontFamily": "$font.ui",
-              "fontSize": "$type.body-md"
+              "fontSize": "$type.body-md",
+              "fontWeight": "normal"
             }
           ]
         },
@@ -715,7 +716,8 @@
                   "content": "Body MD 16/400. Scheduling made simple, predictable, and fast.",
                   "lineHeight": 1.5,
                   "fontFamily": "$font.ui",
-                  "fontSize": "$type.body-md"
+                  "fontSize": "$type.body-md",
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -2070,7 +2072,8 @@
                       "fill": "$colors.on-dark-soft",
                       "content": "Scheduling",
                       "fontFamily": "$font.ui",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -2079,7 +2082,8 @@
                       "fill": "$colors.on-dark-soft",
                       "content": "Routing",
                       "fontFamily": "$font.ui",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -2088,7 +2092,8 @@
                       "fill": "$colors.on-dark-soft",
                       "content": "Workflows",
                       "fontFamily": "$font.ui",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -2117,7 +2122,8 @@
                       "fill": "$colors.on-dark-soft",
                       "content": "Sales",
                       "fontFamily": "$font.ui",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -2126,7 +2132,8 @@
                       "fill": "$colors.on-dark-soft",
                       "content": "Support",
                       "fontFamily": "$font.ui",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -2135,7 +2142,8 @@
                       "fill": "$colors.on-dark-soft",
                       "content": "Education",
                       "fontFamily": "$font.ui",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -2164,7 +2172,8 @@
                       "fill": "$colors.on-dark-soft",
                       "content": "About",
                       "fontFamily": "$font.ui",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -2173,7 +2182,8 @@
                       "fill": "$colors.on-dark-soft",
                       "content": "Careers",
                       "fontFamily": "$font.ui",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -2182,7 +2192,8 @@
                       "fill": "$colors.on-dark-soft",
                       "content": "Contact",
                       "fontFamily": "$font.ui",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -2211,7 +2222,8 @@
                       "fill": "$colors.on-dark-soft",
                       "content": "Docs",
                       "fontFamily": "$font.ui",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -2220,7 +2232,8 @@
                       "fill": "$colors.on-dark-soft",
                       "content": "Blog",
                       "fontFamily": "$font.ui",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -2229,7 +2242,8 @@
                       "fill": "$colors.on-dark-soft",
                       "content": "Changelog",
                       "fontFamily": "$font.ui",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 }
@@ -2331,7 +2345,7 @@
       "clip": true,
       "width": 430,
       "height": 932,
-      "fill": "$colors.canvas",
+      "fill": "$colors.surface-dark",
       "layout": "vertical",
       "gap": 24,
       "padding": [
@@ -2351,7 +2365,7 @@
               "type": "text",
               "id": "y10JKA",
               "name": "Saludo",
-              "fill": "$colors.ink",
+              "fill": "$colors.on-dark",
               "content": "Hola, Camila",
               "fontFamily": "$font.display",
               "fontSize": 36,
@@ -2362,10 +2376,11 @@
               "type": "text",
               "id": "Dlwxj",
               "name": "Subtitulo",
-              "fill": "$colors.body",
+              "fill": "$colors.on-dark-soft",
               "content": "Retoma donde lo dejaste.",
               "fontFamily": "$font.ui",
-              "fontSize": 16
+              "fontSize": 16,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -2374,9 +2389,9 @@
           "id": "WsBgi",
           "name": "Ultima Asistencia",
           "width": "fill_container",
-          "fill": "$colors.surface-soft",
+          "fill": "$colors.surface-dark-elevated",
           "cornerRadius": "$rounded.md",
-          "stroke": "$colors.hairline-soft",
+          "stroke": "$colors.hairline-dark",
           "strokeWidth": 1,
           "padding": [
             12,
@@ -2399,7 +2414,7 @@
               "type": "text",
               "id": "pNIWb",
               "name": "Fecha Asistencia",
-              "fill": "$colors.ink",
+              "fill": "$colors.muted",
               "content": "24 Ago 2026",
               "fontFamily": "$font.ui",
               "fontSize": 14,
@@ -2412,8 +2427,9 @@
           "id": "Kj1ej",
           "name": "Card Contador Pasos",
           "width": "fill_container",
-          "fill": "$colors.surface-card",
+          "fill": "$colors.surface-dark-elevated",
           "cornerRadius": "$rounded.lg",
+          "stroke": "$colors.hairline-dark",
           "layout": "vertical",
           "gap": 12,
           "padding": 16,
@@ -2437,7 +2453,7 @@
                       "type": "text",
                       "id": "MRbv0",
                       "name": "Titulo Pasos",
-                      "fill": "$colors.ink",
+                      "fill": "$colors.muted",
                       "content": "Pasos de hoy",
                       "fontFamily": "$font.ui",
                       "fontSize": 14,
@@ -2447,7 +2463,7 @@
                       "type": "text",
                       "id": "x9ep6",
                       "name": "Cantidad Pasos",
-                      "fill": "$colors.ink",
+                      "fill": "$colors.muted",
                       "content": "8.420",
                       "fontFamily": "$font.display",
                       "fontSize": 36,
@@ -2497,7 +2513,7 @@
                   "type": "text",
                   "id": "cvfnu",
                   "name": "Objetivo Pasos",
-                  "fill": "$colors.muted",
+                  "fill": "$colors.on-dark-soft",
                   "content": "Objetivo: 12.000",
                   "fontFamily": "$font.ui",
                   "fontSize": 13,
@@ -2507,7 +2523,7 @@
                   "type": "text",
                   "id": "fHiaI",
                   "name": "Restante Pasos",
-                  "fill": "$colors.muted",
+                  "fill": "$colors.on-dark-soft",
                   "content": "Faltan 3.580",
                   "fontFamily": "$font.ui",
                   "fontSize": 13,
@@ -2522,7 +2538,7 @@
               "clip": true,
               "width": "fill_container",
               "height": 10,
-              "fill": "$colors.surface-strong",
+              "fill": "$colors.surface-dark-subtle",
               "cornerRadius": "$rounded.pill",
               "children": [
                 {
@@ -2530,7 +2546,7 @@
                   "cornerRadius": "$rounded.pill",
                   "id": "DaUxD",
                   "name": "Barra Pasos Fill",
-                  "fill": "$colors.primary",
+                  "fill": "$colors.on-dark",
                   "width": 273,
                   "height": 10
                 }
@@ -2550,7 +2566,7 @@
               "type": "text",
               "id": "R4EY49",
               "name": "Titulo Seccion",
-              "fill": "$colors.ink",
+              "fill": "$colors.on-dark",
               "content": "Proxima rutina",
               "fontFamily": "$font.display",
               "fontSize": 28,
@@ -2562,8 +2578,10 @@
               "id": "BbwqG",
               "name": "Tarjeta Proxima Rutina",
               "width": "fill_container",
-              "fill": "$colors.surface-card",
+              "fill": "$colors.surface-dark-elevated",
               "cornerRadius": "$rounded.lg",
+              "stroke": "$colors.hairline-dark",
+              "strokeWidth": 1,
               "layout": "vertical",
               "gap": 14,
               "padding": 16,
@@ -2575,7 +2593,7 @@
                   "clip": true,
                   "width": "fill_container",
                   "height": 180,
-                  "fill": "$colors.surface-strong",
+                  "fill": "$colors.surface-dark-subtle",
                   "cornerRadius": "$rounded.md",
                   "children": [
                     {
@@ -2589,7 +2607,7 @@
                       "height": 48,
                       "icon": "dumbbell",
                       "library": "lucide",
-                      "fill": "$colors.ink"
+                      "fill": "$colors.on-dark"
                     }
                   ]
                 },
@@ -2605,7 +2623,7 @@
                       "type": "text",
                       "id": "YNAkN",
                       "name": "Nombre Rutina",
-                      "fill": "$colors.ink",
+                      "fill": "$colors.on-dark",
                       "content": "Fuerza Tren Superior",
                       "fontFamily": "$font.ui",
                       "fontSize": 18,
@@ -2627,13 +2645,13 @@
                           "height": 16,
                           "icon": "clock-3",
                           "library": "lucide",
-                          "fill": "$colors.muted"
+                          "fill": "$colors.on-dark-soft"
                         },
                         {
                           "type": "text",
                           "id": "QXebN",
                           "name": "Duracion Rutina",
-                          "fill": "$colors.body",
+                          "fill": "$colors.on-dark-soft",
                           "content": "45 min estimados",
                           "fontFamily": "$font.ui",
                           "fontSize": 14,
@@ -2649,7 +2667,7 @@
                   "name": "Boton Iniciar",
                   "width": "fill_container",
                   "height": 40,
-                  "fill": "$colors.primary",
+                  "fill": "$colors.canvas",
                   "cornerRadius": "$rounded.md",
                   "justifyContent": "center",
                   "alignItems": "center",
@@ -2658,7 +2676,7 @@
                       "type": "text",
                       "id": "yDMbj",
                       "name": "Texto Iniciar",
-                      "fill": "$colors.on-primary",
+                      "fill": "$colors.ink",
                       "content": "Iniciar rutina",
                       "fontFamily": "$font.ui",
                       "fontSize": 14,
@@ -2681,10 +2699,11 @@
           "type": "frame",
           "id": "oUNeq",
           "name": "Barra Navegacion",
+          "reusable": true,
           "width": "fill_container",
-          "fill": "$colors.canvas",
+          "fill": "$colors.surface-dark-elevated",
           "cornerRadius": "$rounded.lg",
-          "stroke": "$colors.hairline",
+          "stroke": "$colors.hairline-dark",
           "strokeWidth": 1,
           "padding": [
             12,
@@ -2697,7 +2716,7 @@
               "type": "frame",
               "id": "WUBS1",
               "name": "Nav Inicio",
-              "fill": "$colors.surface-soft",
+              "fill": "$colors.surface-dark-active",
               "cornerRadius": "$rounded.md",
               "gap": 6,
               "padding": [
@@ -2714,17 +2733,50 @@
                   "height": 16,
                   "icon": "house",
                   "library": "lucide",
-                  "fill": "$colors.ink"
+                  "fill": "$colors.on-dark"
                 },
                 {
                   "type": "text",
                   "id": "yVfNZ",
                   "name": "Texto Inicio",
-                  "fill": "$colors.ink",
+                  "fill": "$colors.on-dark",
                   "content": "Inicio",
                   "fontFamily": "$font.ui",
                   "fontSize": 14,
                   "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Gn11S",
+              "layoutPosition": "absolute",
+              "x": 157,
+              "y": -9,
+              "name": "Frame 1",
+              "width": 55,
+              "height": 54,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "w2idNV",
+                  "x": 0,
+                  "y": 0,
+                  "fill": "$colors.brand-accent",
+                  "width": 54,
+                  "height": 54
+                },
+                {
+                  "type": "icon",
+                  "id": "hp1AD",
+                  "x": 3,
+                  "y": 3,
+                  "width": 48,
+                  "height": 48,
+                  "icon": "plus",
+                  "library": "lucide",
+                  "fill": "#ffffff"
                 }
               ]
             },
@@ -2748,13 +2800,13 @@
                   "height": 16,
                   "icon": "list",
                   "library": "lucide",
-                  "fill": "$colors.muted"
+                  "fill": "$colors.on-dark-soft"
                 },
                 {
                   "type": "text",
                   "id": "D6eKiU",
                   "name": "Texto Ver Rutinas",
-                  "fill": "$colors.muted",
+                  "fill": "$colors.on-dark-soft",
                   "content": "Ver rutinas",
                   "fontFamily": "$font.ui",
                   "fontSize": 14,
@@ -2763,6 +2815,13 @@
               ]
             }
           ]
+        },
+        {
+          "type": "frame",
+          "id": "Z7eeP",
+          "name": "Spacer",
+          "width": "fill_container",
+          "height": 24
         }
       ]
     },
@@ -2774,8 +2833,8 @@
       "name": "US-02 Catalogo y Gestion de Rutinas",
       "clip": true,
       "width": 430,
-      "height": 1160,
-      "fill": "$colors.canvas",
+      "height": 1261,
+      "fill": "$colors.surface-dark",
       "layout": "vertical",
       "gap": 18,
       "padding": [
@@ -2795,7 +2854,7 @@
               "type": "text",
               "id": "c7BJw",
               "name": "Titulo Catalogo",
-              "fill": "$colors.ink",
+              "fill": "$colors.on-dark",
               "content": "Mis rutinas",
               "fontFamily": "$font.display",
               "fontSize": 34,
@@ -2806,12 +2865,13 @@
               "type": "text",
               "id": "g6pMq",
               "name": "Subtitulo Catalogo",
-              "fill": "$colors.body",
+              "fill": "$colors.on-dark-soft",
               "textGrowth": "fixed-width",
               "width": "fill_container",
               "content": "Explora, edita y abre rapidamente cualquier rutina por grupo muscular o split.",
               "fontFamily": "$font.ui",
-              "fontSize": 14
+              "fontSize": 14,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -2820,7 +2880,7 @@
           "id": "y5n9rl",
           "name": "Filtro Split",
           "width": "fill_container",
-          "fill": "$colors.surface-soft",
+          "fill": "$colors.surface-dark-elevated",
           "cornerRadius": "$rounded.pill",
           "gap": 6,
           "padding": 6,
@@ -2829,7 +2889,7 @@
               "type": "frame",
               "id": "eCvQw",
               "name": "Filtro Activo",
-              "fill": "$colors.canvas",
+              "fill": "$colors.surface-dark-active",
               "cornerRadius": "$rounded.md",
               "effect": {
                 "type": "shadow",
@@ -2852,7 +2912,7 @@
                   "type": "text",
                   "id": "z3YIS",
                   "name": "Texto Activo",
-                  "fill": "$colors.ink",
+                  "fill": "$colors.on-dark",
                   "content": "Todas",
                   "fontFamily": "$font.ui",
                   "fontSize": 13,
@@ -2876,7 +2936,7 @@
                   "type": "text",
                   "id": "ByLo2",
                   "name": "Texto Push",
-                  "fill": "$colors.muted",
+                  "fill": "$colors.on-dark-soft",
                   "content": "Push",
                   "fontFamily": "$font.ui",
                   "fontSize": 13,
@@ -2900,7 +2960,7 @@
                   "type": "text",
                   "id": "IkwYE",
                   "name": "Texto Pull",
-                  "fill": "$colors.muted",
+                  "fill": "$colors.on-dark-soft",
                   "content": "Pull",
                   "fontFamily": "$font.ui",
                   "fontSize": 13,
@@ -2924,7 +2984,7 @@
                   "type": "text",
                   "id": "pQ0LP",
                   "name": "Texto Legs",
-                  "fill": "$colors.muted",
+                  "fill": "$colors.on-dark-soft",
                   "content": "Legs",
                   "fontFamily": "$font.ui",
                   "fontSize": 13,
@@ -2939,8 +2999,10 @@
           "id": "ms4YX",
           "name": "Leyenda Interaccion",
           "width": "fill_container",
-          "fill": "$colors.surface-soft",
+          "fill": "$colors.surface-dark-elevated",
           "cornerRadius": "$rounded.md",
+          "stroke": "$colors.hairline-dark",
+          "strokeWidth": 1,
           "gap": 8,
           "padding": [
             8,
@@ -2956,13 +3018,13 @@
               "height": 14,
               "icon": "hand",
               "library": "lucide",
-              "fill": "$colors.muted"
+              "fill": "$colors.on-dark-soft"
             },
             {
               "type": "text",
               "id": "RiDAZ",
               "name": "Texto Leyenda",
-              "fill": "$colors.muted",
+              "fill": "$colors.on-dark-soft",
               "content": "Toca cualquier card para abrir Ver Rutina (Detalle)",
               "fontFamily": "$font.ui",
               "fontSize": 13,
@@ -2984,9 +3046,9 @@
               "name": "Card Chest",
               "context": "onTap -> View Routine Detail",
               "width": "fill_container",
-              "fill": "$colors.surface-card",
+              "fill": "$colors.surface-dark-elevated",
               "cornerRadius": "$rounded.lg",
-              "stroke": "$colors.hairline-soft",
+              "stroke": "$colors.hairline-dark",
               "strokeWidth": 1,
               "layout": "vertical",
               "gap": 10,
@@ -2999,7 +3061,7 @@
                   "clip": true,
                   "width": "fill_container",
                   "height": 118,
-                  "fill": "#e5e7eb",
+                  "fill": "$colors.dark-badge-blue",
                   "cornerRadius": "$rounded.md",
                   "children": [
                     {
@@ -3013,7 +3075,7 @@
                       "height": 34,
                       "icon": "dumbbell",
                       "library": "lucide",
-                      "fill": "$colors.ink"
+                      "fill": "$colors.on-dark"
                     }
                   ]
                 },
@@ -3037,7 +3099,7 @@
                           "type": "text",
                           "id": "YM7c1",
                           "name": "Chest Nombre",
-                          "fill": "$colors.ink",
+                          "fill": "$colors.on-dark",
                           "content": "Chest",
                           "fontFamily": "$font.ui",
                           "fontSize": 16,
@@ -3047,7 +3109,7 @@
                           "type": "text",
                           "id": "v9FSEh",
                           "name": "Chest Hint",
-                          "fill": "$colors.muted",
+                          "fill": "$colors.on-dark-soft",
                           "content": "Tap para ver detalle",
                           "fontFamily": "$font.ui",
                           "fontSize": 12,
@@ -3059,9 +3121,9 @@
                       "type": "frame",
                       "id": "STY8A",
                       "name": "Chest Boton Editar",
-                      "fill": "$colors.canvas",
+                      "fill": "$colors.surface-dark-subtle",
                       "cornerRadius": "$rounded.md",
-                      "stroke": "$colors.hairline",
+                      "stroke": "$colors.hairline-dark",
                       "strokeWidth": 1,
                       "gap": 6,
                       "padding": [
@@ -3079,13 +3141,13 @@
                           "height": 14,
                           "icon": "pencil",
                           "library": "lucide",
-                          "fill": "$colors.ink"
+                          "fill": "$colors.on-dark"
                         },
                         {
                           "type": "text",
                           "id": "gp1wq",
                           "name": "Chest Edit Text",
-                          "fill": "$colors.ink",
+                          "fill": "$colors.on-dark",
                           "content": "Editar",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -3103,9 +3165,9 @@
               "name": "Card Legs",
               "context": "onTap -> View Routine Detail",
               "width": "fill_container",
-              "fill": "$colors.surface-card",
+              "fill": "$colors.surface-dark-elevated",
               "cornerRadius": "$rounded.lg",
-              "stroke": "$colors.hairline-soft",
+              "stroke": "$colors.hairline-dark",
               "strokeWidth": 1,
               "layout": "vertical",
               "gap": 10,
@@ -3118,7 +3180,7 @@
                   "clip": true,
                   "width": "fill_container",
                   "height": 118,
-                  "fill": "#dbeafe",
+                  "fill": "$colors.dark-badge-indigo",
                   "cornerRadius": "$rounded.md",
                   "children": [
                     {
@@ -3132,7 +3194,7 @@
                       "height": 34,
                       "icon": "dumbbell",
                       "library": "lucide",
-                      "fill": "$colors.ink"
+                      "fill": "$colors.on-dark"
                     }
                   ]
                 },
@@ -3156,7 +3218,7 @@
                           "type": "text",
                           "id": "CUBrd",
                           "name": "Legs Nombre",
-                          "fill": "$colors.ink",
+                          "fill": "$colors.on-dark",
                           "content": "Legs",
                           "fontFamily": "$font.ui",
                           "fontSize": 16,
@@ -3166,7 +3228,7 @@
                           "type": "text",
                           "id": "WadZf",
                           "name": "Legs Hint",
-                          "fill": "$colors.muted",
+                          "fill": "$colors.on-dark-soft",
                           "content": "Tap para ver detalle",
                           "fontFamily": "$font.ui",
                           "fontSize": 12,
@@ -3178,9 +3240,9 @@
                       "type": "frame",
                       "id": "m7eAcQ",
                       "name": "Legs Boton Editar",
-                      "fill": "$colors.canvas",
+                      "fill": "$colors.surface-dark-subtle",
                       "cornerRadius": "$rounded.md",
-                      "stroke": "$colors.hairline",
+                      "stroke": "$colors.hairline-dark",
                       "strokeWidth": 1,
                       "gap": 6,
                       "padding": [
@@ -3198,13 +3260,13 @@
                           "height": 14,
                           "icon": "pencil",
                           "library": "lucide",
-                          "fill": "$colors.ink"
+                          "fill": "$colors.on-dark"
                         },
                         {
                           "type": "text",
                           "id": "R1Tsa",
                           "name": "Legs Edit Text",
-                          "fill": "$colors.ink",
+                          "fill": "$colors.on-dark",
                           "content": "Editar",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -3222,9 +3284,9 @@
               "name": "Card Biceps/Triceps",
               "context": "onTap -> View Routine Detail",
               "width": "fill_container",
-              "fill": "$colors.surface-card",
+              "fill": "$colors.surface-dark-elevated",
               "cornerRadius": "$rounded.lg",
-              "stroke": "$colors.hairline-soft",
+              "stroke": "$colors.hairline-dark",
               "strokeWidth": 1,
               "layout": "vertical",
               "gap": 10,
@@ -3237,7 +3299,7 @@
                   "clip": true,
                   "width": "fill_container",
                   "height": 118,
-                  "fill": "#dcfce7",
+                  "fill": "$colors.dark-badge-emerald",
                   "cornerRadius": "$rounded.md",
                   "children": [
                     {
@@ -3251,7 +3313,7 @@
                       "height": 34,
                       "icon": "dumbbell",
                       "library": "lucide",
-                      "fill": "$colors.ink"
+                      "fill": "$colors.on-dark"
                     }
                   ]
                 },
@@ -3275,7 +3337,7 @@
                           "type": "text",
                           "id": "RnIsT",
                           "name": "Biceps/Triceps Nombre",
-                          "fill": "$colors.ink",
+                          "fill": "$colors.on-dark",
                           "content": "Biceps/Triceps",
                           "fontFamily": "$font.ui",
                           "fontSize": 16,
@@ -3285,7 +3347,7 @@
                           "type": "text",
                           "id": "m43Yt",
                           "name": "Biceps/Triceps Hint",
-                          "fill": "$colors.muted",
+                          "fill": "$colors.on-dark-soft",
                           "content": "Tap para ver detalle",
                           "fontFamily": "$font.ui",
                           "fontSize": 12,
@@ -3297,9 +3359,9 @@
                       "type": "frame",
                       "id": "cjgQh",
                       "name": "Biceps/Triceps Boton Editar",
-                      "fill": "$colors.canvas",
+                      "fill": "$colors.surface-dark-subtle",
                       "cornerRadius": "$rounded.md",
-                      "stroke": "$colors.hairline",
+                      "stroke": "$colors.hairline-dark",
                       "strokeWidth": 1,
                       "gap": 6,
                       "padding": [
@@ -3317,13 +3379,13 @@
                           "height": 14,
                           "icon": "pencil",
                           "library": "lucide",
-                          "fill": "$colors.ink"
+                          "fill": "$colors.on-dark"
                         },
                         {
                           "type": "text",
                           "id": "AqUvf",
                           "name": "Biceps/Triceps Edit Text",
-                          "fill": "$colors.ink",
+                          "fill": "$colors.on-dark",
                           "content": "Editar",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -3341,9 +3403,9 @@
               "name": "Card Shoulders",
               "context": "onTap -> View Routine Detail",
               "width": "fill_container",
-              "fill": "$colors.surface-card",
+              "fill": "$colors.surface-dark-elevated",
               "cornerRadius": "$rounded.lg",
-              "stroke": "$colors.hairline-soft",
+              "stroke": "$colors.hairline-dark",
               "strokeWidth": 1,
               "layout": "vertical",
               "gap": 10,
@@ -3356,7 +3418,7 @@
                   "clip": true,
                   "width": "fill_container",
                   "height": 118,
-                  "fill": "#fae8ff",
+                  "fill": "$colors.dark-badge-purple",
                   "cornerRadius": "$rounded.md",
                   "children": [
                     {
@@ -3370,7 +3432,7 @@
                       "height": 34,
                       "icon": "dumbbell",
                       "library": "lucide",
-                      "fill": "$colors.ink"
+                      "fill": "$colors.on-dark"
                     }
                   ]
                 },
@@ -3394,7 +3456,7 @@
                           "type": "text",
                           "id": "l5GmP5",
                           "name": "Shoulders Nombre",
-                          "fill": "$colors.ink",
+                          "fill": "$colors.on-dark",
                           "content": "Shoulders",
                           "fontFamily": "$font.ui",
                           "fontSize": 16,
@@ -3404,7 +3466,7 @@
                           "type": "text",
                           "id": "Z2zDl",
                           "name": "Shoulders Hint",
-                          "fill": "$colors.muted",
+                          "fill": "$colors.on-dark-soft",
                           "content": "Tap para ver detalle",
                           "fontFamily": "$font.ui",
                           "fontSize": 12,
@@ -3416,9 +3478,9 @@
                       "type": "frame",
                       "id": "fsb2K",
                       "name": "Shoulders Boton Editar",
-                      "fill": "$colors.canvas",
+                      "fill": "$colors.surface-dark-subtle",
                       "cornerRadius": "$rounded.md",
-                      "stroke": "$colors.hairline",
+                      "stroke": "$colors.hairline-dark",
                       "strokeWidth": 1,
                       "gap": 6,
                       "padding": [
@@ -3436,13 +3498,13 @@
                           "height": 14,
                           "icon": "pencil",
                           "library": "lucide",
-                          "fill": "$colors.ink"
+                          "fill": "$colors.on-dark"
                         },
                         {
                           "type": "text",
                           "id": "t5kbZK",
                           "name": "Shoulders Edit Text",
-                          "fill": "$colors.ink",
+                          "fill": "$colors.on-dark",
                           "content": "Editar",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -3461,8 +3523,10 @@
           "id": "VOn8J",
           "name": "Nota Responsive",
           "width": "fill_container",
-          "fill": "$colors.surface-soft",
+          "fill": "$colors.surface-dark-elevated",
           "cornerRadius": "$rounded.md",
+          "stroke": "$colors.hairline-dark",
+          "strokeWidth": 1,
           "layout": "vertical",
           "gap": 6,
           "padding": 12,
@@ -3471,7 +3535,7 @@
               "type": "text",
               "id": "MLZ5z",
               "name": "Titulo Responsive",
-              "fill": "$colors.ink",
+              "fill": "$colors.on-dark",
               "content": "Comportamiento responsive",
               "fontFamily": "$font.ui",
               "fontSize": 13,
@@ -3481,7 +3545,7 @@
               "type": "text",
               "id": "vyR6M",
               "name": "Texto Responsive",
-              "fill": "$colors.muted",
+              "fill": "$colors.on-dark-soft",
               "textGrowth": "fixed-width",
               "width": "fill_container",
               "content": "Movil: lista 1 columna. Tablet/Desktop: grid de 2 columnas con la misma anatomia de card.",
@@ -3490,6 +3554,20 @@
               "fontWeight": "500"
             }
           ]
+        },
+        {
+          "type": "frame",
+          "id": "IpuVP",
+          "name": "Spacer",
+          "width": "fill_container",
+          "height": 24
+        },
+        {
+          "id": "f2oHH",
+          "type": "ref",
+          "ref": "oUNeq",
+          "x": 20,
+          "y": 1183
         }
       ]
     },
@@ -3502,7 +3580,7 @@
       "clip": true,
       "width": 430,
       "height": 1280,
-      "fill": "$colors.canvas",
+      "fill": "$colors.surface-dark",
       "layout": "vertical",
       "gap": 16,
       "padding": [
@@ -3522,7 +3600,7 @@
               "type": "text",
               "id": "k0bHn",
               "name": "Titulo Rutina",
-              "fill": "$colors.ink",
+              "fill": "$colors.on-dark",
               "content": "Chest Day",
               "fontFamily": "$font.display",
               "fontSize": 34,
@@ -3533,7 +3611,7 @@
               "type": "text",
               "id": "MZNn8",
               "name": "Subtitulo Rutina",
-              "fill": "$colors.body",
+              "fill": "$colors.on-dark-soft",
               "content": "Detalle de rutina",
               "fontFamily": "$font.ui",
               "fontSize": 14,
@@ -3546,8 +3624,10 @@
           "id": "QdOmP",
           "name": "Metadata Rutina",
           "width": "fill_container",
-          "fill": "$colors.surface-card",
+          "fill": "$colors.surface-dark-elevated",
           "cornerRadius": "$rounded.lg",
+          "stroke": "$colors.hairline-dark",
+          "strokeWidth": 1,
           "layout": "vertical",
           "gap": 10,
           "padding": 14,
@@ -3564,7 +3644,7 @@
                   "type": "text",
                   "id": "J9r8W6",
                   "name": "Meta Focus Label",
-                  "fill": "$colors.muted",
+                  "fill": "$colors.on-dark-soft",
                   "content": "Enfoque",
                   "fontFamily": "$font.ui",
                   "fontSize": 13,
@@ -3574,7 +3654,7 @@
                   "type": "text",
                   "id": "W6GdZ",
                   "name": "Meta Focus Value",
-                  "fill": "$colors.ink",
+                  "fill": "$colors.on-dark",
                   "content": "Pecho y triceps",
                   "fontFamily": "$font.ui",
                   "fontSize": 13,
@@ -3594,7 +3674,7 @@
                   "type": "text",
                   "id": "uSr3p",
                   "name": "Meta Time Label",
-                  "fill": "$colors.muted",
+                  "fill": "$colors.on-dark-soft",
                   "content": "Tiempo estimado",
                   "fontFamily": "$font.ui",
                   "fontSize": 13,
@@ -3604,7 +3684,7 @@
                   "type": "text",
                   "id": "zxv8Z",
                   "name": "Meta Time Value",
-                  "fill": "$colors.ink",
+                  "fill": "$colors.on-dark",
                   "content": "55 min",
                   "fontFamily": "$font.ui",
                   "fontSize": 13,
@@ -3618,7 +3698,7 @@
           "type": "text",
           "id": "zWL4M",
           "name": "Seccion Ejercicios",
-          "fill": "$colors.ink",
+          "fill": "$colors.on-dark",
           "content": "Ejercicios",
           "fontFamily": "$font.display",
           "fontSize": 28,
@@ -3638,9 +3718,9 @@
               "id": "s1aRdi",
               "name": "Card Flat Bench Press",
               "width": "fill_container",
-              "fill": "$colors.surface-card",
+              "fill": "$colors.surface-dark-elevated",
               "cornerRadius": "$rounded.lg",
-              "stroke": "$colors.hairline-soft",
+              "stroke": "$colors.hairline-dark",
               "strokeWidth": 1,
               "layout": "vertical",
               "gap": 10,
@@ -3653,7 +3733,7 @@
                   "clip": true,
                   "width": "fill_container",
                   "height": 112,
-                  "fill": "#e5e7eb",
+                  "fill": "$colors.dark-badge-blue",
                   "cornerRadius": "$rounded.md",
                   "children": [
                     {
@@ -3667,7 +3747,7 @@
                       "height": 32,
                       "icon": "dumbbell",
                       "library": "lucide",
-                      "fill": "$colors.ink"
+                      "fill": "$colors.on-dark"
                     }
                   ]
                 },
@@ -3675,7 +3755,7 @@
                   "type": "text",
                   "id": "S0QYGu",
                   "name": "Flat Bench Press Nombre",
-                  "fill": "$colors.ink",
+                  "fill": "$colors.on-dark",
                   "content": "Flat Bench Press",
                   "fontFamily": "$font.ui",
                   "fontSize": 16,
@@ -3701,7 +3781,7 @@
                           "type": "text",
                           "id": "SryVt",
                           "name": "Flat Bench Press Sets Label",
-                          "fill": "$colors.muted",
+                          "fill": "$colors.on-dark-soft",
                           "content": "Series",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -3711,7 +3791,7 @@
                           "type": "text",
                           "id": "ANoP7",
                           "name": "Flat Bench Press Sets Value",
-                          "fill": "$colors.ink",
+                          "fill": "$colors.on-dark",
                           "content": "4 sets",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -3731,7 +3811,7 @@
                           "type": "text",
                           "id": "a8sBg",
                           "name": "Flat Bench Press Reps Label",
-                          "fill": "$colors.muted",
+                          "fill": "$colors.on-dark-soft",
                           "content": "Repeticiones",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -3741,7 +3821,7 @@
                           "type": "text",
                           "id": "v8NgvS",
                           "name": "Flat Bench Press Reps Value",
-                          "fill": "$colors.ink",
+                          "fill": "$colors.on-dark",
                           "content": "8-12 reps",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -3761,7 +3841,7 @@
                           "type": "text",
                           "id": "ZwgjK",
                           "name": "Flat Bench Press Weight Label",
-                          "fill": "$colors.muted",
+                          "fill": "$colors.on-dark-soft",
                           "content": "Peso objetivo",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -3771,7 +3851,7 @@
                           "type": "text",
                           "id": "TjJjW",
                           "name": "Flat Bench Press Weight Value",
-                          "fill": "$colors.ink",
+                          "fill": "$colors.on-dark",
                           "content": "80 kg / 175 lbs",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -3791,7 +3871,7 @@
                           "type": "text",
                           "id": "U4CO4l",
                           "name": "Flat Bench Press Rest Label",
-                          "fill": "$colors.muted",
+                          "fill": "$colors.on-dark-soft",
                           "content": "Descanso",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -3801,7 +3881,7 @@
                           "type": "text",
                           "id": "GtEIp",
                           "name": "Flat Bench Press Rest Value",
-                          "fill": "$colors.ink",
+                          "fill": "$colors.on-dark",
                           "content": "90s",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -3818,9 +3898,9 @@
               "id": "Of0Nc",
               "name": "Card Incline Dumbbell Press",
               "width": "fill_container",
-              "fill": "$colors.surface-card",
+              "fill": "$colors.surface-dark-elevated",
               "cornerRadius": "$rounded.lg",
-              "stroke": "$colors.hairline-soft",
+              "stroke": "$colors.hairline-dark",
               "strokeWidth": 1,
               "layout": "vertical",
               "gap": 10,
@@ -3833,7 +3913,7 @@
                   "clip": true,
                   "width": "fill_container",
                   "height": 112,
-                  "fill": "#dbeafe",
+                  "fill": "$colors.dark-badge-indigo",
                   "cornerRadius": "$rounded.md",
                   "children": [
                     {
@@ -3847,7 +3927,7 @@
                       "height": 32,
                       "icon": "dumbbell",
                       "library": "lucide",
-                      "fill": "$colors.ink"
+                      "fill": "$colors.on-dark"
                     }
                   ]
                 },
@@ -3855,7 +3935,7 @@
                   "type": "text",
                   "id": "vKFbb",
                   "name": "Incline Dumbbell Press Nombre",
-                  "fill": "$colors.ink",
+                  "fill": "$colors.on-dark",
                   "content": "Incline Dumbbell Press",
                   "fontFamily": "$font.ui",
                   "fontSize": 16,
@@ -3881,7 +3961,7 @@
                           "type": "text",
                           "id": "w6yM9",
                           "name": "Incline Dumbbell Press Sets Label",
-                          "fill": "$colors.muted",
+                          "fill": "$colors.on-dark-soft",
                           "content": "Series",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -3891,7 +3971,7 @@
                           "type": "text",
                           "id": "E6ltdo",
                           "name": "Incline Dumbbell Press Sets Value",
-                          "fill": "$colors.ink",
+                          "fill": "$colors.on-dark",
                           "content": "4 sets",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -3911,7 +3991,7 @@
                           "type": "text",
                           "id": "R01NJ",
                           "name": "Incline Dumbbell Press Reps Label",
-                          "fill": "$colors.muted",
+                          "fill": "$colors.on-dark-soft",
                           "content": "Repeticiones",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -3921,7 +4001,7 @@
                           "type": "text",
                           "id": "H2hfWE",
                           "name": "Incline Dumbbell Press Reps Value",
-                          "fill": "$colors.ink",
+                          "fill": "$colors.on-dark",
                           "content": "10-12 reps",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -3941,7 +4021,7 @@
                           "type": "text",
                           "id": "GbV49",
                           "name": "Incline Dumbbell Press Weight Label",
-                          "fill": "$colors.muted",
+                          "fill": "$colors.on-dark-soft",
                           "content": "Peso objetivo",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -3951,7 +4031,7 @@
                           "type": "text",
                           "id": "iYivD",
                           "name": "Incline Dumbbell Press Weight Value",
-                          "fill": "$colors.ink",
+                          "fill": "$colors.on-dark",
                           "content": "30 kg / 66 lbs",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -3971,7 +4051,7 @@
                           "type": "text",
                           "id": "yFuVR",
                           "name": "Incline Dumbbell Press Rest Label",
-                          "fill": "$colors.muted",
+                          "fill": "$colors.on-dark-soft",
                           "content": "Descanso",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -3981,7 +4061,7 @@
                           "type": "text",
                           "id": "Zgj63",
                           "name": "Incline Dumbbell Press Rest Value",
-                          "fill": "$colors.ink",
+                          "fill": "$colors.on-dark",
                           "content": "75s",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -3998,9 +4078,9 @@
               "id": "qSoE5",
               "name": "Card Cable Fly",
               "width": "fill_container",
-              "fill": "$colors.surface-card",
+              "fill": "$colors.surface-dark-elevated",
               "cornerRadius": "$rounded.lg",
-              "stroke": "$colors.hairline-soft",
+              "stroke": "$colors.hairline-dark",
               "strokeWidth": 1,
               "layout": "vertical",
               "gap": 10,
@@ -4013,7 +4093,7 @@
                   "clip": true,
                   "width": "fill_container",
                   "height": 112,
-                  "fill": "#dcfce7",
+                  "fill": "$colors.dark-badge-emerald",
                   "cornerRadius": "$rounded.md",
                   "children": [
                     {
@@ -4027,7 +4107,7 @@
                       "height": 32,
                       "icon": "dumbbell",
                       "library": "lucide",
-                      "fill": "$colors.ink"
+                      "fill": "$colors.on-dark"
                     }
                   ]
                 },
@@ -4035,7 +4115,7 @@
                   "type": "text",
                   "id": "QvO1J",
                   "name": "Cable Fly Nombre",
-                  "fill": "$colors.ink",
+                  "fill": "$colors.on-dark",
                   "content": "Cable Fly",
                   "fontFamily": "$font.ui",
                   "fontSize": 16,
@@ -4061,7 +4141,7 @@
                           "type": "text",
                           "id": "dnTsC",
                           "name": "Cable Fly Sets Label",
-                          "fill": "$colors.muted",
+                          "fill": "$colors.on-dark-soft",
                           "content": "Series",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -4071,7 +4151,7 @@
                           "type": "text",
                           "id": "lY7lk",
                           "name": "Cable Fly Sets Value",
-                          "fill": "$colors.ink",
+                          "fill": "$colors.on-dark",
                           "content": "3 sets",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -4091,7 +4171,7 @@
                           "type": "text",
                           "id": "zhBgY",
                           "name": "Cable Fly Reps Label",
-                          "fill": "$colors.muted",
+                          "fill": "$colors.on-dark-soft",
                           "content": "Repeticiones",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -4101,7 +4181,7 @@
                           "type": "text",
                           "id": "T7FiO",
                           "name": "Cable Fly Reps Value",
-                          "fill": "$colors.ink",
+                          "fill": "$colors.on-dark",
                           "content": "12-15 reps",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -4121,7 +4201,7 @@
                           "type": "text",
                           "id": "EtYdI",
                           "name": "Cable Fly Weight Label",
-                          "fill": "$colors.muted",
+                          "fill": "$colors.on-dark-soft",
                           "content": "Peso objetivo",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -4131,7 +4211,7 @@
                           "type": "text",
                           "id": "S15XZ",
                           "name": "Cable Fly Weight Value",
-                          "fill": "$colors.ink",
+                          "fill": "$colors.on-dark",
                           "content": "22 kg / 48 lbs",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -4151,7 +4231,7 @@
                           "type": "text",
                           "id": "P31Wsr",
                           "name": "Cable Fly Rest Label",
-                          "fill": "$colors.muted",
+                          "fill": "$colors.on-dark-soft",
                           "content": "Descanso",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -4161,7 +4241,7 @@
                           "type": "text",
                           "id": "x3251",
                           "name": "Cable Fly Rest Value",
-                          "fill": "$colors.ink",
+                          "fill": "$colors.on-dark",
                           "content": "60s",
                           "fontFamily": "$font.ui",
                           "fontSize": 13,
@@ -4187,7 +4267,7 @@
               "type": "text",
               "id": "RkJji",
               "name": "Hint Gestion",
-              "fill": "$colors.muted",
+              "fill": "$colors.on-dark-soft",
               "content": "Ajusta parametros o agrega/quita ejercicios",
               "fontFamily": "$font.ui",
               "fontSize": 12,
@@ -4199,7 +4279,7 @@
               "name": "Boton Modificar Rutina",
               "width": "fill_container",
               "height": 42,
-              "fill": "$colors.primary",
+              "fill": "$colors.canvas",
               "cornerRadius": "$rounded.md",
               "gap": 8,
               "justifyContent": "center",
@@ -4213,13 +4293,13 @@
                   "height": 16,
                   "icon": "pencil",
                   "library": "lucide",
-                  "fill": "$colors.on-primary"
+                  "fill": "$colors.ink"
                 },
                 {
                   "type": "text",
                   "id": "Snbf0",
                   "name": "Texto Modificar",
-                  "fill": "$colors.on-primary",
+                  "fill": "$colors.ink",
                   "content": "Modificar rutina",
                   "fontFamily": "$font.ui",
                   "fontSize": 14,
@@ -4228,6 +4308,1925 @@
               ]
             }
           ]
+        },
+        {
+          "type": "frame",
+          "id": "YZqCJ",
+          "name": "Spacer",
+          "width": "fill_container",
+          "height": 24
+        },
+        {
+          "id": "u6kK6v",
+          "type": "ref",
+          "ref": "oUNeq",
+          "x": 20,
+          "y": 1174
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "u4Scr",
+      "x": 3210,
+      "y": 0,
+      "name": "US-04 Creacion de Rutina",
+      "clip": true,
+      "width": 430,
+      "height": 1360,
+      "fill": "$colors.surface-dark",
+      "layout": "vertical",
+      "gap": 20,
+      "padding": [
+        24,
+        20
+      ],
+      "children": [
+        {
+          "type": "frame",
+          "id": "u4Hdr",
+          "name": "Header Creacion Rutina",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 8,
+          "children": [
+            {
+              "type": "frame",
+              "id": "u4Nav",
+              "name": "Barra Superior Nav",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "u4Bck",
+                  "name": "Boton Volver",
+                  "width": 36,
+                  "height": 36,
+                  "fill": "$colors.surface-dark-elevated",
+                  "cornerRadius": "$rounded.full",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "u4BckIc",
+                      "name": "Icono Volver",
+                      "width": 18,
+                      "height": 18,
+                      "icon": "arrow-left",
+                      "library": "lucide",
+                      "fill": "$colors.on-dark"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "u4Sts",
+                  "name": "Badge Estado",
+                  "fill": "$colors.dark-badge-blue",
+                  "cornerRadius": "$rounded.pill",
+                  "padding": [
+                    4,
+                    10
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "u4StsTx",
+                      "name": "Texto Estado",
+                      "fill": "$colors.brand-accent",
+                      "content": "Borrador",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "u4Tit",
+              "name": "Titulo Pantalla",
+              "fill": "$colors.on-dark",
+              "content": "Crear nueva rutina",
+              "fontFamily": "$font.display",
+              "fontSize": 32,
+              "fontWeight": "600",
+              "letterSpacing": -1
+            },
+            {
+              "type": "text",
+              "id": "u4Sub",
+              "name": "Subtitulo Pantalla",
+              "fill": "$colors.on-dark-soft",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Define el nombre y añade ejercicios personalizados con series, repeticiones y descansos.",
+              "fontFamily": "$font.ui",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "u4NmSec",
+          "name": "Seccion Nombre Rutina",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 8,
+          "children": [
+            {
+              "type": "text",
+              "id": "u4NmLab",
+              "name": "Label Nombre Rutina",
+              "fill": "$colors.on-dark",
+              "content": "Nombre de la rutina",
+              "fontFamily": "$font.ui",
+              "fontSize": 14,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "u4NmInp",
+              "name": "Input Nombre Validado",
+              "width": "fill_container",
+              "height": 48,
+              "fill": "$colors.surface-dark-elevated",
+              "cornerRadius": "$rounded.md",
+              "stroke": "$colors.hairline-dark",
+              "strokeWidth": 1,
+              "padding": [
+                0,
+                14
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "u4NmVal",
+                  "name": "Texto Input Nombre",
+                  "fill": "$colors.on-dark",
+                  "content": "Hipertrofia Pecho & Tríceps",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 15,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "frame",
+                  "id": "u4VldIcB",
+                  "name": "Icono Validado Container",
+                  "width": 22,
+                  "height": 22,
+                  "fill": "$colors.dark-badge-emerald",
+                  "cornerRadius": "$rounded.full",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "u4VldIc",
+                      "name": "Icono Check Validacion",
+                      "width": 14,
+                      "height": 14,
+                      "icon": "check",
+                      "library": "lucide",
+                      "fill": "$colors.badge-emerald"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "u4NmHlp",
+              "name": "Hint Validacion",
+              "fill": "$colors.badge-emerald",
+              "content": "✓ Nombre válido y disponible",
+              "fontFamily": "$font.ui",
+              "fontSize": 12,
+              "fontWeight": "500"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "u4SpltSec",
+          "name": "Seccion Split Categoria",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 8,
+          "children": [
+            {
+              "type": "text",
+              "id": "u4SpltLab",
+              "name": "Label Split",
+              "fill": "$colors.on-dark",
+              "content": "Categoría / Split",
+              "fontFamily": "$font.ui",
+              "fontSize": 14,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "u4SpltPill",
+              "name": "Split Pill Group",
+              "width": "fill_container",
+              "fill": "$colors.surface-dark-elevated",
+              "cornerRadius": "$rounded.pill",
+              "gap": 6,
+              "padding": 4,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "u4SpltA",
+                  "name": "Split Push Activo",
+                  "fill": "$colors.surface-dark-active",
+                  "cornerRadius": "$rounded.md",
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#00000014",
+                    "offset": {
+                      "x": 0,
+                      "y": 1
+                    },
+                    "blur": 3
+                  },
+                  "padding": [
+                    6,
+                    12
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "u4SpltATx",
+                      "name": "Texto Push",
+                      "fill": "$colors.on-dark",
+                      "content": "Push",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "u4SpltB",
+                  "name": "Split Pull",
+                  "cornerRadius": "$rounded.md",
+                  "padding": [
+                    6,
+                    12
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "u4SpltBTx",
+                      "name": "Texto Pull",
+                      "fill": "$colors.on-dark-soft",
+                      "content": "Pull",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "u4SpltC",
+                  "name": "Split Legs",
+                  "cornerRadius": "$rounded.md",
+                  "padding": [
+                    6,
+                    12
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "u4SpltCTx",
+                      "name": "Texto Legs",
+                      "fill": "$colors.on-dark-soft",
+                      "content": "Legs",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "u4SpltD",
+                  "name": "Split Upper",
+                  "cornerRadius": "$rounded.md",
+                  "padding": [
+                    6,
+                    12
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "u4SpltDTx",
+                      "name": "Texto Upper",
+                      "fill": "$colors.on-dark-soft",
+                      "content": "Upper",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "u4ExSec",
+          "name": "Seccion Ejercicios Agregados",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 12,
+          "children": [
+            {
+              "type": "frame",
+              "id": "u4ExHdr",
+              "name": "Header Lista Ejercicios",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "u4ExTit",
+                  "name": "Titulo Ejercicios",
+                  "fill": "$colors.on-dark",
+                  "content": "Ejercicios en la rutina",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 16,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "u4ExCnt",
+                  "name": "Contador Ejercicios",
+                  "fill": "$colors.on-dark-soft",
+                  "content": "2 configurados",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 13,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "u4ExCd1",
+              "name": "Card Ejercicio 1 Flat Bench",
+              "width": "fill_container",
+              "fill": "$colors.surface-dark-elevated",
+              "cornerRadius": "$rounded.lg",
+              "stroke": "$colors.hairline-dark",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 10,
+              "padding": 14,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "u4Ex1Hd",
+                  "name": "Head Ejercicio 1",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "u4Ex1TitGrp",
+                      "name": "Titulo y Orden",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "u4Ex1Idx",
+                          "name": "Badge Indice",
+                          "width": 24,
+                          "height": 24,
+                          "fill": "$colors.surface-dark-subtle",
+                          "cornerRadius": "$rounded.full",
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "u4Ex1IdxTx",
+                              "name": "Numero 1",
+                              "fill": "$colors.on-dark",
+                              "content": "1",
+                              "fontFamily": "$font.ui",
+                              "fontSize": 12,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "u4Ex1Nm",
+                          "name": "Nombre Flat Bench",
+                          "fill": "$colors.on-dark",
+                          "content": "Flat Bench Press",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 15,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "u4Ex1Acts",
+                      "name": "Acciones Ejercicio 1",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "u4Ex1EdIc",
+                          "name": "Icono Editar",
+                          "width": 16,
+                          "height": 16,
+                          "icon": "pencil",
+                          "library": "lucide",
+                          "fill": "$colors.on-dark-soft"
+                        },
+                        {
+                          "type": "icon",
+                          "id": "u4Ex1DelIc",
+                          "name": "Icono Eliminar",
+                          "width": 16,
+                          "height": 16,
+                          "icon": "trash-2",
+                          "library": "lucide",
+                          "fill": "$colors.on-dark-soft"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "u4Ex1Pills",
+                  "name": "Pills Parametros 1",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "u4Ex1P1",
+                      "name": "Pill Sets",
+                      "fill": "$colors.surface-dark-subtle",
+                      "cornerRadius": "$rounded.sm",
+                      "stroke": "$colors.hairline-dark",
+                      "strokeWidth": 1,
+                      "padding": [
+                        4,
+                        8
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "u4Ex1P1Tx",
+                          "name": "Sets 4",
+                          "fill": "$colors.on-dark",
+                          "content": "4 sets",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "u4Ex1P2",
+                      "name": "Pill Reps",
+                      "fill": "$colors.surface-dark-subtle",
+                      "cornerRadius": "$rounded.sm",
+                      "stroke": "$colors.hairline-dark",
+                      "strokeWidth": 1,
+                      "padding": [
+                        4,
+                        8
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "u4Ex1P2Tx",
+                          "name": "Reps 8-12",
+                          "fill": "$colors.on-dark",
+                          "content": "8-12 reps",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "u4Ex1P3",
+                      "name": "Pill Peso",
+                      "fill": "$colors.surface-dark-subtle",
+                      "cornerRadius": "$rounded.sm",
+                      "stroke": "$colors.hairline-dark",
+                      "strokeWidth": 1,
+                      "padding": [
+                        4,
+                        8
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "u4Ex1P3Tx",
+                          "name": "Peso 80kg",
+                          "fill": "$colors.on-dark",
+                          "content": "80 kg",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "u4Ex1P4",
+                      "name": "Pill Rest",
+                      "fill": "$colors.surface-dark-subtle",
+                      "cornerRadius": "$rounded.sm",
+                      "stroke": "$colors.hairline-dark",
+                      "strokeWidth": 1,
+                      "padding": [
+                        4,
+                        8
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "u4Ex1P4Tx",
+                          "name": "Rest 90s",
+                          "fill": "$colors.on-dark-soft",
+                          "content": "90s descanso",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "u4ExCd2",
+              "name": "Card Ejercicio 2 Incline Dumbbell",
+              "width": "fill_container",
+              "fill": "$colors.surface-dark-elevated",
+              "cornerRadius": "$rounded.lg",
+              "stroke": "$colors.hairline-dark",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 10,
+              "padding": 14,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "u4Ex2Hd",
+                  "name": "Head Ejercicio 2",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "u4Ex2TitGrp",
+                      "name": "Titulo y Orden 2",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "u4Ex2Idx",
+                          "name": "Badge Indice 2",
+                          "width": 24,
+                          "height": 24,
+                          "fill": "$colors.surface-dark-subtle",
+                          "cornerRadius": "$rounded.full",
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "u4Ex2IdxTx",
+                              "name": "Numero 2",
+                              "fill": "$colors.on-dark",
+                              "content": "2",
+                              "fontFamily": "$font.ui",
+                              "fontSize": 12,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "u4Ex2Nm",
+                          "name": "Nombre Incline Dumbbell",
+                          "fill": "$colors.on-dark",
+                          "content": "Incline Dumbbell Press",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 15,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "u4Ex2Acts",
+                      "name": "Acciones Ejercicio 2",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "u4Ex2EdIc",
+                          "name": "Icono Editar 2",
+                          "width": 16,
+                          "height": 16,
+                          "icon": "pencil",
+                          "library": "lucide",
+                          "fill": "$colors.on-dark-soft"
+                        },
+                        {
+                          "type": "icon",
+                          "id": "u4Ex2DelIc",
+                          "name": "Icono Eliminar 2",
+                          "width": 16,
+                          "height": 16,
+                          "icon": "trash-2",
+                          "library": "lucide",
+                          "fill": "$colors.on-dark-soft"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "u4Ex2Pills",
+                  "name": "Pills Parametros 2",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "u4Ex2P1",
+                      "name": "Pill Sets 2",
+                      "fill": "$colors.surface-dark-subtle",
+                      "cornerRadius": "$rounded.sm",
+                      "stroke": "$colors.hairline-dark",
+                      "strokeWidth": 1,
+                      "padding": [
+                        4,
+                        8
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "u4Ex2P1Tx",
+                          "name": "Sets 4",
+                          "fill": "$colors.on-dark",
+                          "content": "4 sets",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "u4Ex2P2",
+                      "name": "Pill Reps 2",
+                      "fill": "$colors.surface-dark-subtle",
+                      "cornerRadius": "$rounded.sm",
+                      "stroke": "$colors.hairline-dark",
+                      "strokeWidth": 1,
+                      "padding": [
+                        4,
+                        8
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "u4Ex2P2Tx",
+                          "name": "Reps 10-12",
+                          "fill": "$colors.on-dark",
+                          "content": "10-12 reps",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "u4Ex2P3",
+                      "name": "Pill Peso 2",
+                      "fill": "$colors.surface-dark-subtle",
+                      "cornerRadius": "$rounded.sm",
+                      "stroke": "$colors.hairline-dark",
+                      "strokeWidth": 1,
+                      "padding": [
+                        4,
+                        8
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "u4Ex2P3Tx",
+                          "name": "Peso 30kg",
+                          "fill": "$colors.on-dark",
+                          "content": "30 kg",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "u4Ex2P4",
+                      "name": "Pill Rest 2",
+                      "fill": "$colors.surface-dark-subtle",
+                      "cornerRadius": "$rounded.sm",
+                      "stroke": "$colors.hairline-dark",
+                      "strokeWidth": 1,
+                      "padding": [
+                        4,
+                        8
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "u4Ex2P4Tx",
+                          "name": "Rest 75s",
+                          "fill": "$colors.on-dark-soft",
+                          "content": "75s descanso",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "u4AddBtn",
+              "name": "Boton Add Exercise Trigger",
+              "width": "fill_container",
+              "height": 48,
+              "fill": "$colors.surface-dark-elevated",
+              "cornerRadius": "$rounded.md",
+              "stroke": "$colors.on-dark",
+              "strokeWidth": 1.5,
+              "gap": 8,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "u4AddBtnIc",
+                  "name": "Icono Plus",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "plus",
+                  "library": "lucide",
+                  "fill": "$colors.on-dark"
+                },
+                {
+                  "type": "text",
+                  "id": "u4AddBtnTx",
+                  "name": "Texto Add Exercise",
+                  "fill": "$colors.on-dark",
+                  "content": "Add Exercise",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "u4SavSec",
+          "name": "Seccion Guardar Rutina",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 10,
+          "children": [
+            {
+              "type": "frame",
+              "id": "u4SavBtn",
+              "name": "Boton Save Routine",
+              "width": "fill_container",
+              "height": 48,
+              "fill": "$colors.canvas",
+              "cornerRadius": "$rounded.md",
+              "gap": 8,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "u4SavBtnIc",
+                  "name": "Icono Check Guardar",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "check",
+                  "library": "lucide",
+                  "fill": "$colors.ink"
+                },
+                {
+                  "type": "text",
+                  "id": "u4SavBtnTx",
+                  "name": "Texto Save Routine",
+                  "fill": "$colors.ink",
+                  "content": "Save Routine",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 15,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "u4SavHnt",
+              "name": "Hint Guardar",
+              "fill": "$colors.on-dark-soft",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Guarda la rutina personalizada en tu catálogo y te redirige a Mis rutinas.",
+              "fontFamily": "$font.ui",
+              "fontSize": 12,
+              "fontWeight": "500"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "w5aSih",
+          "name": "Spacer",
+          "width": "fill_container",
+          "height": 24
+        },
+        {
+          "id": "kOqSi",
+          "type": "ref",
+          "ref": "oUNeq",
+          "x": 20,
+          "y": 811
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "u4Mdl",
+      "x": 3720,
+      "y": 0,
+      "name": "US-04 Modal Configuracion de Ejercicio",
+      "clip": true,
+      "width": 430,
+      "height": 1320,
+      "fill": "$colors.surface-dark",
+      "layout": "vertical",
+      "gap": 20,
+      "padding": [
+        24,
+        20
+      ],
+      "children": [
+        {
+          "type": "frame",
+          "id": "u4MdlHdr",
+          "name": "Header Modal",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 10,
+          "children": [
+            {
+              "type": "frame",
+              "id": "u4MdlTopRow",
+              "name": "Fila Top Modal",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "u4MdlHndl",
+                  "name": "Pill Handle",
+                  "width": 40,
+                  "height": 4,
+                  "fill": "$colors.surface-dark-subtle",
+                  "cornerRadius": "$rounded.full"
+                },
+                {
+                  "type": "frame",
+                  "id": "u4MdlClsBtn",
+                  "name": "Boton Cerrar Modal",
+                  "width": 32,
+                  "height": 32,
+                  "fill": "$colors.surface-dark-elevated",
+                  "cornerRadius": "$rounded.full",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "u4MdlClsIc",
+                      "name": "Icono X",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "x",
+                      "library": "lucide",
+                      "fill": "$colors.on-dark"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "u4MdlTit",
+              "name": "Titulo Modal",
+              "fill": "$colors.on-dark",
+              "content": "Configurar ejercicio",
+              "fontFamily": "$font.display",
+              "fontSize": 26,
+              "fontWeight": "600",
+              "letterSpacing": -0.5
+            },
+            {
+              "type": "text",
+              "id": "u4MdlSub",
+              "name": "Subtitulo Modal",
+              "fill": "$colors.on-dark-soft",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Selecciona un ejercicio del catálogo y ajusta sus series, repeticiones, peso y descanso.",
+              "fontFamily": "$font.ui",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "u4PckSec",
+          "name": "Seccion Exercise Picker",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 8,
+          "children": [
+            {
+              "type": "text",
+              "id": "u4PckLab",
+              "name": "Label Picker",
+              "fill": "$colors.on-dark",
+              "content": "Ejercicio del catálogo",
+              "fontFamily": "$font.ui",
+              "fontSize": 14,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "u4PckBox",
+              "name": "Dropdown Search Box",
+              "width": "fill_container",
+              "height": 46,
+              "fill": "$colors.surface-dark-elevated",
+              "cornerRadius": "$rounded.md",
+              "stroke": "$colors.hairline-dark",
+              "strokeWidth": 1,
+              "padding": [
+                0,
+                12
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "u4PckSelVal",
+                  "name": "Valor Seleccionado",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "u4PckSrchIc",
+                      "name": "Icono Buscar",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "search",
+                      "library": "lucide",
+                      "fill": "$colors.on-dark-soft"
+                    },
+                    {
+                      "type": "text",
+                      "id": "u4PckValTx",
+                      "name": "Texto Seleccion",
+                      "fill": "$colors.on-dark",
+                      "content": "Squat (Sentadilla con barra)",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "icon",
+                  "id": "u4PckChvIc",
+                  "name": "Icono Chevron Dropdown",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "chevron-down",
+                  "library": "lucide",
+                  "fill": "$colors.on-dark"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "u4PckQuickPills",
+              "name": "Sugerencias Rapidas Catalogo",
+              "width": "fill_container",
+              "gap": 6,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "u4PckS1",
+                  "name": "Pill Sugerencia 1",
+                  "fill": "$colors.surface-dark-elevated",
+                  "cornerRadius": "$rounded.pill",
+                  "padding": [
+                    4,
+                    10
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "u4PckS1Tx",
+                      "name": "Tx Sug 1",
+                      "fill": "$colors.on-dark-soft",
+                      "content": "Flat Bench Press",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "u4PckS2",
+                  "name": "Pill Sugerencia 2",
+                  "fill": "$colors.surface-dark-elevated",
+                  "cornerRadius": "$rounded.pill",
+                  "padding": [
+                    4,
+                    10
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "u4PckS2Tx",
+                      "name": "Tx Sug 2",
+                      "fill": "$colors.on-dark-soft",
+                      "content": "Incline Bench",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "u4PckS3",
+                  "name": "Pill Sugerencia 3",
+                  "fill": "$colors.canvas",
+                  "cornerRadius": "$rounded.pill",
+                  "padding": [
+                    4,
+                    10
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "u4PckS3Tx",
+                      "name": "Tx Sug 3",
+                      "fill": "$colors.ink",
+                      "content": "Squat",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 11,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "u4ImgSec",
+          "name": "Seccion Imagen Ejercicio",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 8,
+          "children": [
+            {
+              "type": "frame",
+              "id": "u4ImgHdr",
+              "name": "Header Imagen",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "u4ImgLab",
+                  "name": "Label Imagen",
+                  "fill": "$colors.on-dark",
+                  "content": "Imagen del ejercicio",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "u4ImgOpt",
+                  "name": "Opcional Tag",
+                  "fill": "$colors.on-dark-soft",
+                  "content": "Opcional",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "u4ImgBox",
+              "name": "Card Dropzone Imagen",
+              "width": "fill_container",
+              "height": 104,
+              "fill": "$colors.surface-dark-elevated",
+              "cornerRadius": "$rounded.md",
+              "stroke": "$colors.hairline-dark",
+              "strokeWidth": 1,
+              "gap": 12,
+              "padding": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "u4ImgPrv",
+                  "name": "Preview Imagen Box",
+                  "width": 80,
+                  "height": 80,
+                  "fill": "$colors.dark-badge-blue",
+                  "cornerRadius": "$rounded.md",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "u4ImgPrvIc",
+                      "name": "Icono Preview",
+                      "width": 32,
+                      "height": 32,
+                      "icon": "dumbbell",
+                      "library": "lucide",
+                      "fill": "#60a5fa"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "u4ImgActionsCol",
+                  "name": "Columna Acciones Imagen",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "u4ImgBtnsRow",
+                      "name": "Fila Botones Carga",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "u4UploadBtn",
+                          "name": "Boton Subir Foto",
+                          "fill": "$colors.canvas",
+                          "cornerRadius": "$rounded.sm",
+                          "gap": 6,
+                          "padding": [
+                            6,
+                            12
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "u4UpIc",
+                              "name": "Icono Camara",
+                              "width": 14,
+                              "height": 14,
+                              "icon": "camera",
+                              "library": "lucide",
+                              "fill": "$colors.ink"
+                            },
+                            {
+                              "type": "text",
+                              "id": "u4UpTx",
+                              "name": "Texto Subir",
+                              "fill": "$colors.ink",
+                              "content": "Subir imagen",
+                              "fontFamily": "$font.ui",
+                              "fontSize": 12,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "u4GalBtn",
+                          "name": "Boton Galeria",
+                          "fill": "$colors.surface-dark-subtle",
+                          "cornerRadius": "$rounded.sm",
+                          "stroke": "$colors.hairline-dark",
+                          "strokeWidth": 1,
+                          "gap": 6,
+                          "padding": [
+                            6,
+                            10
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "u4GalIc",
+                              "name": "Icono Galeria",
+                              "width": 14,
+                              "height": 14,
+                              "icon": "image",
+                              "library": "lucide",
+                              "fill": "$colors.on-dark"
+                            },
+                            {
+                              "type": "text",
+                              "id": "u4GalTx",
+                              "name": "Texto Galeria",
+                              "fill": "$colors.on-dark",
+                              "content": "Galería",
+                              "fontFamily": "$font.ui",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "u4ImgHnt",
+                      "name": "Hint Formato Imagen",
+                      "fill": "$colors.on-dark-soft",
+                      "content": "PNG, JPG o ilustración predeterminada",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "u4ParamsGrid",
+          "name": "Seccion Parameter Fields",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 16,
+          "children": [
+            {
+              "type": "frame",
+              "id": "u4SetsRepsRow",
+              "name": "Fila Sets y Reps",
+              "width": "fill_container",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "u4SetsCol",
+                  "name": "Campo Sets (Integer)",
+                  "width": 185,
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "u4SetsLab",
+                      "name": "Label Sets",
+                      "fill": "$colors.on-dark",
+                      "content": "Series (Sets)",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "u4SetsBox",
+                      "name": "Stepper Sets",
+                      "width": "fill_container",
+                      "height": 44,
+                      "fill": "$colors.surface-dark-elevated",
+                      "cornerRadius": "$rounded.md",
+                      "stroke": "$colors.hairline-dark",
+                      "strokeWidth": 1,
+                      "padding": [
+                        0,
+                        8
+                      ],
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "u4SetsMinus",
+                          "name": "Btn Minus Sets",
+                          "width": 28,
+                          "height": 28,
+                          "fill": "$colors.surface-dark-subtle",
+                          "cornerRadius": "$rounded.sm",
+                          "stroke": "$colors.hairline-dark",
+                          "strokeWidth": 1,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "u4SetsMinTx",
+                              "name": "Minus Symbol",
+                              "fill": "$colors.on-dark",
+                              "content": "-",
+                              "fontFamily": "$font.ui",
+                              "fontSize": 16,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "u4SetsVal",
+                          "name": "Valor Sets",
+                          "fill": "$colors.on-dark",
+                          "content": "4",
+                          "fontFamily": "$font.display",
+                          "fontSize": 18,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "u4SetsPlus",
+                          "name": "Btn Plus Sets",
+                          "width": 28,
+                          "height": 28,
+                          "fill": "$colors.surface-dark-subtle",
+                          "cornerRadius": "$rounded.sm",
+                          "stroke": "$colors.hairline-dark",
+                          "strokeWidth": 1,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "u4SetsPlsTx",
+                              "name": "Plus Symbol",
+                              "fill": "$colors.on-dark",
+                              "content": "+",
+                              "fontFamily": "$font.ui",
+                              "fontSize": 16,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "u4RepsCol",
+                  "name": "Campo Reps (Integer)",
+                  "width": 185,
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "u4RepsLab",
+                      "name": "Label Reps",
+                      "fill": "$colors.on-dark",
+                      "content": "Repeticiones (Reps)",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "u4RepsBox",
+                      "name": "Stepper Reps",
+                      "width": "fill_container",
+                      "height": 44,
+                      "fill": "$colors.surface-dark-elevated",
+                      "cornerRadius": "$rounded.md",
+                      "stroke": "$colors.hairline-dark",
+                      "strokeWidth": 1,
+                      "padding": [
+                        0,
+                        8
+                      ],
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "u4RepsMinus",
+                          "name": "Btn Minus Reps",
+                          "width": 28,
+                          "height": 28,
+                          "fill": "$colors.surface-dark-subtle",
+                          "cornerRadius": "$rounded.sm",
+                          "stroke": "$colors.hairline-dark",
+                          "strokeWidth": 1,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "u4RepsMinTx",
+                              "name": "Minus Reps",
+                              "fill": "$colors.on-dark",
+                              "content": "-",
+                              "fontFamily": "$font.ui",
+                              "fontSize": 16,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "u4RepsVal",
+                          "name": "Valor Reps",
+                          "fill": "$colors.on-dark",
+                          "content": "10 - 12",
+                          "fontFamily": "$font.display",
+                          "fontSize": 16,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "u4RepsPlus",
+                          "name": "Btn Plus Reps",
+                          "width": 28,
+                          "height": 28,
+                          "fill": "$colors.surface-dark-subtle",
+                          "cornerRadius": "$rounded.sm",
+                          "stroke": "$colors.hairline-dark",
+                          "strokeWidth": 1,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "u4RepsPlsTx",
+                              "name": "Plus Reps",
+                              "fill": "$colors.on-dark",
+                              "content": "+",
+                              "fontFamily": "$font.ui",
+                              "fontSize": 16,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "u4WgtSec",
+              "name": "Campo Weight con Unit Selector",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 6,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "u4WgtLab",
+                  "name": "Label Peso",
+                  "fill": "$colors.on-dark",
+                  "content": "Peso objetivo (Weight)",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "u4WgtInpRow",
+                  "name": "Fila Input Peso y Selector Unidad",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "u4WgtBox",
+                      "name": "Input Valor Peso",
+                      "width": 230,
+                      "height": 44,
+                      "fill": "$colors.surface-dark-elevated",
+                      "cornerRadius": "$rounded.md",
+                      "stroke": "$colors.hairline-dark",
+                      "strokeWidth": 1,
+                      "padding": [
+                        0,
+                        14
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "u4WgtVal",
+                          "name": "Texto Valor Peso",
+                          "fill": "$colors.on-dark",
+                          "content": "100.0",
+                          "fontFamily": "$font.display",
+                          "fontSize": 16,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "u4UnitToggle",
+                      "name": "Unit Selector Toggle kg lbs",
+                      "width": 140,
+                      "height": 44,
+                      "fill": "$colors.surface-dark-subtle",
+                      "cornerRadius": "$rounded.md",
+                      "gap": 4,
+                      "padding": 4,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "u4KgBtn",
+                          "name": "Boton kg Activo",
+                          "width": 64,
+                          "height": 36,
+                          "fill": "$colors.canvas",
+                          "cornerRadius": "$rounded.sm",
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "u4KgTx",
+                              "name": "Texto kg",
+                              "fill": "$colors.ink",
+                              "content": "kg",
+                              "fontFamily": "$font.ui",
+                              "fontSize": 13,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "u4LbsBtn",
+                          "name": "Boton lbs Inactivo",
+                          "width": 64,
+                          "height": 36,
+                          "cornerRadius": "$rounded.sm",
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "u4LbsTx",
+                              "name": "Texto lbs",
+                              "fill": "$colors.on-dark-soft",
+                              "content": "lbs",
+                              "fontFamily": "$font.ui",
+                              "fontSize": 13,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "u4RstSec",
+              "name": "Campo Rest Time",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "u4RstLabRow",
+                  "name": "Label y Valor Descanso",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "u4RstLab",
+                      "name": "Label Rest Time",
+                      "fill": "$colors.on-dark",
+                      "content": "Tiempo de descanso (Rest Time)",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "u4RstCurVal",
+                      "name": "Valor Seleccionado Rest",
+                      "fill": "#60a5fa",
+                      "content": "90 segundos",
+                      "fontFamily": "$font.ui",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "u4RstPresets",
+                  "name": "Pills Presets Descanso",
+                  "width": "fill_container",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "u4RstP1",
+                      "name": "Preset 45s",
+                      "fill": "$colors.surface-dark-elevated",
+                      "cornerRadius": "$rounded.md",
+                      "padding": [
+                        8,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "u4RstP1Tx",
+                          "name": "Tx 45s",
+                          "fill": "$colors.on-dark-soft",
+                          "content": "45s",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "u4RstP2",
+                      "name": "Preset 60s",
+                      "fill": "$colors.surface-dark-elevated",
+                      "cornerRadius": "$rounded.md",
+                      "padding": [
+                        8,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "u4RstP2Tx",
+                          "name": "Tx 60s",
+                          "fill": "$colors.on-dark-soft",
+                          "content": "60s",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "u4RstP3",
+                      "name": "Preset 90s Activo",
+                      "fill": "$colors.canvas",
+                      "cornerRadius": "$rounded.md",
+                      "padding": [
+                        8,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "u4RstP3Tx",
+                          "name": "Tx 90s",
+                          "fill": "$colors.ink",
+                          "content": "90s",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "u4RstP4",
+                      "name": "Preset 120s",
+                      "fill": "$colors.surface-dark-elevated",
+                      "cornerRadius": "$rounded.md",
+                      "padding": [
+                        8,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "u4RstP4Tx",
+                          "name": "Tx 120s",
+                          "fill": "$colors.on-dark-soft",
+                          "content": "120s",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "u4RstP5",
+                      "name": "Preset 2min",
+                      "fill": "$colors.surface-dark-elevated",
+                      "cornerRadius": "$rounded.md",
+                      "padding": [
+                        8,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "u4RstP5Tx",
+                          "name": "Tx 3min",
+                          "fill": "$colors.on-dark-soft",
+                          "content": "3 min",
+                          "fontFamily": "$font.ui",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "u4MdlActSec",
+          "name": "Seccion Botones Accion Modal",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 10,
+          "children": [
+            {
+              "type": "frame",
+              "id": "u4ConfAddBtn",
+              "name": "Boton Confirm Add",
+              "width": "fill_container",
+              "height": 48,
+              "fill": "$colors.canvas",
+              "cornerRadius": "$rounded.md",
+              "gap": 8,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "u4ConfAddIc",
+                  "name": "Icono Plus Confirm",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "plus",
+                  "library": "lucide",
+                  "fill": "$colors.ink"
+                },
+                {
+                  "type": "text",
+                  "id": "u4ConfAddTx",
+                  "name": "Texto Confirm Add",
+                  "fill": "$colors.ink",
+                  "content": "Add",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 15,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "u4CnclBtn",
+              "name": "Boton Cancelar Modal",
+              "width": "fill_container",
+              "height": 42,
+              "fill": "$colors.surface-dark-elevated",
+              "cornerRadius": "$rounded.md",
+              "stroke": "$colors.hairline-dark",
+              "strokeWidth": 1,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "u4CnclTx",
+                  "name": "Texto Cancelar",
+                  "fill": "$colors.on-dark",
+                  "content": "Cancelar",
+                  "fontFamily": "$font.ui",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "mPDTE",
+          "name": "Spacer",
+          "width": "fill_container",
+          "height": 24
+        },
+        {
+          "id": "zMTQi",
+          "type": "ref",
+          "ref": "oUNeq",
+          "x": 20,
+          "y": 830
         }
       ]
     }
@@ -4440,6 +6439,34 @@
     "type.caption": {
       "type": "number",
       "value": 13
+    },
+    "colors.surface-dark-subtle": {
+      "type": "color",
+      "value": "#242427"
+    },
+    "colors.surface-dark-active": {
+      "type": "color",
+      "value": "#2e2e33"
+    },
+    "colors.hairline-dark": {
+      "type": "color",
+      "value": "#2e2e33"
+    },
+    "colors.dark-badge-blue": {
+      "type": "color",
+      "value": "#1e293b"
+    },
+    "colors.dark-badge-indigo": {
+      "type": "color",
+      "value": "#1e1b4b"
+    },
+    "colors.dark-badge-emerald": {
+      "type": "color",
+      "value": "#064e3b"
+    },
+    "colors.dark-badge-purple": {
+      "type": "color",
+      "value": "#2e1065"
     }
   },
   "fileToken": "5d293eb5-986c-4009-881d-4c5dd467e427"
