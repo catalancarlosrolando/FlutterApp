@@ -6,12 +6,9 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: Colors.blueGrey[900],
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
         leading: IconButton(
           icon: ImageIcon(const AssetImage('assets/images/logo.png')),
           iconSize: 60.0,
@@ -21,23 +18,36 @@ class LandingPage extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        backgroundColor: Colors.blueGrey[900],
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
+
         title: Center(
-          child: Text(title, style: TextStyle(color: Colors.amber)),
+          child: Text(title, style: TextStyle(color: colors.onPrimary)),
         ),
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-
           children: [
-            const Text(
-              'Bienvenido a la Landing Page',
-              style: TextStyle(fontSize: 24, color: Colors.white),
+            Container(
+              height: 41.0,
+              width: 500,
+              //color: colors.primaryContainer,
+              padding: const EdgeInsets.all(12.0),
+              margin: EdgeInsets.all(25.0),
+              decoration: BoxDecoration(
+                color: colors.onSurfaceVariant.withValues(alpha: 0.2),
+                borderRadius: BorderRadius.circular(10.0),
+                border: Border.all(color: colors.outline, width: 1.0),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Ultima Asistencia"),
+                  Text(
+                    '14 de mayo 2026',
+                    style: TextStyle(color: colors.onPrimaryContainer),
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 20),
           ],
         ),
       ),

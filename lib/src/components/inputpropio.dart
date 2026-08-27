@@ -7,9 +7,10 @@ class Inputpropio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return TextField(
-      style: const TextStyle(
-        color: Colors.black87,
+      style: TextStyle(
+        color: colors.onPrimary,
         fontSize: 16.0,
         fontWeight: FontWeight.w500,
       ),
@@ -17,7 +18,7 @@ class Inputpropio extends StatelessWidget {
         labelText: "",
         hintText: text,
         filled: true,
-        fillColor: Colors.grey,
+        fillColor: colors.surface, // Color de fondo
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(16.0)),
       ),
     );

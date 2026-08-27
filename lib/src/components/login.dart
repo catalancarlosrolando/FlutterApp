@@ -12,6 +12,7 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Container(
       padding: EdgeInsets.all(16.0),
       child: Column(
@@ -41,16 +42,19 @@ class Login extends StatelessWidget {
               Row(
                 children: [
                   MiCheckbox(),
-                  Text("Remember me", style: TextStyle(color: Colors.white)),
+                  Text(
+                    "Remember me",
+                    style: TextStyle(color: colors.onPrimary),
+                  ),
                 ],
               ),
 
               Text(
                 "Forgot password?",
                 style: TextStyle(
-                  color: Colors.yellow,
+                  color: colors.primary,
                   decoration: TextDecoration.underline,
-                  decorationColor: Colors.yellow,
+                  decorationColor: colors.primary,
                   decorationThickness: 2.5,
                 ),
               ),
