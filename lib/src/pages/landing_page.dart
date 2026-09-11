@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/src/components/lastday.dart';
 
 class LandingPage extends StatelessWidget {
   final String title;
@@ -26,26 +27,20 @@ class LandingPage extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
+            LastDay(),
             Container(
-              height: 41.0,
+              height: 150.0,
               width: 500,
               //color: colors.primaryContainer,
               padding: const EdgeInsets.all(12.0),
               margin: EdgeInsets.all(25.0),
               decoration: BoxDecoration(
-                color: colors.onSurfaceVariant.withValues(alpha: 0.2),
+                color: colors.surfaceContainer,
                 borderRadius: BorderRadius.circular(10.0),
-                border: Border.all(color: colors.outline, width: 1.0),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Ultima Asistencia"),
-                  Text(
-                    '14 de mayo 2026',
-                    style: TextStyle(color: colors.onPrimaryContainer),
-                  ),
-                ],
+                children: [Text("Ultima Asistencia"), Text('14 de mayo 2026')],
               ),
             ),
           ],
