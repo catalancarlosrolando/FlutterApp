@@ -11,7 +11,7 @@ class LastDay extends StatelessWidget {
       width: 500,
       //color: colors.primaryContainer,
       padding: const EdgeInsets.all(12.0),
-      margin: EdgeInsets.all(25.0),
+      //margin: EdgeInsets.all(25.0),
       decoration: BoxDecoration(
         color: colors.onSurfaceVariant.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(10.0),
@@ -19,7 +19,10 @@ class LastDay extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [Text("Ultima Asistencia"), Text('14 de mayo 2026')],
+        children: [
+          Text("Ultima Asistencia", style: TextStyle(color: colors.onSurface)),
+          Text('14 de mayo 2026', style: TextStyle(color: colors.onSurface)),
+        ],
       ),
     );
   }

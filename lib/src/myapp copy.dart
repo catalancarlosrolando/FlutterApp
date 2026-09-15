@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/src/pages/Testing/home_page.dart';
 import 'package:flutter_application/src/pages/landing_page.dart';
-import 'package:flutter_application/src/pages/login_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_application/src/pages/Testing/avatar_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -11,13 +12,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     const brandColor = Color(0xFF2563EB);
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       initialRoute: '/login',
 
       // Diccionario de rutas de la app
       routes: {
-        '/login': (BuildContext context) => const LoginPage(),
+        '/login': (BuildContext context) =>
+            const MyHomePage(title: 'Login Page'),
         '/landing': (BuildContext context) =>
             const LandingPage(title: "Landing Page"),
       },
@@ -31,7 +32,8 @@ class MyApp extends StatelessWidget {
               seedColor: brandColor,
               brightness: Brightness.light,
             ).copyWith(
-              primary: brandColor, // azul exacto
+              primary: brandColor, // 👈 Tu azul saturado exacto
+              onPrimary: Colors.white,
             ),
         textTheme: GoogleFonts.nunitoTextTheme(),
         scaffoldBackgroundColor:
@@ -47,13 +49,13 @@ class MyApp extends StatelessWidget {
               brightness: Brightness.dark,
             ).copyWith(
               primary: brandColor, // Mantiene mi branColor
+              onPrimary: Colors.white,
             ),
-        textTheme: GoogleFonts.nunitoTextTheme(),
         scaffoldBackgroundColor: Colors.black,
       ),
 
       themeMode: ThemeMode.system,
-      home: const LoginPage(),
+      home: const AvatarPage(),
     );
   }
 }

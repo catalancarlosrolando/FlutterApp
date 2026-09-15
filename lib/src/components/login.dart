@@ -1,11 +1,10 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
-import 'package:flutter_application/src/components/buttonpropio.dart';
+import 'package:flutter_application/src/components/buttonWhite.dart';
 import 'package:flutter_application/src/components/checkbox.dart';
 
 import 'package:flutter_application/src/components/inputpropio.dart';
+import 'package:flutter_application/src/components/buttonBlack.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -14,28 +13,35 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     return Container(
-      padding: EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(8.0),
       child: Column(
         //mainAxisAlignment: MainAxisAlignment.start,
+        spacing: 12,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [Text("Username", style: TextStyle(color: Colors.white))],
+            children: [
+              Text("Usuario o correo", style: TextStyle(color: Colors.white)),
+            ],
           ),
-          SizedBox(height: 12.0),
           Padding(
-            padding: EdgeInsets.only(bottom: 16.0),
-            child: Inputpropio(text: "whathever...."),
+            padding: EdgeInsets.only(bottom: 8.0),
+            child: Inputpropio(
+              text: "tumail@email.com",
+              icon: Icon(Icons.email),
+            ),
           ),
 
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [Text("Password", style: TextStyle(color: Colors.white))],
+            children: [
+              Text("Contraseña", style: TextStyle(color: Color(0xffa2a2ab))),
+            ],
           ),
-          SizedBox(height: 12.0),
-          Inputpropio(text: "your super secret pass"),
-          SizedBox(height: 36.0, width: 200.0),
+
+          Inputpropio(text: "••••••••••••••", icon: Icon(Icons.lock_outline)),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -50,18 +56,60 @@ class Login extends StatelessWidget {
               ),
 
               Text(
-                "Forgot password?",
+                "¿Olvidaste tu contraseña?",
                 style: TextStyle(
                   color: colors.primary,
-                  decoration: TextDecoration.underline,
+
                   decorationColor: colors.primary,
-                  decorationThickness: 2.5,
                 ),
               ),
             ],
           ),
-          SizedBox(height: 36.0, width: 200.0),
-          BotonPropio(),
+          BotonWhite(text: "Inicie sesión", iconEnable: false),
+          //linea seguida de un texto
+          Row(
+            children: [
+              Expanded(
+                child: Divider(
+                  color: colors.surfaceContainerHigh,
+                  thickness: 1,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: Text(
+                  "O",
+                  style: TextStyle(
+                    color: colors.onSurface.withAlpha(150),
+                    fontSize: 14.0,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Divider(
+                  color: colors.surfaceContainerHigh,
+                  thickness: 1,
+                ),
+              ),
+            ],
+          ),
+
+          BotonBlack(
+            text: "Continuar con Google",
+            iconEnable: true,
+            icon: Icons.language,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 8,
+            children: [
+              Text(
+                "¿No tienes una cuenta?",
+                style: TextStyle(color: colors.onPrimary),
+              ),
+              Text("Registrate", style: TextStyle(color: colors.primary)),
+            ],
+          ),
         ],
       ),
     );
