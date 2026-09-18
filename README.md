@@ -1,17 +1,27 @@
-# flutter_application
 
-A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1. **Clonar el repositorio:**
+   ```bash
+   git clone https://github.com/catalancarlosrolando/FlutterApp.git
+   cd FlutterApp
+   ```
 
-A few resources to get you started if this is your first Flutter project:
+2. **Instalar todas las dependencias declaradas:**
+   ```bash
+   flutter pub get
+   ```
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+3. **Verificar que el entorno esté listo:**
+   ```bash
+   flutter doctor
+   ```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+4. **Ejecutar la app:**
+   ```bash
+   flutter run
+   ```
+
+> [!TIP]
+> Si en la otra máquina abres la carpeta directamente en **VS Code** o **Android Studio** con las extensiones de Flutter instaladas, el editor suele detectar el [pubspec.yaml] y ejecuta `flutter pub get` automáticamente por ti.
