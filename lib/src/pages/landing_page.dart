@@ -44,13 +44,15 @@ class _LandingPageState extends State<LandingPage> {
           ],
         ),
       ),
-      endDrawer: MyEndDrawer(),
+      endDrawer: const MyEndDrawer(),
+
+      // 2. El body cambia según el índice seleccionado
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             spacing: 24.0,
-            children: [LastDay(), StepsToday(), NextRoutine()],
+            children: [StepsToday(), NextRoutine(), LastDay()],
           ),
         ),
       ),

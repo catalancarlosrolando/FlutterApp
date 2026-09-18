@@ -2996,7 +2996,7 @@
               "stroke": "$colors.hairline-dark",
               "strokeWidth": 1,
               "layout": "vertical",
-              "gap": 14,
+              "gap": 18,
               "padding": 16,
               "children": [
                 {

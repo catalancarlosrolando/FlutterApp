@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/src/pages/landing_page.dart';
 import 'package:flutter_application/src/pages/login_page.dart';
+import 'package:flutter_application/src/pages/main_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyApp extends StatelessWidget {
@@ -18,8 +19,7 @@ class MyApp extends StatelessWidget {
       // Diccionario de rutas de la app
       routes: {
         '/login': (BuildContext context) => const LoginPage(),
-        '/landing': (BuildContext context) =>
-            const LandingPage(title: "Landing Page"),
+        '/main': (BuildContext context) => const MainNavigationPage(),
       },
 
       // 1. Tema Claro

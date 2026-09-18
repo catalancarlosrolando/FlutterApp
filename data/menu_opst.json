@@ -1,0 +1,54 @@
+{
+    "rutines": [
+        {
+            "name": "chess",
+            "image": "assets/images/Chess/apertunaConMancuernas.jpg",
+            "tiempo": "60 Minutos",
+            "description": "Rutina Tren Superior"
+        },
+        {
+            "name": "avatar",
+            "image": "assets/images/Chess/sentadillaConBarra.jpg",
+            "tiempo": "60 Minutos",
+            "description": "Rutina Tren Inferior"
+        },
+        {
+            "name": "card",
+            "image": "assets/images/Chess/pressBancaInclinado.jpg",
+            "tiempo": "60 Minutos",
+            "description": "Rutina Tren Superior"
+        },
+        {
+            "name": "espalda",
+            "image": "assets/images/Espalda/JalonPecho.jpg",
+            "tiempo": "60 Minutos",
+            "description": "Rutina Espalda"
+        },
+        {
+            "name": "espalda",
+            "image": "assets/images/Chess/pressMilitar.jpg",
+            "tiempo": "60 Minutos",
+            "description": "Rutina Tren Superior"
+        },
+        {
+            "name": "card",
+            "image": "folder_open",
+            "description": "Cards - Tarjetas"
+        },
+        {
+            "name": "alert",
+            "image": "add_alert",
+            "description": "Alertas"
+        },
+        {
+            "name": "avatar",
+            "image": "accessibility",
+            "description": "Avatars"
+        },
+        {
+            "name": "card",
+            "image": "folder_open",
+            "description": "Cards - Tarjetas"
+        }
+    ]
+}

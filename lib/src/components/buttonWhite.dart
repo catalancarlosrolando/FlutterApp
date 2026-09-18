@@ -6,7 +6,7 @@ class BotonWhite extends StatelessWidget {
   const BotonWhite({super.key, required this.text, required this.iconEnable});
 
   void _goToLandingPage(BuildContext context) {
-    Navigator.pushNamed(context, '/landing');
+    Navigator.pushNamed(context, '/main');
   }
 
   @override

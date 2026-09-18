@@ -14,6 +14,7 @@ migrate_working_dir/
 bestPractices.md
 showDialogFunction.md
 Docs_flutter
+lib\src\pages\Testing
 
 # IntelliJ related
 *.iml
