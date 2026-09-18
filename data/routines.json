@@ -58,7 +58,7 @@
         "id": "routine_push_02",
         "name": "Pecho & Hombros con Mancuernas",
         "description": "Énfasis en aislamiento superior, deltoides y trabajo estabilizador.",
-        "image": "assets/images/Chess/pressBancaMarcuernas.jpg",
+        "image": "assets/images/Push.webp",
         "tiempo": "45 Minutos",
         "exercises": [
           {
@@ -111,7 +111,7 @@
         "id": "routine_push_03",
         "name": "Tríceps Power & Definición",
         "description": "Aislamiento completo de las 3 cabezas del tríceps.",
-        "image": "assets/images/Triceps/ExtensiónTrícepsPolea.webp",
+        "image": "assets/images/Push.webp",
         "tiempo": "35 Minutos",
         "exercises": [
           {
