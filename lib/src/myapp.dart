@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/src/pages/exerciseLive_page.dart';
 import 'package:flutter_application/src/pages/landing_page.dart';
 import 'package:flutter_application/src/pages/login_page.dart';
 import 'package:flutter_application/src/pages/main_navigation.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         '/main': (BuildContext context) => const MainNavigationPage(),
       },
 
-      // 1. Tema Claro
+      // Tema Claro
       theme: ThemeData(
         useMaterial3: true,
 
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
             Colors.grey[300], // Color de fondo para el tema claro
       ),
 
-      // 2. Tema Oscuro
+      // Tema Oscuro
       darkTheme: ThemeData(
         useMaterial3: true,
         colorScheme:

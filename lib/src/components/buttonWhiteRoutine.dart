@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 class BotonWhiteRoutine extends StatelessWidget {
   final String text;
   final bool iconEnable;
+  final VoidCallback? onTap;
+
   const BotonWhiteRoutine({
     super.key,
     required this.text,
     required this.iconEnable,
+    this.onTap,
   });
 
   void _goToRoutineDetail(BuildContext context) {
@@ -26,7 +29,7 @@ class BotonWhiteRoutine extends StatelessWidget {
           side: BorderSide(color: colors.onSurface, width: 1.0),
         ),
       ),
-      onPressed: () => _goToRoutineDetail(context),
+      onPressed: onTap ?? () => _goToRoutineDetail(context),
       icon: iconEnable ? Icon(Icons.edit, color: colors.onSurface) : null,
       label: Text(
         text,

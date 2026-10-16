@@ -57,10 +57,10 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
           child: const Icon(Icons.add, color: Colors.white, size: 28),
         ),
 
-        // 2. 👈 Esta línea mágica lo coloca flotando en el medio de la barra:
+        // Esta línea mágica lo coloca flotando en el medio de la barra:
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
-        // 3. Barra de navegación inferior
+        // Barra de navegación inferior
         bottomNavigationBar: MyNavigationBar(
           currentIndex: _selectedIndex,
           onDestinationSelected: (int index) {
