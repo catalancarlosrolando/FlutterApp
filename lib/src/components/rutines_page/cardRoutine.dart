@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_application/src/components/custom_image_loader.dart';
 import 'package:flutter_application/src/components/iconText.dart';
+import 'package:flutter_application/src/components/text_card.dart';
 
 class CardRoutine extends StatelessWidget {
   final String rutinaName;
@@ -38,41 +39,30 @@ class CardRoutine extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Row(
+            spacing: 10,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: .start,
             children: [
               CustomImageLoader(imagePath: image),
-              SizedBox(
-                width: 180,
+              Flexible(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   spacing: 8,
                   children: [
-                    Text(
-                      rutinaName,
-                      style: TextStyle(
-                        color: colors.onSurface,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12.0,
-                      ),
-                    ),
-                    Text(
-                      descripcion,
-                      style: TextStyle(
-                        color: colors.onSurface,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 12.0,
-                      ),
-                    ),
+                    TextCard(text: rutinaName, fontWeight: FontWeight.bold),
+                    TextCard(text: descripcion),
                   ],
                 ),
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 spacing: 8,
-                children: [IconText(icon: Icons.timer, text: time)],
+                children: [
+                  IconText(icon: Icons.timer, text: time),
+                  TextCard(text: "$exercisesCount ejercicios"),
+                ],
               ),
             ],
           ),
