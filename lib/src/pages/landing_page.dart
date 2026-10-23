@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/src/components/endDrawer.dart';
-import 'package:flutter_application/src/components/lastday.dart';
-import 'package:flutter_application/src/components/nextRoutine.dart';
-import 'package:flutter_application/src/components/stepsToday.dart';
+import 'package:flutter_application/src/components/landing/lastday.dart';
+import 'package:flutter_application/src/components/landing/nextRoutine.dart';
+import 'package:flutter_application/src/components/landing/stepsToday.dart';
 
 class LandingPage extends StatefulWidget {
   final String title;

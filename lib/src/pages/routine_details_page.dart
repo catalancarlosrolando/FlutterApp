@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/src/components/Exercise.dart';
-import 'package:flutter_application/src/pages/exerciseLive_page.dart';
 
 class RoutineDetails extends StatelessWidget {
   final Map<String, dynamic> rutina;
@@ -9,6 +8,7 @@ class RoutineDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
+
     return Scaffold(
       appBar: AppBar(
         title: Column(
@@ -49,17 +49,7 @@ class RoutineDetails extends StatelessWidget {
         cards.add(
           Padding(
             padding: const EdgeInsets.only(bottom: 16.0),
-            child: Exercise(
-              exercise: exercise,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (context) => ExerciseLivePage(exercise: exercise),
-                  ),
-                );
-              },
-            ),
+            child: Exercise(exercise: exercise),
           ),
         );
       }

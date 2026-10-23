@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/src/components/heroLogin.dart';
-import 'package:flutter_application/src/components/login.dart';
+import 'package:flutter_application/src/components/login/heroLogin.dart';
+import 'package:flutter_application/src/components/login/login.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

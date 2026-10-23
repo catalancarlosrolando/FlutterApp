@@ -45,46 +45,50 @@ class _MyRoutinesState extends State<MyRoutines> {
         // FutureBuilder para cargar las rutinas
         body: FutureBuilder<Map<String, dynamic>>(
           future: routineProvider.cargarData(),
-          builder: (BuildContext context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
-            if (snapshot.hasError) {
-              return Center(
-                child: Text(
-                  'Error: ${snapshot.error}',
-                  style: const TextStyle(color: Colors.red),
-                ),
-              );
-            }
+          builder:
+              (
+                BuildContext context,
+                AsyncSnapshot<Map<String, dynamic>> snapshot,
+              ) {
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Text(
+                      'Error: ${snapshot.error}',
+                      style: const TextStyle(color: Colors.red),
+                    ),
+                  );
+                }
 
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
 
-            // Retorna el TabBarView con la lista de 4 ListView independientes
-            return TabBarView(
-              children: [
-                // ListView 1: Push
-                ListView(
-                  padding: const EdgeInsets.all(16.0),
-                  children: _listItem(snapshot.data, 'push'),
-                ),
-                // ListView 2: Pull
-                ListView(
-                  padding: const EdgeInsets.all(16.0),
-                  children: _listItem(snapshot.data, 'pull'),
-                ),
-                // ListView 3: Legs
-                ListView(
-                  padding: const EdgeInsets.all(16.0),
-                  children: _listItem(snapshot.data, 'legs'),
-                ),
-                // ListView 4: Core
-                ListView(
-                  padding: const EdgeInsets.all(16.0),
-                  children: _listItem(snapshot.data, 'core'),
-                ),
-              ],
-            );
-          },
+                // Retorna el TabBarView con la lista de 4 ListView independientes
+                return TabBarView(
+                  children: [
+                    // ListView 1: Push
+                    ListView(
+                      padding: const EdgeInsets.all(16.0),
+                      children: _listItem(snapshot.data, 'push'),
+                    ),
+                    // ListView 2: Pull
+                    ListView(
+                      padding: const EdgeInsets.all(16.0),
+                      children: _listItem(snapshot.data, 'pull'),
+                    ),
+                    // ListView 3: Legs
+                    ListView(
+                      padding: const EdgeInsets.all(16.0),
+                      children: _listItem(snapshot.data, 'legs'),
+                    ),
+                    // ListView 4: Core
+                    ListView(
+                      padding: const EdgeInsets.all(16.0),
+                      children: _listItem(snapshot.data, 'core'),
+                    ),
+                  ],
+                );
+              },
         ),
       ),
     );
@@ -99,14 +103,16 @@ class _MyRoutinesState extends State<MyRoutines> {
 
     if (rutinas != null) {
       for (var rutina in rutinas) {
-        final exercisesCount = (rutina["exercises"] as List<dynamic>?)?.length ?? 0;
+        final exercisesCount =
+            (rutina["exercises"] as List<dynamic>?)?.length ?? 0;
         cards.add(
           Padding(
             padding: const EdgeInsets.only(bottom: 16.0),
             child: CardRoutine(
               rutinaName: rutina["name"] ?? "",
-              descripcion:
-                  "${rutina['tiempo'] ?? ''} • $exercisesCount Ejercicios",
+              descripcion: rutina['description'] ?? '',
+              time: rutina['tiempo'] ?? '',
+              exercisesCount: exercisesCount.toString(),
               image: rutina["image"] ?? "",
               onTap: () {
                 Navigator.push(

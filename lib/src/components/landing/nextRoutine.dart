@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/src/components/buttonWhite.dart';
-import 'package:flutter_application/src/components/buttonWhiteRoutine.dart';
+import 'package:flutter_application/src/components/custom_image_loader.dart';
+
 import 'package:flutter_application/src/components/iconText.dart';
 
 class NextRoutine extends StatelessWidget {
@@ -30,16 +31,8 @@ class NextRoutine extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 16,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
-                  child: FadeInImage(
-                    placeholder: AssetImage("assets/images/loading3.gif"),
-                    image: AssetImage("assets/images/Chess/Pecho-Plano.jpg"),
-                    fadeInDuration: Duration(seconds: 1),
-                    height: 180,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
+                CustomImageLoader(
+                  imagePath: "assets/images/Chess/Pecho-Plano.jpg",
                 ),
                 Text(
                   rutina,

@@ -19,7 +19,7 @@ class IconText extends StatelessWidget {
     return Row(
       spacing: 6.0,
       children: [
-        Icon(icon, size: fontSize + 2, color: colors.onSurface),
+        Icon(icon, size: fontSize + 2, color: colors.primary),
         Text(
           text,
           style: TextStyle(color: colors.onSurface, fontSize: fontSize),

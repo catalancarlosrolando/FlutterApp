@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/src/myapp.dart';
-import 'package:flutter/rendering.dart';
 
 void main() {
   //debugPaintSizeEnabled = true;
