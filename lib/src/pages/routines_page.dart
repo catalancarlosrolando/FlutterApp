@@ -5,7 +5,8 @@ import 'package:flutter_application/src/provider/routines_provider.dart'
     show routineProvider;
 
 class MyRoutines extends StatefulWidget {
-  const MyRoutines({super.key});
+  final String uid;
+  const MyRoutines({super.key, required this.uid});
 
   @override
   State<MyRoutines> createState() => _MyRoutinesState();

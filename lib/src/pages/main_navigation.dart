@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/src/components/myNavigatorbar.dart';
-import 'package:flutter_application/src/pages/createRoutines_page.dart';
-import 'package:flutter_application/src/pages/landing_page.dart';
+import 'package:flutter_application/src/pages/add_rutina_page.dart';
+//import 'package:flutter_application/src/pages/createRoutines_page.dart';
+import 'package:flutter_application/src/pages/home_page.dart';
 import 'package:flutter_application/src/pages/routines_page.dart';
 
+/// Navegador principal con 3 pestañas: Home, Ver Rutinas, Crear Rutina.
+/// Requiere `uid` del usuario logueado para pasarlo a HomePage y MyRoutines.
 class MainNavigationPage extends StatefulWidget {
-  const MainNavigationPage({super.key});
+  final String uid;
+  const MainNavigationPage({super.key, required this.uid});
 
   @override
   State<MainNavigationPage> createState() => _MainNavigationPageState();
@@ -16,10 +20,14 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
 
   // 1. Claves de navegación independientes por cada pestaña
   final List<GlobalKey<NavigatorState>> _navigatorKeys = [
-    GlobalKey<NavigatorState>(), // Pestaña 0
-    GlobalKey<NavigatorState>(), // Pestaña 1
-    GlobalKey<NavigatorState>(), // Pestaña 2
+    GlobalKey<NavigatorState>(), // Pestaña 0 - Home
+    GlobalKey<NavigatorState>(), // Pestaña 1 - Ver Rutinas
+    GlobalKey<NavigatorState>(), // Pestaña 2 - Crear Rutina
   ];
+
+  void _goToCreateTab() {
+    setState(() => _selectedIndex = 2);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,21 +47,19 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
         body: IndexedStack(
           index: _selectedIndex,
           children: [
+            _buildTabNavigator(_navigatorKeys[0], HomePage(uid: widget.uid)),
+            _buildTabNavigator(_navigatorKeys[1], MyRoutines(uid: widget.uid)),
             _buildTabNavigator(
-              _navigatorKeys[0],
-              const LandingPage(title: "Landing Page"),
+              _navigatorKeys[2],
+              AddRutinaPage(uid: widget.uid),
             ),
-            _buildTabNavigator(_navigatorKeys[1], const MyRoutines()),
-            _buildTabNavigator(_navigatorKeys[2], const CreateRoutine()),
           ],
         ),
 
         floatingActionButton: FloatingActionButton(
           shape: const CircleBorder(), // Círculo perfecto
           backgroundColor: colors.primary,
-          onPressed: () {
-            // Acción rápida (Crear nueva rutina)
-          },
+          onPressed: _goToCreateTab, // Cambia a la pestaña "Crear Rutina"
           child: const Icon(Icons.add, color: Colors.white, size: 28),
         ),
 

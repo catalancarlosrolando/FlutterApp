@@ -4,11 +4,13 @@ class BotonBlack extends StatelessWidget {
   final String text;
   final bool iconEnable;
   final IconData icon;
+  final VoidCallback? onPressed;
   const BotonBlack({
     super.key,
     required this.text,
     required this.iconEnable,
     required this.icon,
+    required this.onPressed,
   });
 
   void _goToLandingPage(BuildContext context) {
@@ -24,7 +26,7 @@ class BotonBlack extends StatelessWidget {
         backgroundColor: colors.surfaceContainerHighest,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       ),
-      onPressed: () => _goToLandingPage(context),
+      onPressed: onPressed,
       icon: iconEnable ? Icon(icon, color: Colors.white) : null,
       label: Text(
         text,
