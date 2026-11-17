@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/src/pages/login_page.dart';
-import 'package:flutter_application/src/pages/main_navigation.dart';
+import 'package:flutter_application/src/pages/MainNavigationPage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyApp extends StatelessWidget {

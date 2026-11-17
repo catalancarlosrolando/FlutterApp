@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_application/src/pages/main_navigation.dart';
+import 'package:flutter_application/src/pages/MainNavigationPage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'firebase_options.dart';
 
@@ -31,23 +32,58 @@ void main() async {
   runApp(const FitAccessApp());
 }
 
+/// Notificador global para alternar tema claro / oscuro en la app
+final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.system);
+
 class FitAccessApp extends StatelessWidget {
   const FitAccessApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'FitAccess',
-      // Dark theme como el de tus mockups
-      theme: ThemeData(
-        useMaterial3: true,
-        brightness: Brightness.dark,
-        colorSchemeSeed: const Color(0xFF2563EB),
-      ),
-      initialRoute: '/',
-      routes: <String, WidgetBuilder>{
-        '/': (context) => const Gate(),
-        '/addEjercicio': (context) => const AddEjercicioPage(),
+    const brandColor = Color(0xFF2563EB);
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: themeNotifier,
+      builder: (context, currentMode, child) {
+        return MaterialApp(
+          title: 'FitAccess',
+          // Dark theme como el de tus mockups
+          // Tema Claro
+          theme: ThemeData(
+            useMaterial3: true,
+            colorScheme:
+                ColorScheme.fromSeed(
+                  seedColor: brandColor,
+                  brightness: Brightness.light,
+                ).copyWith(
+                  primary: brandColor, // azul exacto
+                ),
+            textTheme: GoogleFonts.nunitoTextTheme(),
+            scaffoldBackgroundColor:
+                Colors.grey[300], // Color de fondo para el tema claro
+          ),
+
+          // Tema Oscuro
+          darkTheme: ThemeData(
+            useMaterial3: true,
+            colorScheme:
+                ColorScheme.fromSeed(
+                  seedColor: brandColor,
+                  brightness: Brightness.dark,
+                ).copyWith(
+                  primary: brandColor, // Mantiene mi branColor
+                ),
+            textTheme: GoogleFonts.nunitoTextTheme(),
+            scaffoldBackgroundColor: Colors.black,
+          ),
+
+          themeMode: currentMode,
+
+          initialRoute: '/',
+          routes: <String, WidgetBuilder>{
+            '/': (context) => const Gate(),
+            '/addEjercicio': (context) => const AddEjercicioPage(),
+          },
+        );
       },
     );
   }

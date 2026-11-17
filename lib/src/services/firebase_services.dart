@@ -12,23 +12,76 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 /// Crea el documento del usuario al iniciar sesión con Google por primera vez.
 /// Usa el uid de Firebase Auth como id del documento.
-Future<void> crearUsuario({
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+final _db = FirebaseFirestore.instance;
+
+// PASO 1, 2 y 3: Login + Crear doc + Perfil default
+Future<String> asegurarUsuarioYPerfil({
   required String uid,
   required String email,
   required String nombre,
   String photoUrl = '',
 }) async {
-  final ref = FirebaseFirestore.instance.collection('usuarios').doc(uid);
-  final snap = await ref.get();
-  if (!snap.exists) {
-    await ref.set({
-      'nombre': nombre,
-      'email': email,
-      'photoUrl': photoUrl,
-      'rutinas': [], // arranca con ninguna
-      'createdAt': FieldValue.serverTimestamp(),
-    });
+  final userRef = _db.collection('usuarios').doc(uid);
+  final userSnap = await userRef.get();
+
+  // Si ya existe, retornar perfil default guardado
+  if (userSnap.exists) {
+    return userSnap.data()?['defaultProfileId'] as String;
   }
+
+  // Si no existe, crear perfil default primero
+  final perfilRef = userRef.collection('perfiles').doc();
+  await perfilRef.set({
+    'nombre': 'Principal',
+    'createdAt': FieldValue.serverTimestamp(),
+  });
+
+  // Crear usuario con defaultProfileId apuntando al nuevo perfil
+  await userRef.set({
+    'nombre': nombre,
+    'email': email,
+    'photoUrl': photoUrl,
+    'defaultProfileId': perfilRef.id,
+    'createdAt': FieldValue.serverTimestamp(),
+  });
+
+  return perfilRef.id;
+}
+
+// PASO 4: Cambiar perfil seleccionado
+Future<void> cambiarPerfilActivo(String uid, String profileId) async {
+  await _db.collection('usuarios').doc(uid).update({
+    'defaultProfileId': profileId,
+  });
+}
+
+// PASO 5: Cargar rutinas del perfil seleccionado (con sus ejercicios)
+Stream<List<Map<String, dynamic>>> streamRutinasDelPerfil({
+  required String uid,
+  required String profileId,
+}) {
+  return _db
+      .collection('usuarios')
+      .doc(uid)
+      .collection('perfiles')
+      .doc(profileId)
+      .collection('rutinas')
+      .snapshots()
+      .map(
+        (snapshot) => snapshot.docs.map((doc) {
+          final data = doc.data();
+          return {
+            'id': doc.id,
+            ...data,
+            // 'ejercicios' ya viene como List en cada doc de rutina
+            'ejercicios': List<Map<String, dynamic>>.from(
+              data['ejercicios'] ?? [],
+            ),
+          };
+        }).toList(),
+      );
 }
 
 /// Agrega el id de una rutina al array `rutinas` del usuario.

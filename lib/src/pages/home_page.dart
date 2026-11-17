@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import 'package:flutter_application/main.dart';
+import 'package:flutter_application/src/pages/profile_selection_page.dart';
+import 'package:flutter_application/src/pages/edit_profile_page.dart';
 import 'package:flutter_application/src/services/firebase_services.dart';
 
 /// Home: muestra la PRÓXIMA rutina no finalizada (la "siguiente").
 /// Usa StreamBuilder para que reaccione en tiempo real a cambios en Firestore.
 ///
 /// Si todas están finalizadas o no hay rutinas → estado vacío.
-/// Botón de logout arriba a la derecha.
 class HomePage extends StatefulWidget {
   final String uid;
   const HomePage({super.key, required this.uid});
@@ -21,22 +23,103 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       backgroundColor: colors.surface,
       appBar: AppBar(
         backgroundColor: colors.surface,
         elevation: 0,
         title: const Text('Tu próxima rutina'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () async {
-              // google_sign_in 7.x: disconnect() en vez de signOut()
-              await GoogleSignIn.instance.disconnect();
-              await FirebaseAuth.instance.signOut();
-            },
-          ),
-        ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(color: colors.primary),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  CircleAvatar(
+                    backgroundColor: colors.onPrimary,
+                    radius: 28,
+                    child: Icon(Icons.person, size: 36, color: colors.primary),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    'Menú',
+                    style: TextStyle(
+                      color: colors.onPrimary,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.switch_account),
+              title: const Text('Elección de perfil'),
+              onTap: () {
+                Navigator.pop(context); // Cierra el Drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProfileSelectionPage(uid: widget.uid),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.edit),
+              title: const Text('Editar perfil'),
+              onTap: () {
+                Navigator.pop(context); // Cierra el Drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EditProfilePage(uid: widget.uid),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(isDark ? Icons.light_mode : Icons.dark_mode),
+              title: Text(isDark ? 'Modo claro' : 'Modo oscuro'),
+              trailing: Switch(
+                value: isDark,
+                onChanged: (val) {
+                  themeNotifier.value = val ? ThemeMode.dark : ThemeMode.light;
+                },
+              ),
+              onTap: () {
+                themeNotifier.value = isDark ? ThemeMode.light : ThemeMode.dark;
+              },
+            ),
+            const Divider(),
+            ListTile(
+              leading: IconButton(
+                icon: const Icon(Icons.logout, color: Colors.redAccent),
+                onPressed: () async {
+                  Navigator.pop(context);
+                  await GoogleSignIn.instance.disconnect();
+                  await FirebaseAuth.instance.signOut();
+                },
+              ),
+              title: const Text(
+                'Cerrar sesión',
+                style: TextStyle(color: Colors.redAccent),
+              ),
+              onTap: () async {
+                Navigator.pop(context);
+                await GoogleSignIn.instance.disconnect();
+                await FirebaseAuth.instance.signOut();
+              },
+            ),
+          ],
+        ),
       ),
       body: StreamBuilder<Map<String, dynamic>?>(
         stream: streamProximaRutina(widget.uid),
