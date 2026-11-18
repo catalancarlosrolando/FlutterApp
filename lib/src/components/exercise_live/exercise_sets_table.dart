@@ -9,7 +9,6 @@ import 'package:flutter_application/src/components/exercise_live/workout_set_mod
 class ExerciseSetsTable extends StatelessWidget {
   final String exerciseName;
   final String exerciseSubtitle;
-  final String accessoryButtonText;
   final IconData accessoryIcon;
   final VoidCallback? onAccessoryPressed;
   final List<WorkoutSetItem> sets;
@@ -22,7 +21,6 @@ class ExerciseSetsTable extends StatelessWidget {
     super.key,
     required this.exerciseName,
     required this.exerciseSubtitle,
-    this.accessoryButtonText = 'Discos',
     this.accessoryIcon = Icons.calculate_outlined,
     this.onAccessoryPressed,
     required this.sets,
@@ -42,10 +40,7 @@ class ExerciseSetsTable extends StatelessWidget {
       decoration: BoxDecoration(
         color: colors.surfaceContainer,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: colors.outlineVariant,
-          width: 1,
-        ),
+        border: Border.all(color: colors.outlineVariant, width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +50,6 @@ class ExerciseSetsTable extends StatelessWidget {
           ExerciseTableHeader(
             exerciseName: exerciseName,
             exerciseSubtitle: exerciseSubtitle,
-            accessoryButtonText: accessoryButtonText,
             accessoryIcon: accessoryIcon,
             onAccessoryPressed: onAccessoryPressed,
           ),

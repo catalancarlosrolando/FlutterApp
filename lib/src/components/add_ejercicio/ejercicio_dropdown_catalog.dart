@@ -80,7 +80,15 @@ class _EjercicioDropdownCatalogState extends State<EjercicioDropdownCatalog> {
               ),
             );
           }).toList(),
-          onChanged: widget.onSelected,
+          onChanged: (seleccionado) {
+            if (seleccionado != null) {
+              final map = Map<String, dynamic>.from(seleccionado);
+              map.putIfAbsent('finalizado', () => false);
+              widget.onSelected(map);
+            } else {
+              widget.onSelected(null);
+            }
+          },
         );
       },
     );

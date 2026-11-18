@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_application/src/components/Exercise.dart';
 import 'package:flutter_application/src/pages/add_rutina_page.dart';
+import 'package:flutter_application/src/services/firebase_services.dart';
 
 class RoutineDetails extends StatefulWidget {
   final Map<String, dynamic> rutina;
@@ -44,15 +44,12 @@ class _RoutineDetailsState extends State<RoutineDetails> {
       return _buildStaticScaffold(widget.rutina, colors);
     }
 
-    return StreamBuilder<DocumentSnapshot>(
-      stream: FirebaseFirestore.instance
-          .collection('usuarios')
-          .doc(widget.uid)
-          .collection('perfiles')
-          .doc(widget.profileId)
-          .collection('rutinas')
-          .doc(rutinaId)
-          .snapshots(),
+    return StreamBuilder<Map<String, dynamic>?>(
+      stream: streamRutina(
+        uid: widget.uid!,
+        profileId: widget.profileId!,
+        rutinaId: rutinaId,
+      ),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
@@ -61,12 +58,10 @@ class _RoutineDetailsState extends State<RoutineDetails> {
           );
         }
 
-        if (!snapshot.hasData || !snapshot.data!.exists) {
+        final rutinaLive = snapshot.data;
+        if (rutinaLive == null) {
           return _buildStaticScaffold(widget.rutina, colors);
         }
-
-        final data = snapshot.data!.data() as Map<String, dynamic>;
-        final rutinaLive = {'uid_doc': rutinaId, ...data};
 
         return _buildRoutineScaffold(rutinaLive, colors, canEdit: true);
       },
@@ -144,10 +139,18 @@ class _RoutineDetailsState extends State<RoutineDetails> {
               padding: const EdgeInsets.all(16.0),
               itemCount: ejercicios.length,
               itemBuilder: (context, index) {
-                final exercise = ejercicios[index];
+                final exercise = Map<String, dynamic>.from(
+                  ejercicios[index] as Map,
+                );
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 16.0),
-                  child: Exercise(exercise: exercise),
+                  child: Exercise(
+                    exercise: exercise,
+                    uid: widget.uid,
+                    profileId: widget.profileId,
+                    rutinaId: widget.rutina['uid_doc'],
+                    exerciseIndex: index,
+                  ),
                 );
               },
             ),

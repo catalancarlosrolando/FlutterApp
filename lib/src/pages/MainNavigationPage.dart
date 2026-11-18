@@ -51,7 +51,12 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
             _buildTabNavigator(_navigatorKeys[1], MyRoutines(uid: widget.uid)),
             _buildTabNavigator(
               _navigatorKeys[2],
-              AddRutinaPage(uid: widget.uid),
+              AddRutinaPage(
+                uid: widget.uid,
+                onRutinaCreada: () {
+                  setState(() => _selectedIndex = 0);
+                },
+              ),
             ),
           ],
         ),

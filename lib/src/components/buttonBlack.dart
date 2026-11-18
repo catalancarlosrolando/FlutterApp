@@ -5,12 +5,14 @@ class BotonBlack extends StatelessWidget {
   final bool iconEnable;
   final IconData icon;
   final VoidCallback? onPressed;
+  final bool success;
   const BotonBlack({
     super.key,
     required this.text,
     required this.iconEnable,
     required this.icon,
     required this.onPressed,
+    this.success = false,
   });
 
   @override
@@ -19,7 +21,7 @@ class BotonBlack extends StatelessWidget {
     return TextButton.icon(
       style: TextButton.styleFrom(
         minimumSize: const Size(double.infinity, 48.0),
-        backgroundColor: colors.primary,
+        backgroundColor: success ? colors.tertiary : colors.primary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       ),
       onPressed: onPressed,
@@ -29,7 +31,7 @@ class BotonBlack extends StatelessWidget {
         style: TextStyle(
           fontSize: 16.0,
           fontWeight: FontWeight.normal,
-          color: colors.onSurfaceVariant,
+          color: success ? colors.onTertiary : colors.onSurfaceVariant,
         ),
       ),
     );

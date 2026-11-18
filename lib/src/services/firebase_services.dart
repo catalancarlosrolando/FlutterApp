@@ -92,11 +92,11 @@ Future<String> crearNuevoPerfil(
       .doc(uid)
       .collection('perfiles')
       .add({
-    'nombre': nombrePerfil,
-    'image': image,
-    'descripcion': descripcion,
-    'createdAt': FieldValue.serverTimestamp(),
-  });
+        'nombre': nombrePerfil,
+        'image': image,
+        'descripcion': descripcion,
+        'createdAt': FieldValue.serverTimestamp(),
+      });
   return ref.id;
 }
 
@@ -137,11 +137,11 @@ Future<void> updatePerfil({
       .collection('perfiles')
       .doc(profileId)
       .set({
-    'nombre': nombre,
-    'image': image,
-    'descripcion': descripcion,
-    'updatedAt': FieldValue.serverTimestamp(),
-  }, SetOptions(merge: true));
+        'nombre': nombre,
+        'image': image,
+        'descripcion': descripcion,
+        'updatedAt': FieldValue.serverTimestamp(),
+      }, SetOptions(merge: true));
 }
 
 /// Cambia el perfil activo del usuario.
@@ -184,10 +184,7 @@ Stream<Map<String, List>> streamRutinasPorCategoria(
 }
 
 /// Stream reactivo de TODAS las rutinas del perfil (lista plana).
-Stream<List<Map<String, dynamic>>> streamRutinas(
-  String uid,
-  String profileId,
-) {
+Stream<List<Map<String, dynamic>>> streamRutinas(String uid, String profileId) {
   return _db
       .collection('usuarios')
       .doc(uid)
@@ -215,6 +212,23 @@ Stream<Map<String, dynamic>?> streamProximaRutina(
       .limit(1)
       .snapshots()
       .map((q) => q.docs.isEmpty ? null : _rutinaFromDoc(q.docs.first));
+}
+
+/// Stream reactivo de una rutina específica por su ID.
+Stream<Map<String, dynamic>?> streamRutina({
+  required String uid,
+  required String profileId,
+  required String rutinaId,
+}) {
+  return _db
+      .collection('usuarios')
+      .doc(uid)
+      .collection('perfiles')
+      .doc(profileId)
+      .collection('rutinas')
+      .doc(rutinaId)
+      .snapshots()
+      .map((doc) => doc.exists ? _rutinaFromDoc(doc) : null);
 }
 
 Map<String, dynamic> _rutinaFromDoc(DocumentSnapshot doc) {
@@ -251,15 +265,15 @@ Future<String> addRutina({
       .doc(profileId)
       .collection('rutinas')
       .add({
-    'categoria': categoria,
-    'name': name,
-    'description': description,
-    'image': image,
-    'tiempo': tiempo,
-    'finalizada': false,
-    'ejercicios': ejercicios,
-    'createdAt': FieldValue.serverTimestamp(),
-  });
+        'categoria': categoria,
+        'name': name,
+        'description': description,
+        'image': image,
+        'tiempo': tiempo,
+        'finalizada': false,
+        'ejercicios': ejercicios,
+        'createdAt': FieldValue.serverTimestamp(),
+      });
   return ref.id;
 }
 
@@ -323,9 +337,7 @@ Future<void> setRutinaFinalizada({
       .doc(profileId)
       .collection('rutinas')
       .doc(uidDoc)
-      .update({
-    'finalizada': finalizada,
-  });
+      .update({'finalizada': finalizada});
 }
 
 // ===================== EJERCICIOS DE UNA RUTINA =====================
@@ -366,8 +378,8 @@ Future<void> addEjercicioARutina({
       .collection('rutinas')
       .doc(rutinaId)
       .update({
-    'ejercicios': FieldValue.arrayUnion([ejercicio]),
-  });
+        'ejercicios': FieldValue.arrayUnion([ejercicio]),
+      });
 }
 
 Future<void> borrarEjercicioDeRutina({
@@ -390,6 +402,47 @@ Future<void> borrarEjercicioDeRutina({
   await docRef.update({'ejercicios': ejercicios});
 }
 
+/// Actualiza un ejercicio específico o la lista de ejercicios de una rutina,
+/// permitiendo modificar campos como finalizado, series, peso, reps, etc.
+Future<void> updateEjercicioEnRutina({
+  required String uid,
+  required String profileId,
+  required String rutinaId,
+  required Map<String, dynamic> ejercicioActualizado,
+  int? ejercicioIndex,
+}) async {
+  final docRef = _db
+      .collection('usuarios')
+      .doc(uid)
+      .collection('perfiles')
+      .doc(profileId)
+      .collection('rutinas')
+      .doc(rutinaId);
+  final snap = await docRef.get();
+  if (!snap.exists) return;
+  final data = snap.data() ?? {};
+  final ejercicios = List<Map<String, dynamic>>.from(
+    (data['ejercicios'] as List<dynamic>? ?? []).map(
+      (e) => Map<String, dynamic>.from(e as Map),
+    ),
+  );
+
+  int targetIndex = -1;
+  if (ejercicioIndex != null && ejercicioIndex >= 0 && ejercicioIndex < ejercicios.length) {
+    targetIndex = ejercicioIndex;
+  } else {
+    final ejId = ejercicioActualizado['id'];
+    if (ejId != null) {
+      targetIndex = ejercicios.indexWhere((e) => e['id'] == ejId);
+    }
+  }
+
+  if (targetIndex != -1) {
+    ejercicios[targetIndex] = ejercicioActualizado;
+    await docRef.update({'ejercicios': ejercicios});
+  }
+}
+
 // ===================== CATÁLOGO DE EJERCICIOS =====================
 
 /// Stream del catálogo compartido (todos los ejercicios disponibles).
@@ -407,6 +460,7 @@ Stream<List<Map<String, dynamic>>> streamCatalogoEjercicios() {
             'image': data['image'] ?? '',
             'tiempo': data['tiempo'] ?? '',
             'description': data['description'] ?? '',
+            'finalizado': false,
           };
         }).toList(),
       );
@@ -423,6 +477,7 @@ Future<List<Map<String, dynamic>>> getCatalogoEjercicios() async {
       'image': data['image'] ?? '',
       'tiempo': data['tiempo'] ?? '',
       'description': data['description'] ?? '',
+      'finalizado': false,
     };
   }).toList();
 }
