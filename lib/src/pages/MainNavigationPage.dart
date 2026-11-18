@@ -60,7 +60,7 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
           shape: const CircleBorder(), // Círculo perfecto
           backgroundColor: colors.primary,
           onPressed: _goToCreateTab, // Cambia a la pestaña "Crear Rutina"
-          child: const Icon(Icons.add, color: Colors.white, size: 28),
+          child: Icon(Icons.add, color: colors.onPrimary, size: 28),
         ),
 
         // Boton en el medio de la barra:

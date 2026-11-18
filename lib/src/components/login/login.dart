@@ -59,9 +59,11 @@ class _LoginState extends State<Login> {
         return;
       }
 
-      setState(
-        () => _error = 'No se pudo iniciar sesión. Verificá tu conexión.',
-      );
+      if (mounted) {
+        setState(
+          () => _error = 'No se pudo iniciar sesión. Verificá tu conexión.',
+        );
+      }
     } finally {
       if (mounted) {
         setState(() => _loading = false);
@@ -92,12 +94,6 @@ class _LoginState extends State<Login> {
               ),
             ),
           const SizedBox(height: 8),
-          // Texto encima del botón Google (mantenemos tu estilo)
-          Text(
-            'Iniciá sesión para continuar',
-            style: TextStyle(color: colors.onPrimary),
-            textAlign: TextAlign.center,
-          ),
           // Botón Google (tu componente).
           // ⚠️ Tu BotonBlack probablemente NO tenga parámetro onPressed todavía.
           // Agregáselo así en components/buttonBlack.dart:

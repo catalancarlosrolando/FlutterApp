@@ -5,6 +5,7 @@ class HeroLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return SizedBox(
       height: 164.0,
       width: 382.0,
@@ -20,11 +21,11 @@ class HeroLogin extends StatelessWidget {
           ),
           Text(
             "GymTracker Pro",
-            style: TextStyle(color: Colors.white, fontSize: 34.0),
+            style: TextStyle(color: colors.onSurface, fontSize: 34.0),
           ),
           Text(
             "Inicia sesión para continuar con tu progreso",
-            style: TextStyle(color: Colors.white, fontSize: 14.0),
+            style: TextStyle(color: colors.onSurface, fontSize: 14.0),
           ),
         ],
       ),

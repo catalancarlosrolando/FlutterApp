@@ -81,8 +81,14 @@ class _AddRutinaPageState extends State<AddRutinaPage> {
 
     try {
       final uid = FirebaseAuth.instance.currentUser!.uid;
+      final profileId = await getPerfilActivoId(uid);
+      if (profileId == null || profileId.isEmpty) {
+        throw Exception('No hay perfil activo seleccionado.');
+      }
+
       await addRutina(
         uid: uid,
+        profileId: profileId,
         categoria: _categoria,
         name: _nameCtrl.text.trim(),
         description: _descCtrl.text.trim(),

@@ -7,6 +7,7 @@ class ButtonLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         //minimumSize: Size.zero,
@@ -22,10 +23,10 @@ class ButtonLogin extends StatelessWidget {
         softWrap: true,
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 16.0,
           fontWeight: FontWeight.bold,
-          color: Colors.blue,
+          color: colors.primary,
         ),
       ),
     );

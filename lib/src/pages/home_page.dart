@@ -101,16 +101,16 @@ class _HomePageState extends State<HomePage> {
             const Divider(),
             ListTile(
               leading: IconButton(
-                icon: const Icon(Icons.logout, color: Colors.redAccent),
+                icon: Icon(Icons.logout, color: colors.error),
                 onPressed: () async {
                   Navigator.pop(context);
                   await GoogleSignIn.instance.disconnect();
                   await FirebaseAuth.instance.signOut();
                 },
               ),
-              title: const Text(
+              title: Text(
                 'Cerrar sesión',
-                style: TextStyle(color: Colors.redAccent),
+                style: TextStyle(color: colors.error),
               ),
               onTap: () async {
                 Navigator.pop(context);
@@ -121,29 +121,47 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: StreamBuilder<Map<String, dynamic>?>(
-        stream: streamProximaRutina(widget.uid),
-        builder: (context, snap) {
-          if (snap.connectionState == ConnectionState.waiting) {
+      body: StreamBuilder<String?>(
+        stream: streamPerfilActivoId(widget.uid),
+        builder: (context, activeSnap) {
+          if (activeSnap.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
-          if (snap.hasError) {
-            return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Text(
-                  'Error: ${snap.error}',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: colors.error),
-                ),
-              ),
-            );
+          final profileId = activeSnap.data;
+          if (profileId == null || profileId.isEmpty) {
+            return const Center(child: Text('No hay perfil seleccionado.'));
           }
-          final rutina = snap.data;
-          if (rutina == null) {
-            return _EmptyState(colors: colors);
-          }
-          return _RutinaCard(rutina: rutina, colors: colors);
+
+          return StreamBuilder<Map<String, dynamic>?>(
+            stream: streamProximaRutina(widget.uid, profileId),
+            builder: (context, snap) {
+              if (snap.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (snap.hasError) {
+                return Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Text(
+                      'Error: ${snap.error}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: colors.error),
+                    ),
+                  ),
+                );
+              }
+              final rutina = snap.data;
+              if (rutina == null) {
+                return _EmptyState(colors: colors);
+              }
+              return _RutinaCard(
+                uid: widget.uid,
+                profileId: profileId,
+                rutina: rutina,
+                colors: colors,
+              );
+            },
+          );
         },
       ),
     );
@@ -190,10 +208,17 @@ class _EmptyState extends StatelessWidget {
 }
 
 class _RutinaCard extends StatelessWidget {
+  final String uid;
+  final String profileId;
   final Map<String, dynamic> rutina;
   final ColorScheme colors;
 
-  const _RutinaCard({required this.rutina, required this.colors});
+  const _RutinaCard({
+    required this.uid,
+    required this.profileId,
+    required this.rutina,
+    required this.colors,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -296,7 +321,12 @@ class _RutinaCard extends StatelessWidget {
         // Botón "Marcar como finalizada"
         FilledButton.icon(
           onPressed: () async {
-            await setRutinaFinalizada(rutina['uid_doc'], true);
+            await setRutinaFinalizada(
+              uid: uid,
+              profileId: profileId,
+              uidDoc: rutina['uid_doc'],
+              finalizada: true,
+            );
             if (context.mounted) {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('¡Rutina completada! 💪')),
@@ -329,7 +359,7 @@ class _EjercicioItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: colors.surfaceContainerHigh,
+      color: colors.surfaceContainerHighest,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       margin: const EdgeInsets.only(bottom: 12),
       child: Padding(

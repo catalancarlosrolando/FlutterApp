@@ -13,27 +13,23 @@ class BotonBlack extends StatelessWidget {
     required this.onPressed,
   });
 
-  void _goToLandingPage(BuildContext context) {
-    Navigator.pushNamed(context, '/landing');
-  }
-
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     return TextButton.icon(
       style: TextButton.styleFrom(
         minimumSize: const Size(double.infinity, 48.0),
-        backgroundColor: colors.surfaceContainerHighest,
+        backgroundColor: colors.primary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       ),
       onPressed: onPressed,
-      icon: iconEnable ? Icon(icon, color: Colors.white) : null,
+      icon: iconEnable ? Icon(icon, color: colors.onSurfaceVariant) : null,
       label: Text(
         text,
         style: TextStyle(
           fontSize: 16.0,
           fontWeight: FontWeight.normal,
-          color: Colors.white,
+          color: colors.onSurfaceVariant,
         ),
       ),
     );
