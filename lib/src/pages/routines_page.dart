@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/src/components/rutines_page/cardRoutine.dart';
 import 'package:flutter_application/src/pages/routine_details_page.dart';
-import 'package:flutter_application/src/provider/routines_provider.dart'
-    show routineProvider;
+import 'package:flutter_application/src/services/firebase_services.dart';
 
 class MyRoutines extends StatefulWidget {
   final String uid;
@@ -13,10 +12,14 @@ class MyRoutines extends StatefulWidget {
 }
 
 class _MyRoutinesState extends State<MyRoutines> {
+  final List<String> _categorias = ['push', 'pull', 'legs', 'core'];
+
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
     return DefaultTabController(
-      length: 4, // 4 Pestañas
+      length: _categorias.length,
       child: Scaffold(
         appBar: AppBar(
           title: const Column(
@@ -37,20 +40,33 @@ class _MyRoutinesState extends State<MyRoutines> {
             tabs: [
               Tab(text: "Push"),
               Tab(text: "Pull"),
-              Tab(text: "legs"),
-              Tab(text: "core"),
+              Tab(text: "Legs"),
+              Tab(text: "Core"),
             ],
           ),
         ),
 
-        // FutureBuilder para cargar las rutinas
-        body: FutureBuilder<Map<String, dynamic>>(
-          future: routineProvider.cargarData(),
-          builder:
-              (
-                BuildContext context,
-                AsyncSnapshot<Map<String, dynamic>> snapshot,
-              ) {
+        // Stream reactivo para obtener perfil activo y sus rutinas
+        body: StreamBuilder<String?>(
+          stream: streamPerfilActivoId(widget.uid),
+          builder: (context, activeSnap) {
+            if (activeSnap.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            final profileId = activeSnap.data;
+            if (profileId == null || profileId.isEmpty) {
+              return Center(
+                child: Text(
+                  'No se encontró un perfil activo.',
+                  style: TextStyle(color: colors.onSurfaceVariant),
+                ),
+              );
+            }
+
+            return StreamBuilder<Map<String, List>>(
+              stream: streamRutinasPorCategoria(widget.uid, profileId),
+              builder: (context, snapshot) {
                 if (snapshot.hasError) {
                   return Center(
                     child: Text(
@@ -64,71 +80,65 @@ class _MyRoutinesState extends State<MyRoutines> {
                   return const Center(child: CircularProgressIndicator());
                 }
 
-                // Retorna el TabBarView con la lista de 4 ListView independientes
+                final data = snapshot.data ?? {};
+
                 return TabBarView(
-                  children: [
-                    // ListView 1: Push
-                    ListView(
+                  children: _categorias.map((cat) {
+                    final rutinas = data[cat] ?? [];
+
+                    if (rutinas.isEmpty) {
+                      return Center(
+                        child: Text(
+                          'No hay rutinas para ${cat.toUpperCase()}',
+                          style: TextStyle(color: colors.onSurfaceVariant),
+                        ),
+                      );
+                    }
+
+                    return ListView.builder(
                       padding: const EdgeInsets.all(16.0),
-                      children: _listItem(snapshot.data, 'push'),
-                    ),
-                    // ListView 2: Pull
-                    ListView(
-                      padding: const EdgeInsets.all(16.0),
-                      children: _listItem(snapshot.data, 'pull'),
-                    ),
-                    // ListView 3: Legs
-                    ListView(
-                      padding: const EdgeInsets.all(16.0),
-                      children: _listItem(snapshot.data, 'legs'),
-                    ),
-                    // ListView 4: Core
-                    ListView(
-                      padding: const EdgeInsets.all(16.0),
-                      children: _listItem(snapshot.data, 'core'),
-                    ),
-                  ],
+                      itemCount: rutinas.length,
+                      itemBuilder: (context, index) {
+                        final rutina = rutinas[index] as Map<String, dynamic>;
+                        final exercisesList =
+                            (rutina["ejercicios"] ?? rutina["exercises"])
+                                as List<dynamic>?;
+                        final exercisesCount = exercisesList?.length ?? 0;
+
+                        final finalizada = (rutina["finalizada"] as bool?) ?? false;
+
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 16.0),
+                          child: CardRoutine(
+                            rutinaName: rutina["name"] ?? "",
+                            descripcion: rutina['description'] ?? '',
+                            time: rutina['tiempo'] ?? '',
+                            exercisesCount: exercisesCount.toString(),
+                            image: rutina["image"] ?? "",
+                            finalizada: finalizada,
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute<void>(
+                                  builder: (context) => RoutineDetails(
+                                    rutina: rutina,
+                                    uid: widget.uid,
+                                    profileId: profileId,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    );
+                  }).toList(),
                 );
               },
+            );
+          },
         ),
       ),
     );
-  }
-
-  // Helper que extrae y arma las tarjetas de cada categoría
-  List<Widget> _listItem(Map<String, dynamic>? data, String categoria) {
-    if (data == null || data.isEmpty) return [];
-
-    final List<Widget> cards = [];
-    final List<dynamic>? rutinas = data[categoria];
-
-    if (rutinas != null) {
-      for (var rutina in rutinas) {
-        final exercisesCount =
-            (rutina["exercises"] as List<dynamic>?)?.length ?? 0;
-        cards.add(
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
-            child: CardRoutine(
-              rutinaName: rutina["name"] ?? "",
-              descripcion: rutina['description'] ?? '',
-              time: rutina['tiempo'] ?? '',
-              exercisesCount: exercisesCount.toString(),
-              image: rutina["image"] ?? "",
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (context) => RoutineDetails(rutina: rutina),
-                  ),
-                );
-              },
-            ),
-          ),
-        );
-      }
-    }
-
-    return cards;
   }
 }

@@ -20,9 +20,10 @@ import 'package:flutter_application/src/services/firebase_services.dart';
 /// /addEjercicio). Como esa página está dentro de otra ruta, le pasamos
 /// por argumentos un callback para recibir el ejercicio configurado.
 class AddRutinaPage extends StatefulWidget {
-  final uid;
+  final String? uid;
+  final Map<String, dynamic>? rutinaParaEditar;
 
-  const AddRutinaPage({super.key, this.uid});
+  const AddRutinaPage({super.key, this.uid, this.rutinaParaEditar});
 
   @override
   State<AddRutinaPage> createState() => _AddRutinaPageState();
@@ -37,6 +38,30 @@ class _AddRutinaPageState extends State<AddRutinaPage> {
 
   // Ejercicios en memoria mientras armás la rutina
   final List<Map<String, dynamic>> _ejercicios = [];
+
+  bool get _esEdicion => widget.rutinaParaEditar != null;
+
+  @override
+  void initState() {
+    super.initState();
+    if (_esEdicion) {
+      final r = widget.rutinaParaEditar!;
+      _nameCtrl.text = r['name'] ?? '';
+      _descCtrl.text = r['description'] ?? '';
+      if ((r['tiempo'] as String?)?.isNotEmpty == true) {
+        _tiempoCtrl.text = r['tiempo'];
+      }
+      _categoria = (r['categoria'] as String?)?.toLowerCase() ?? 'push';
+      final listaEj = (r['ejercicios'] ?? r['exercises']) as List<dynamic>?;
+      if (listaEj != null) {
+        for (var item in listaEj) {
+          if (item is Map) {
+            _ejercicios.add(Map<String, dynamic>.from(item));
+          }
+        }
+      }
+    }
+  }
 
   // Imágenes por categoría (subí estas a Cloudinary también y reemplazá acá)
   static const _imagenesPorCategoria = {
@@ -80,39 +105,56 @@ class _AddRutinaPageState extends State<AddRutinaPage> {
     setState(() => _guardando = true);
 
     try {
-      final uid = FirebaseAuth.instance.currentUser!.uid;
+      final uid = widget.uid ?? FirebaseAuth.instance.currentUser!.uid;
       final profileId = await getPerfilActivoId(uid);
       if (profileId == null || profileId.isEmpty) {
         throw Exception('No hay perfil activo seleccionado.');
       }
 
-      await addRutina(
-        uid: uid,
-        profileId: profileId,
-        categoria: _categoria,
-        name: _nameCtrl.text.trim(),
-        description: _descCtrl.text.trim(),
-        image: _imagenesPorCategoria[_categoria] ?? '',
-        tiempo: _tiempoCtrl.text.trim(),
-        ejercicios: _ejercicios,
-      );
+      if (_esEdicion) {
+        final uidDoc = widget.rutinaParaEditar!['uid_doc'];
+        await updateRutina(
+          uid: uid,
+          profileId: profileId,
+          uidDoc: uidDoc,
+          name: _nameCtrl.text.trim(),
+          description: _descCtrl.text.trim(),
+          tiempo: _tiempoCtrl.text.trim(),
+          categoria: _categoria,
+          image: _imagenesPorCategoria[_categoria] ?? widget.rutinaParaEditar!['image'] ?? '',
+          ejercicios: _ejercicios,
+        );
+      } else {
+        await addRutina(
+          uid: uid,
+          profileId: profileId,
+          categoria: _categoria,
+          name: _nameCtrl.text.trim(),
+          description: _descCtrl.text.trim(),
+          image: _imagenesPorCategoria[_categoria] ?? '',
+          tiempo: _tiempoCtrl.text.trim(),
+          ejercicios: _ejercicios,
+        );
+      }
 
       // Verificamos que el widget siga montado antes de usar el contexto
       if (!mounted) return;
 
       // 1. Mostrar el Toast / SnackBar de éxito
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('¡Rutina guardada exitosamente!'),
+        SnackBar(
+          content: Text(_esEdicion
+              ? '¡Rutina actualizada exitosamente!'
+              : '¡Rutina guardada exitosamente!'),
           backgroundColor: Colors.green,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         ),
       );
 
       // 2. Volver al home o pantalla anterior de forma segura
       // Si hay pantallas previas en el historial, hacemos pop:
       if (Navigator.canPop(context)) {
-        Navigator.pop(context);
+        Navigator.pop(context, true);
       } else {
         // Si no hay historial (es la raíz), redirigimos al home (ajustá '/home' a la ruta de tu pantalla principal)
         Navigator.pushAndRemoveUntil(
@@ -141,13 +183,13 @@ class _AddRutinaPageState extends State<AddRutinaPage> {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-    final usuario = widget.uid;
+
     return Scaffold(
       backgroundColor: colors.surface,
       appBar: AppBar(
         backgroundColor: colors.surface,
         elevation: 0,
-        title: const Text('Crear nueva rutina'),
+        title: Text(_esEdicion ? 'Editar rutina' : 'Crear nueva rutina'),
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 16),
@@ -157,7 +199,7 @@ class _AddRutinaPageState extends State<AddRutinaPage> {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
-              'Borrador',
+              _esEdicion ? 'Edición' : 'Borrador',
               style: TextStyle(color: colors.onSurface, fontSize: 13),
             ),
           ),
@@ -320,9 +362,12 @@ class _AddRutinaPageState extends State<AddRutinaPage> {
                     width: 22,
                     child: CircularProgressIndicator(color: Colors.white),
                   )
-                : const Text(
-                    'Save Routine',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                : Text(
+                    _esEdicion ? 'Actualizar Rutina' : 'Save Routine',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
           ),
           const SizedBox(height: 40),
