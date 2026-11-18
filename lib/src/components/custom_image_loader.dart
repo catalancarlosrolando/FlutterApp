@@ -24,7 +24,7 @@ class CustomImageLoader extends StatelessWidget {
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(borderRadius),
-      child: Image.asset(
+      child: Image.network(
         imagePath,
         height: height,
         width: width,

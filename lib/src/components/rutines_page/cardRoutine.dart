@@ -10,6 +10,7 @@ class CardRoutine extends StatelessWidget {
   final String image;
   final String time;
   final String exercisesCount;
+  final bool finalizada;
   final VoidCallback onTap;
 
   const CardRoutine({
@@ -19,6 +20,7 @@ class CardRoutine extends StatelessWidget {
     required this.time,
     required this.exercisesCount,
     required this.image,
+    this.finalizada = false,
     required this.onTap,
   });
 
@@ -34,7 +36,10 @@ class CardRoutine extends StatelessWidget {
         decoration: BoxDecoration(
           color: colors.surfaceContainer,
           borderRadius: BorderRadius.circular(10.0),
-          border: Border.all(color: colors.outline),
+          border: Border.all(
+            color: finalizada ? Colors.green : colors.outline,
+            width: finalizada ? 1.5 : 1.0,
+          ),
         ),
         child: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -43,14 +48,63 @@ class CardRoutine extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: .start,
             children: [
-              CustomImageLoader(imagePath: image),
+              Stack(
+                children: [
+                  CustomImageLoader(imagePath: image),
+                  if (finalizada)
+                    Positioned(
+                      top: 4,
+                      right: 4,
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: const BoxDecoration(
+                          color: Colors.green,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.check,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
               Flexible(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   spacing: 8,
                   children: [
-                    TextCard(text: rutinaName, fontWeight: FontWeight.bold),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextCard(
+                            text: rutinaName,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        if (finalizada)
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 2,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.green.withAlpha(40),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: const Text(
+                              'Realizada',
+                              style: TextStyle(
+                                color: Colors.green,
+                                fontSize: 11,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
                     TextCard(text: descripcion),
                   ],
                 ),

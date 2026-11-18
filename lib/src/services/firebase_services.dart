@@ -270,7 +270,20 @@ Future<void> updateRutina({
   required String name,
   required String description,
   required String tiempo,
+  String? categoria,
+  String? image,
+  List<Map<String, dynamic>>? ejercicios,
 }) async {
+  final Map<String, dynamic> data = {
+    'name': name,
+    'description': description,
+    'tiempo': tiempo,
+    'updatedAt': FieldValue.serverTimestamp(),
+  };
+  if (categoria != null) data['categoria'] = categoria;
+  if (image != null) data['image'] = image;
+  if (ejercicios != null) data['ejercicios'] = ejercicios;
+
   await _db
       .collection('usuarios')
       .doc(uid)
@@ -278,11 +291,7 @@ Future<void> updateRutina({
       .doc(profileId)
       .collection('rutinas')
       .doc(uidDoc)
-      .set({
-    'name': name,
-    'description': description,
-    'tiempo': tiempo,
-  }, SetOptions(merge: true));
+      .set(data, SetOptions(merge: true));
 }
 
 Future<void> borrarRutina({
