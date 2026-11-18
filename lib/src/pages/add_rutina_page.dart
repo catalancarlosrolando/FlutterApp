@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application/src/pages/add_exercise_page.dart';
-import 'package:flutter_application/src/pages/home_page.dart';
 
 import 'package:flutter_application/src/services/firebase_services.dart';
 
@@ -22,8 +21,14 @@ import 'package:flutter_application/src/services/firebase_services.dart';
 class AddRutinaPage extends StatefulWidget {
   final String? uid;
   final Map<String, dynamic>? rutinaParaEditar;
+  final VoidCallback? onRutinaCreada;
 
-  const AddRutinaPage({super.key, this.uid, this.rutinaParaEditar});
+  const AddRutinaPage({
+    super.key,
+    this.uid,
+    this.rutinaParaEditar,
+    this.onRutinaCreada,
+  });
 
   @override
   State<AddRutinaPage> createState() => _AddRutinaPageState();
@@ -96,6 +101,30 @@ class _AddRutinaPageState extends State<AddRutinaPage> {
     }
   }
 
+  Future<void> _editarEjercicio(int index) async {
+    final ejercicioEditado = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AddExercisePage(
+          ejercicioParaEditar: _ejercicios[index],
+        ),
+      ),
+    );
+    if (ejercicioEditado != null && ejercicioEditado is Map<String, dynamic>) {
+      setState(() {
+        _ejercicios[index] = ejercicioEditado;
+      });
+    }
+  }
+
+  void _limpiarFormulario() {
+    _nameCtrl.clear();
+    _descCtrl.clear();
+    _tiempoCtrl.text = '45 Minutos';
+    _categoria = 'push';
+    _ejercicios.clear();
+  }
+
   void _quitarEjercicio(int i) {
     setState(() => _ejercicios.removeAt(i));
   }
@@ -156,20 +185,17 @@ class _AddRutinaPageState extends State<AddRutinaPage> {
         ),
       );
 
-      // 2. Volver al home o pantalla anterior de forma segura
-      // Si hay pantallas previas en el historial, hacemos pop:
-      if (Navigator.canPop(context)) {
-        Navigator.pop(context, true);
+      // 2. Gestionar navegación o reseteo
+      if (_esEdicion) {
+        if (Navigator.canPop(context)) {
+          Navigator.pop(context, true);
+        }
       } else {
-        // Si no hay historial (es la raíz), redirigimos al home (ajustá '/home' a la ruta de tu pantalla principal)
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) =>
-                HomePage(uid: uid), // 👈 Sin 'const' y enviando el uid
-          ),
-          (route) => false, // Limpia el historial para que no pueda volver con ' atrás' al formulario vacío
-        );
+        setState(() {
+          _guardando = false;
+          _limpiarFormulario();
+        });
+        widget.onRutinaCreada?.call();
       }
     } catch (e) {
       // Si ocurre un error, sí detenemos el estado de carga y mostramos el error en pantalla
@@ -301,6 +327,7 @@ class _AddRutinaPageState extends State<AddRutinaPage> {
               final e = entry.value;
               return _EjercicioCard(
                 ejercicio: e,
+                onEditar: () => _editarEjercicio(i),
                 onQuitar: () => _quitarEjercicio(i),
               );
             }),
@@ -386,7 +413,7 @@ class _AddRutinaPageState extends State<AddRutinaPage> {
       {'key': 'push', 'label': 'Push'},
       {'key': 'pull', 'label': 'Pull'},
       {'key': 'legs', 'label': 'Legs'},
-      {'key': 'core', 'label': 'Upper'},
+      {'key': 'core', 'label': 'Core'},
     ];
     return Container(
       decoration: BoxDecoration(
@@ -429,9 +456,14 @@ class _AddRutinaPageState extends State<AddRutinaPage> {
 /// Card de un ejercicio ya agregado a la rutina (memoria).
 class _EjercicioCard extends StatelessWidget {
   final Map<String, dynamic> ejercicio;
+  final VoidCallback onEditar;
   final VoidCallback onQuitar;
 
-  const _EjercicioCard({required this.ejercicio, required this.onQuitar});
+  const _EjercicioCard({
+    required this.ejercicio,
+    required this.onEditar,
+    required this.onQuitar,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -440,68 +472,78 @@ class _EjercicioCard extends StatelessWidget {
       color: colors.surfaceContainerHigh,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       margin: const EdgeInsets.only(bottom: 12),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Row(
-          children: [
-            // Imagen (URL Cloudinary, cargada con Image.network)
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: SizedBox(
-                width: 64,
-                height: 64,
-                child: (ejercicio['image'] as String?)?.isNotEmpty == true
-                    ? Image.network(
-                        ejercicio['image'],
-                        fit: BoxFit.cover,
-                        errorBuilder: (_, __, ___) => Container(
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: onEditar,
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Row(
+            children: [
+              // Imagen (URL Cloudinary, cargada con Image.network)
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: SizedBox(
+                  width: 64,
+                  height: 64,
+                  child: (ejercicio['image'] as String?)?.isNotEmpty == true
+                      ? Image.network(
+                          ejercicio['image'],
+                          fit: BoxFit.cover,
+                          errorBuilder: (_, __, ___) => Container(
+                            color: colors.surfaceContainerHighest,
+                            child: Icon(
+                              Icons.fitness_center,
+                              color: colors.onSurfaceVariant,
+                            ),
+                          ),
+                        )
+                      : Container(
                           color: colors.surfaceContainerHighest,
                           child: Icon(
                             Icons.fitness_center,
                             color: colors.onSurfaceVariant,
                           ),
                         ),
-                      )
-                    : Container(
-                        color: colors.surfaceContainerHighest,
-                        child: Icon(
-                          Icons.fitness_center,
-                          color: colors.onSurfaceVariant,
-                        ),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      ejercicio['name'] ?? '',
+                      style: TextStyle(
+                        color: colors.onSurface,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
                       ),
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    ejercicio['name'] ?? '',
-                    style: TextStyle(
-                      color: colors.onSurface,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
                     ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    '${ejercicio['series']} series · ${ejercicio['reps']} reps\n'
-                    '${ejercicio['peso']} · descanso ${ejercicio['descanso']}',
-                    style: TextStyle(
-                      color: colors.onSurfaceVariant,
-                      fontSize: 12,
-                      height: 1.4,
+                    const SizedBox(height: 4),
+                    Text(
+                      '${ejercicio['series']} series · ${ejercicio['reps']} reps\n'
+                      '${ejercicio['peso']} · descanso ${ejercicio['descanso']}',
+                      style: TextStyle(
+                        color: colors.onSurfaceVariant,
+                        fontSize: 12,
+                        height: 1.4,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            IconButton(
-              icon: Icon(Icons.delete_outline, color: colors.error),
-              onPressed: onQuitar,
-            ),
-          ],
+              IconButton(
+                icon: Icon(Icons.edit_outlined, color: colors.primary),
+                tooltip: 'Editar ejercicio',
+                onPressed: onEditar,
+              ),
+              IconButton(
+                icon: Icon(Icons.delete_outline, color: colors.error),
+                tooltip: 'Eliminar ejercicio',
+                onPressed: onQuitar,
+              ),
+            ],
+          ),
         ),
       ),
     );

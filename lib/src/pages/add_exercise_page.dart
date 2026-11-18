@@ -6,6 +6,7 @@ import 'package:flutter_application/src/components/add_ejercicio/ejercicio_confi
 import 'package:flutter_application/src/components/add_ejercicio/ejercicio_dropdown_catalog.dart';
 import 'package:flutter_application/src/components/add_ejercicio/ejercicio_preview_image.dart';
 import 'package:flutter_application/src/components/add_ejercicio/qr_scanner_modal.dart';
+import 'package:flutter_application/src/components/buttonBlack.dart';
 
 /// Pantalla "Configurar ejercicio".
 ///
@@ -25,7 +26,9 @@ import 'package:flutter_application/src/components/add_ejercicio/qr_scanner_moda
 ///
 /// Al presionar "+ Add", retorna el ejercicio configurado via Navigator.pop(context, ejercicio).
 class AddExercisePage extends StatefulWidget {
-  const AddExercisePage({super.key});
+  final Map<String, dynamic>? ejercicioParaEditar;
+
+  const AddExercisePage({super.key, this.ejercicioParaEditar});
 
   @override
   State<AddExercisePage> createState() => _AddExercisePageState();
@@ -36,11 +39,45 @@ class _AddExercisePageState extends State<AddExercisePage> {
   Map<String, dynamic>? _ejercicio;
 
   // Controladores y estados editables
-  final _seriesCtrl = TextEditingController(text: '4');
-  final _repsCtrl = TextEditingController(text: '10-12');
-  final _pesoCtrl = TextEditingController(text: '80');
+  late final TextEditingController _seriesCtrl;
+  late final TextEditingController _repsCtrl;
+  late final TextEditingController _pesoCtrl;
   String _pesoUnit = 'kg';
   String _descanso = '90 seg';
+
+  bool get _esEdicion => widget.ejercicioParaEditar != null;
+
+  @override
+  void initState() {
+    super.initState();
+    final edit = widget.ejercicioParaEditar;
+    if (edit != null) {
+      _ejercicio = Map<String, dynamic>.from(edit);
+      _seriesCtrl = TextEditingController(
+        text: edit['series']?.toString() ?? '4',
+      );
+      _repsCtrl = TextEditingController(
+        text: edit['reps']?.toString() ?? '10-12',
+      );
+
+      final pStr = edit['peso']?.toString() ?? '80 kg';
+      final partes = pStr.trim().split(' ');
+      _pesoCtrl = TextEditingController(
+        text: partes.isNotEmpty ? partes.first : '80',
+      );
+      if (partes.length > 1 && (partes[1] == 'lbs' || partes[1] == 'kg')) {
+        _pesoUnit = partes[1];
+      }
+
+      if (edit['descanso'] != null) {
+        _descanso = edit['descanso'].toString();
+      }
+    } else {
+      _seriesCtrl = TextEditingController(text: '4');
+      _repsCtrl = TextEditingController(text: '10-12');
+      _pesoCtrl = TextEditingController(text: '80');
+    }
+  }
 
   @override
   void dispose() {
@@ -155,7 +192,7 @@ class _AddExercisePageState extends State<AddExercisePage> {
       appBar: AppBar(
         backgroundColor: colors.surface,
         elevation: 0,
-        title: const Text('Configurar ejercicio'),
+        title: Text(_esEdicion ? 'Editar ejercicio' : 'Configurar ejercicio'),
       ),
       body: ListView(
         padding: const EdgeInsets.all(20),
@@ -296,32 +333,21 @@ class _AddExercisePageState extends State<AddExercisePage> {
           Row(
             children: [
               Expanded(
-                child: OutlinedButton(
+                child: BotonBlack(
+                  text: 'Cancelar',
+                  iconEnable: false,
+                  icon: Icons.cancel,
                   onPressed: _cancelar,
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text('Cancelar', style: TextStyle(fontSize: 16)),
                 ),
               ),
               const SizedBox(width: 12),
               Expanded(
-                child: FilledButton.icon(
+                child: BotonBlack(
+                  text: _esEdicion ? 'Guardar' : 'Agregar',
+                  iconEnable: true,
+                  success: true,
+                  icon: _esEdicion ? Icons.check : Icons.add,
                   onPressed: _agregar,
-                  style: FilledButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  icon: const Icon(Icons.add),
-                  label: const Text(
-                    'Add',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
                 ),
               ),
             ],

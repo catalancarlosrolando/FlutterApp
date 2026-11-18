@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/src/components/exercise_live/dialogs/exercise_live_dialogs.dart';
 import 'package:flutter_application/src/components/exercise_live/exercise_details_expansion_card.dart';
 import 'package:flutter_application/src/components/exercise_live/exercise_sets_table.dart';
-import 'package:flutter_application/src/components/exercise_live/plate_calculator_dialog.dart';
 import 'package:flutter_application/src/components/exercise_live/rest_timer_card.dart';
 import 'package:flutter_application/src/components/exercise_live/workout_live_header.dart';
 import 'package:flutter_application/src/components/exercise_live/workout_set_model.dart';
@@ -141,22 +140,6 @@ class _ExerciseLivePageState extends State<ExerciseLivePage> {
     });
   }
 
-  Future<void> _openPlateCalculator() async {
-    final activeSet = _sets.firstWhere(
-      (s) => s.isActive,
-      orElse: () => _sets.first,
-    );
-
-    final appliedWeight = await PlateCalculatorDialog.show(
-      context,
-      initialWeight: activeSet.weight,
-    );
-
-    if (appliedWeight != null && mounted) {
-      setState(() => activeSet.weight = appliedWeight);
-    }
-  }
-
   Future<void> _editWeight(int index) async {
     final newWeight = await EditWeightDialog.show(
       context,
@@ -269,9 +252,6 @@ class _ExerciseLivePageState extends State<ExerciseLivePage> {
               ExerciseSetsTable(
                 exerciseName: '1. $exerciseName',
                 exerciseSubtitle: '${_sets.length} series • ${exercise['reps'] ?? "10-12"} reps • Descanso $exerciseDescanso',
-                accessoryButtonText: 'Discos',
-                accessoryIcon: Icons.calculate_outlined,
-                onAccessoryPressed: _openPlateCalculator,
                 sets: _sets,
                 onToggleSet: _handleToggleSet,
                 onTapWeight: _editWeight,

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 class ExerciseTableHeader extends StatelessWidget {
   final String exerciseName;
   final String exerciseSubtitle;
-  final String accessoryButtonText;
   final IconData accessoryIcon;
   final VoidCallback? onAccessoryPressed;
 
@@ -12,7 +11,6 @@ class ExerciseTableHeader extends StatelessWidget {
     super.key,
     required this.exerciseName,
     required this.exerciseSubtitle,
-    this.accessoryButtonText = 'Discos',
     this.accessoryIcon = Icons.calculate_outlined,
     this.onAccessoryPressed,
   });
@@ -52,41 +50,6 @@ class ExerciseTableHeader extends StatelessWidget {
                 ),
               ),
             ],
-          ),
-        ),
-        const SizedBox(width: 8),
-        InkWell(
-          onTap: onAccessoryPressed,
-          borderRadius: BorderRadius.circular(6),
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
-            decoration: BoxDecoration(
-              color: colors.surfaceContainerHigh,
-              borderRadius: BorderRadius.circular(6),
-              border: Border.all(
-                color: colors.outlineVariant,
-                width: 1,
-              ),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  accessoryIcon,
-                  size: 14,
-                  color: colors.onSurface,
-                ),
-                const SizedBox(width: 6),
-                Text(
-                  accessoryButtonText,
-                  style: TextStyle(
-                    color: colors.onSurface,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-            ),
           ),
         ),
       ],

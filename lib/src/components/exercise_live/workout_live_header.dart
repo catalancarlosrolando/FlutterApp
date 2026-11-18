@@ -74,7 +74,7 @@ class WorkoutLiveHeader extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: isWorkoutActive
-                            ? colors.primary
+                            ? colors.tertiary
                             : colors.onSurfaceVariant,
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
@@ -115,7 +115,9 @@ class WorkoutLiveHeader extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(
-                  isWorkoutActive ? Icons.stop_circle_outlined : Icons.play_arrow,
+                  isWorkoutActive
+                      ? Icons.stop_circle_outlined
+                      : Icons.play_arrow,
                   size: 16,
                   color: isWorkoutActive ? colors.onError : colors.onPrimary,
                 ),
