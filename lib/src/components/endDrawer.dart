@@ -88,10 +88,10 @@ class _MyEndDrawerState extends State<MyEndDrawer> {
             // 3. Opción al pie (ej. Cerrar sesión)
             const Divider(height: 1),
             ListTile(
-              leading: const Icon(Icons.logout, color: Colors.redAccent),
-              title: const Text(
+              leading: Icon(Icons.logout, color: colors.error),
+              title: Text(
                 'Cerrar sesión',
-                style: TextStyle(color: Colors.redAccent),
+                style: TextStyle(color: colors.error),
               ),
               onTap: () {
                 Navigator.pop(context);

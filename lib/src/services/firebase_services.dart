@@ -1,111 +1,170 @@
 // firebase_services.dart — Patrón cátedra: funciones sueltas.
 //
 // Colecciones:
-//   usuarios/{uid}     → { nombre, email, rutinas: [ids] }
-//   rutinas/{id}       → { uid, categoria, name, description, image, tiempo,
-//                         finalizada: bool, ejercicios: [...] }
-//   ejercicios/{id}    → { id, name, image (URL Cloudinary), tiempo, description }
+//   usuarios/{uid}                                  → { nombre, email, defaultProfileId }
+//   usuarios/{uid}/perfiles/{profileId}             → { nombre, createdAt }
+//   usuarios/{uid}/perfiles/{profileId}/rutinas/{id} → { categoria, name, description, image, tiempo, finalizada, ejercicios: [...] }
+//   ejercicios/{id}                                 → { id, name, image (URL Cloudinary), tiempo, description }
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-// ===================== USUARIOS =====================
+final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-/// Crea el documento del usuario al iniciar sesión con Google por primera vez.
-/// Usa el uid de Firebase Auth como id del documento.
-import 'package:cloud_firestore/cloud_firestore.dart';
+// ===================== USUARIOS Y PERFILES =====================
 
-final _db = FirebaseFirestore.instance;
-
-// PASO 1, 2 y 3: Login + Crear doc + Perfil default
-Future<String> asegurarUsuarioYPerfil({
+/// Flujo completo:
+/// 1. Si el usuario ya existe en Firestore, devuelve su defaultProfileId.
+/// 2. Si no existe, crea perfil inicial "Principal" en subcolección perfiles
+///    y guarda su id en defaultProfileId del usuario.
+Future<String> crearUsuario({
   required String uid,
   required String email,
   required String nombre,
   String photoUrl = '',
 }) async {
   final userRef = _db.collection('usuarios').doc(uid);
-  final userSnap = await userRef.get();
+  final snap = await userRef.get();
 
-  // Si ya existe, retornar perfil default guardado
-  if (userSnap.exists) {
-    return userSnap.data()?['defaultProfileId'] as String;
+  if (snap.exists) {
+    final data = snap.data();
+    final profileId = data?['defaultProfileId'] as String?;
+    if (profileId != null && profileId.isNotEmpty) {
+      return profileId;
+    }
   }
 
-  // Si no existe, crear perfil default primero
+  // Crear perfil predeterminado en subcolección
   final perfilRef = userRef.collection('perfiles').doc();
   await perfilRef.set({
     'nombre': 'Principal',
+    'image': photoUrl,
+    'descripcion': 'Perfil predeterminado',
     'createdAt': FieldValue.serverTimestamp(),
   });
 
-  // Crear usuario con defaultProfileId apuntando al nuevo perfil
+  // Guardar documento del usuario con su perfil activo
   await userRef.set({
     'nombre': nombre,
     'email': email,
     'photoUrl': photoUrl,
     'defaultProfileId': perfilRef.id,
     'createdAt': FieldValue.serverTimestamp(),
-  });
+  }, SetOptions(merge: true));
 
   return perfilRef.id;
 }
 
-// PASO 4: Cambiar perfil seleccionado
+/// Obtiene el defaultProfileId activo actual (Future).
+Future<String?> getPerfilActivoId(String uid) async {
+  final snap = await _db.collection('usuarios').doc(uid).get();
+  if (!snap.exists) return null;
+  return snap.data()?['defaultProfileId'] as String?;
+}
+
+/// Stream reactivo del profileId activo del usuario.
+Stream<String?> streamPerfilActivoId(String uid) {
+  return _db.collection('usuarios').doc(uid).snapshots().map((snap) {
+    if (!snap.exists) return null;
+    return snap.data()?['defaultProfileId'] as String?;
+  });
+}
+
+/// Stream con la lista de todos los perfiles creados por el usuario.
+Stream<List<Map<String, dynamic>>> streamPerfiles(String uid) {
+  return _db
+      .collection('usuarios')
+      .doc(uid)
+      .collection('perfiles')
+      .orderBy('createdAt', descending: false)
+      .snapshots()
+      .map((q) => q.docs.map((doc) => {'id': doc.id, ...doc.data()}).toList());
+}
+
+/// Crea un nuevo perfil en la subcolección del usuario.
+Future<String> crearNuevoPerfil(
+  String uid,
+  String nombrePerfil, {
+  String image = '',
+  String descripcion = '',
+}) async {
+  final ref = await _db
+      .collection('usuarios')
+      .doc(uid)
+      .collection('perfiles')
+      .add({
+    'nombre': nombrePerfil,
+    'image': image,
+    'descripcion': descripcion,
+    'createdAt': FieldValue.serverTimestamp(),
+  });
+  return ref.id;
+}
+
+/// Obtiene los datos del perfil activo.
+Future<Map<String, dynamic>?> getPerfil(String uid, String profileId) async {
+  final snap = await _db
+      .collection('usuarios')
+      .doc(uid)
+      .collection('perfiles')
+      .doc(profileId)
+      .get();
+  if (!snap.exists) return null;
+  return {'id': snap.id, ...snap.data()!};
+}
+
+/// Stream de los datos del perfil activo en tiempo real.
+Stream<Map<String, dynamic>?> streamPerfil(String uid, String profileId) {
+  return _db
+      .collection('usuarios')
+      .doc(uid)
+      .collection('perfiles')
+      .doc(profileId)
+      .snapshots()
+      .map((snap) => snap.exists ? {'id': snap.id, ...snap.data()!} : null);
+}
+
+/// Actualiza los datos de un perfil (nombre, imagen, descripción).
+Future<void> updatePerfil({
+  required String uid,
+  required String profileId,
+  required String nombre,
+  required String image,
+  required String descripcion,
+}) async {
+  await _db
+      .collection('usuarios')
+      .doc(uid)
+      .collection('perfiles')
+      .doc(profileId)
+      .set({
+    'nombre': nombre,
+    'image': image,
+    'descripcion': descripcion,
+    'updatedAt': FieldValue.serverTimestamp(),
+  }, SetOptions(merge: true));
+}
+
+/// Cambia el perfil activo del usuario.
 Future<void> cambiarPerfilActivo(String uid, String profileId) async {
   await _db.collection('usuarios').doc(uid).update({
     'defaultProfileId': profileId,
   });
 }
 
-// PASO 5: Cargar rutinas del perfil seleccionado (con sus ejercicios)
-Stream<List<Map<String, dynamic>>> streamRutinasDelPerfil({
-  required String uid,
-  required String profileId,
-}) {
+// ===================== RUTINAS — STREAMS =====================
+
+/// Stream reactivo de las rutinas del perfil, agrupadas por categoría.
+/// Devuelve un map: { 'push': [...], 'pull': [...], 'legs': [...], 'core': [...] }
+Stream<Map<String, List>> streamRutinasPorCategoria(
+  String uid,
+  String profileId,
+) {
   return _db
       .collection('usuarios')
       .doc(uid)
       .collection('perfiles')
       .doc(profileId)
       .collection('rutinas')
-      .snapshots()
-      .map(
-        (snapshot) => snapshot.docs.map((doc) {
-          final data = doc.data();
-          return {
-            'id': doc.id,
-            ...data,
-            // 'ejercicios' ya viene como List en cada doc de rutina
-            'ejercicios': List<Map<String, dynamic>>.from(
-              data['ejercicios'] ?? [],
-            ),
-          };
-        }).toList(),
-      );
-}
-
-/// Agrega el id de una rutina al array `rutinas` del usuario.
-Future<void> agregarRutinaAUsuario(String uid, String rutinaId) async {
-  await FirebaseFirestore.instance.collection('usuarios').doc(uid).update({
-    'rutinas': FieldValue.arrayUnion([rutinaId]),
-  });
-}
-
-/// Quita el id de una rutina del array del usuario.
-Future<void> quitarRutinaDeUsuario(String uid, String rutinaId) async {
-  await FirebaseFirestore.instance.collection('usuarios').doc(uid).update({
-    'rutinas': FieldValue.arrayRemove([rutinaId]),
-  });
-}
-
-// ===================== RUTINAS — STREAMS =====================
-
-/// Stream reactivo de las rutinas del usuario, agrupadas por categoría.
-/// Devuelve un map: { 'push': [...], 'pull': [...], 'legs': [...], 'core': [...] }
-Stream<Map<String, List>> streamRutinasPorCategoria(String uid) {
-  return FirebaseFirestore.instance
-      .collection('rutinas')
-      .where('uid', isEqualTo: uid)
       .snapshots()
       .map((query) {
         final out = <String, List>{
@@ -124,23 +183,33 @@ Stream<Map<String, List>> streamRutinasPorCategoria(String uid) {
       });
 }
 
-/// Stream reactivo de TODAS las rutinas del usuario (lista plana).
-Stream<List<Map<String, dynamic>>> streamRutinas(String uid) {
-  return FirebaseFirestore.instance
+/// Stream reactivo de TODAS las rutinas del perfil (lista plana).
+Stream<List<Map<String, dynamic>>> streamRutinas(
+  String uid,
+  String profileId,
+) {
+  return _db
+      .collection('usuarios')
+      .doc(uid)
+      .collection('perfiles')
+      .doc(profileId)
       .collection('rutinas')
-      .where('uid', isEqualTo: uid)
       .orderBy('createdAt', descending: true)
       .snapshots()
       .map((q) => q.docs.map(_rutinaFromDoc).toList());
 }
 
-/// Stream de la próxima rutina NO finalizada del usuario.
-/// Devuelve null si todas están finalizadas o si no hay rutinas.
-/// Útil para mostrar "la rutina siguiente" en la home.
-Stream<Map<String, dynamic>?> streamProximaRutina(String uid) {
-  return FirebaseFirestore.instance
+/// Stream de la próxima rutina NO finalizada del perfil.
+Stream<Map<String, dynamic>?> streamProximaRutina(
+  String uid,
+  String profileId,
+) {
+  return _db
+      .collection('usuarios')
+      .doc(uid)
+      .collection('perfiles')
+      .doc(profileId)
       .collection('rutinas')
-      .where('uid', isEqualTo: uid)
       .where('finalizada', isEqualTo: false)
       .orderBy('createdAt')
       .limit(1)
@@ -152,7 +221,6 @@ Map<String, dynamic> _rutinaFromDoc(DocumentSnapshot doc) {
   final data = doc.data() as Map<String, dynamic>;
   return {
     'uid_doc': doc.id,
-    'uid': data['uid'] ?? '',
     'categoria': data['categoria'] ?? 'push',
     'name': data['name'] ?? '',
     'description': data['description'] ?? '',
@@ -165,10 +233,10 @@ Map<String, dynamic> _rutinaFromDoc(DocumentSnapshot doc) {
 
 // ===================== RUTINAS — ESCRITURA =====================
 
-/// Crea una rutina con los ejercicios ya configurados (o vacía) y la asocia al usuario.
-/// Devuelve el id del doc creado.
+/// Crea una rutina con ejercicios dentro del perfil activo.
 Future<String> addRutina({
   required String uid,
+  required String profileId,
   required String categoria,
   required String name,
   required String description,
@@ -176,51 +244,94 @@ Future<String> addRutina({
   required String tiempo,
   List<Map<String, dynamic>> ejercicios = const [],
 }) async {
-  final ref = await FirebaseFirestore.instance.collection('rutinas').add({
-    'uid': uid,
+  final ref = await _db
+      .collection('usuarios')
+      .doc(uid)
+      .collection('perfiles')
+      .doc(profileId)
+      .collection('rutinas')
+      .add({
     'categoria': categoria,
     'name': name,
     'description': description,
     'image': image,
     'tiempo': tiempo,
-    'finalizada': false, // NUEVO CAMPO
+    'finalizada': false,
     'ejercicios': ejercicios,
     'createdAt': FieldValue.serverTimestamp(),
   });
-  await agregarRutinaAUsuario(uid, ref.id);
   return ref.id;
 }
 
 Future<void> updateRutina({
+  required String uid,
+  required String profileId,
   required String uidDoc,
   required String name,
   required String description,
   required String tiempo,
 }) async {
-  await FirebaseFirestore.instance.collection('rutinas').doc(uidDoc).set({
+  await _db
+      .collection('usuarios')
+      .doc(uid)
+      .collection('perfiles')
+      .doc(profileId)
+      .collection('rutinas')
+      .doc(uidDoc)
+      .set({
     'name': name,
     'description': description,
     'tiempo': tiempo,
   }, SetOptions(merge: true));
 }
 
-Future<void> borrarRutina(String uid, String uidDoc) async {
-  await FirebaseFirestore.instance.collection('rutinas').doc(uidDoc).delete();
-  await quitarRutinaDeUsuario(uid, uidDoc);
+Future<void> borrarRutina({
+  required String uid,
+  required String profileId,
+  required String uidDoc,
+}) async {
+  await _db
+      .collection('usuarios')
+      .doc(uid)
+      .collection('perfiles')
+      .doc(profileId)
+      .collection('rutinas')
+      .doc(uidDoc)
+      .delete();
 }
 
 /// Marca (o desmarca) una rutina como finalizada.
-Future<void> setRutinaFinalizada(String uidDoc, bool finalizada) async {
-  await FirebaseFirestore.instance.collection('rutinas').doc(uidDoc).update({
+Future<void> setRutinaFinalizada({
+  required String uid,
+  required String profileId,
+  required String uidDoc,
+  required bool finalizada,
+}) async {
+  await _db
+      .collection('usuarios')
+      .doc(uid)
+      .collection('perfiles')
+      .doc(profileId)
+      .collection('rutinas')
+      .doc(uidDoc)
+      .update({
     'finalizada': finalizada,
   });
 }
 
 // ===================== EJERCICIOS DE UNA RUTINA =====================
 
-/// Stream reactivo de los ejercicios de una rutina (como array del doc).
-Stream<List<Map<String, dynamic>>> streamEjerciciosDeRutina(String rutinaId) {
-  return FirebaseFirestore.instance
+/// Stream reactivo de los ejercicios de una rutina del perfil.
+Stream<List<Map<String, dynamic>>> streamEjerciciosDeRutina({
+  required String uid,
+  required String profileId,
+  required String rutinaId,
+}) {
+  return _db
+      .collection('usuarios')
+      .doc(uid)
+      .collection('perfiles')
+      .doc(profileId)
       .collection('rutinas')
       .doc(rutinaId)
       .snapshots()
@@ -231,22 +342,38 @@ Stream<List<Map<String, dynamic>>> streamEjerciciosDeRutina(String rutinaId) {
       });
 }
 
-/// Añade un ejercicio (ya con series/reps/peso/descanso definidos) al array
-/// `ejercicios` de la rutina.
+/// Añade un ejercicio a una rutina del perfil.
 Future<void> addEjercicioARutina({
+  required String uid,
+  required String profileId,
   required String rutinaId,
   required Map<String, dynamic> ejercicio,
 }) async {
-  await FirebaseFirestore.instance.collection('rutinas').doc(rutinaId).update({
+  await _db
+      .collection('usuarios')
+      .doc(uid)
+      .collection('perfiles')
+      .doc(profileId)
+      .collection('rutinas')
+      .doc(rutinaId)
+      .update({
     'ejercicios': FieldValue.arrayUnion([ejercicio]),
   });
 }
 
-Future<void> borrarEjercicioDeRutina(
-  String rutinaId,
-  String ejercicioId,
-) async {
-  final docRef = FirebaseFirestore.instance.collection('rutinas').doc(rutinaId);
+Future<void> borrarEjercicioDeRutina({
+  required String uid,
+  required String profileId,
+  required String rutinaId,
+  required String ejercicioId,
+}) async {
+  final docRef = _db
+      .collection('usuarios')
+      .doc(uid)
+      .collection('perfiles')
+      .doc(profileId)
+      .collection('rutinas')
+      .doc(rutinaId);
   final snap = await docRef.get();
   final data = snap.data() ?? {};
   final ejercicios = List.from(data['ejercicios'] ?? []);
@@ -258,7 +385,7 @@ Future<void> borrarEjercicioDeRutina(
 
 /// Stream del catálogo compartido (todos los ejercicios disponibles).
 Stream<List<Map<String, dynamic>>> streamCatalogoEjercicios() {
-  return FirebaseFirestore.instance
+  return _db
       .collection('ejercicios')
       .orderBy('name')
       .snapshots()
@@ -278,10 +405,7 @@ Stream<List<Map<String, dynamic>>> streamCatalogoEjercicios() {
 
 /// Lista única (Future) del catálogo — útil para diálogos.
 Future<List<Map<String, dynamic>>> getCatalogoEjercicios() async {
-  final query = await FirebaseFirestore.instance
-      .collection('ejercicios')
-      .orderBy('name')
-      .get();
+  final query = await _db.collection('ejercicios').orderBy('name').get();
   return query.docs.map((doc) {
     final data = doc.data();
     return {

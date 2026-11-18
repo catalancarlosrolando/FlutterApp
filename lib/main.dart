@@ -3,15 +3,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application/src/pages/MainNavigationPage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_application/src/theme/color_sheme.dart';
 
 import 'firebase_options.dart';
 
 // Ajustá los imports a tu estructura de paquetes
 import 'package:flutter_application/src/pages/login_page.dart';
-import 'package:flutter_application/src/pages/home_page.dart';
-import 'package:flutter_application/src/pages/add_rutina_page.dart';
 import 'package:flutter_application/src/pages/add_ejercicio_page.dart';
 
 void main() async {
@@ -40,7 +38,6 @@ class FitAccessApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const brandColor = Color(0xFF2563EB);
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: themeNotifier,
       builder: (context, currentMode, child) {
@@ -50,30 +47,15 @@ class FitAccessApp extends StatelessWidget {
           // Tema Claro
           theme: ThemeData(
             useMaterial3: true,
-            colorScheme:
-                ColorScheme.fromSeed(
-                  seedColor: brandColor,
-                  brightness: Brightness.light,
-                ).copyWith(
-                  primary: brandColor, // azul exacto
-                ),
+            colorScheme: lightColorScheme,
             textTheme: GoogleFonts.nunitoTextTheme(),
-            scaffoldBackgroundColor:
-                Colors.grey[300], // Color de fondo para el tema claro
           ),
 
           // Tema Oscuro
           darkTheme: ThemeData(
             useMaterial3: true,
-            colorScheme:
-                ColorScheme.fromSeed(
-                  seedColor: brandColor,
-                  brightness: Brightness.dark,
-                ).copyWith(
-                  primary: brandColor, // Mantiene mi branColor
-                ),
+            colorScheme: darkColorScheme,
             textTheme: GoogleFonts.nunitoTextTheme(),
-            scaffoldBackgroundColor: Colors.black,
           ),
 
           themeMode: currentMode,

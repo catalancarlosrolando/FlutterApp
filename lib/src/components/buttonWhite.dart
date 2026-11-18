@@ -15,17 +15,17 @@ class BotonWhite extends StatelessWidget {
     return TextButton.icon(
       style: TextButton.styleFrom(
         minimumSize: const Size(double.infinity, 48.0),
-        backgroundColor: colors.onSurface,
+        backgroundColor: colors.primary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       ),
       onPressed: () => _goToLandingPage(context),
-      icon: iconEnable ? Icon(Icons.arrow_forward, color: Colors.black) : null,
+      icon: iconEnable ? Icon(Icons.arrow_forward, color: colors.onPrimary) : null,
       label: Text(
         text,
         style: TextStyle(
           fontSize: 16.0,
           fontWeight: FontWeight.bold,
-          color: Colors.black,
+          color: colors.onPrimary,
         ),
       ),
     );
