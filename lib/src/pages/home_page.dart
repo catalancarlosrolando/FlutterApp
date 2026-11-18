@@ -368,9 +368,15 @@ class _RutinaCard extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 12),
-        ...ejercicios.map((e) => Padding(
+        ...ejercicios.asMap().entries.map((entry) => Padding(
               padding: const EdgeInsets.only(bottom: 12),
-              child: Exercise(exercise: Map<String, dynamic>.from(e)),
+              child: Exercise(
+                exercise: Map<String, dynamic>.from(entry.value),
+                uid: uid,
+                profileId: profileId,
+                rutinaId: rutina['uid_doc'],
+                exerciseIndex: entry.key,
+              ),
             )),
 
         const SizedBox(height: 32),

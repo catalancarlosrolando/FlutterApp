@@ -6,15 +6,24 @@ import 'package:flutter_application/src/components/exercise_live/exercise_sets_t
 import 'package:flutter_application/src/components/exercise_live/rest_timer_card.dart';
 import 'package:flutter_application/src/components/exercise_live/workout_live_header.dart';
 import 'package:flutter_application/src/components/exercise_live/workout_set_model.dart';
+import 'package:flutter_application/src/services/firebase_services.dart';
 
 /// Screen representing US-05 Modo Entrenamiento en Vivo y Rest Timer (Node ID: u5Scr)
 /// Clean, modular, and styled using Material 3 ColorScheme from Theme.of(context).colorScheme
 class ExerciseLivePage extends StatefulWidget {
   final Map<String, dynamic> exercise;
+  final String? uid;
+  final String? profileId;
+  final String? rutinaId;
+  final int? exerciseIndex;
 
   const ExerciseLivePage({
     super.key,
     required this.exercise,
+    this.uid,
+    this.profileId,
+    this.rutinaId,
+    this.exerciseIndex,
   });
 
   @override
@@ -63,6 +72,10 @@ class _ExerciseLivePageState extends State<ExerciseLivePage> {
   }
 
   void _startRestTimer() {
+    if (!_isWorkoutStarted) {
+      _startWorkout();
+    }
+
     _restTimer?.cancel();
     setState(() => _isRestRunning = true);
 
@@ -71,23 +84,157 @@ class _ExerciseLivePageState extends State<ExerciseLivePage> {
       if (_restSecondsRemaining > 0 && _isRestRunning) {
         setState(() => _restSecondsRemaining--);
       } else {
-        // Rest finished, reset clock back to initial rest time
-        setState(() {
-          _isRestRunning = false;
-          _restSecondsRemaining = _restTotalSeconds;
-        });
         timer.cancel();
+        _onRestCompletedOrCancelled();
       }
     });
   }
 
-  /// Si el usuario termina el descanso antes, el reloj vuelve atrás al tiempo inicial de descanso
-  void _resetOrSkipRest() {
-    _restTimer?.cancel();
+  /// Si el descanso termina o el usuario lo reinicia/cancela:
+  /// Se marca la serie activa como completada automáticamente y pasa a la siguiente.
+  void _onRestCompletedOrCancelled() {
     setState(() {
       _isRestRunning = false;
       _restSecondsRemaining = _restTotalSeconds;
+
+      // Marcar la serie que estaba activa como completada
+      final activeIndex = _sets.indexWhere((s) => s.isActive && !s.isCompleted);
+      final targetIndex = activeIndex != -1
+          ? activeIndex
+          : _sets.indexWhere((s) => !s.isCompleted);
+
+      if (targetIndex != -1) {
+        _sets[targetIndex].isCompleted = true;
+        _sets[targetIndex].isActive = false;
+
+        // Seleccionar la siguiente serie incompleta
+        final nextIndex = _sets.indexWhere((s) => !s.isCompleted);
+        if (nextIndex != -1) {
+          for (int i = 0; i < _sets.length; i++) {
+            _sets[i].isActive = (i == nextIndex);
+          }
+        }
+      }
     });
+
+    _checkAllSetsCompleted();
+  }
+
+  /// Si el usuario termina o reinicia el descanso antes
+  void _resetOrSkipRest() {
+    _restTimer?.cancel();
+    _onRestCompletedOrCancelled();
+  }
+
+  void _checkAllSetsCompleted() {
+    final allCompleted = _sets.every((s) => s.isCompleted);
+    if (allCompleted) {
+      _finalizarEjercicioCompleto();
+    }
+  }
+
+  Future<void> _finalizarEjercicioCompleto() async {
+    _workoutTimer?.cancel();
+    _restTimer?.cancel();
+
+    if (!mounted) return;
+
+    final canPersist = widget.uid != null &&
+        widget.profileId != null &&
+        widget.rutinaId != null;
+
+    final bool? guardarCambios = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) {
+        final colors = Theme.of(ctx).colorScheme;
+        return AlertDialog(
+          backgroundColor: colors.surfaceContainer,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          title: const Row(
+            children: [
+              Icon(Icons.check_circle, color: Colors.green, size: 28),
+              SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  '¡Ejercicio finalizado!',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
+          content: Text(
+            canPersist
+                ? 'Completaste todas las series con éxito. ¿Deseas guardar los cambios y nuevas series realizadas en tu rutina?'
+                : '¡Completaste todas las series con éxito!',
+            style: TextStyle(color: colors.onSurfaceVariant),
+          ),
+          actions: [
+            if (canPersist) ...[
+              TextButton(
+                onPressed: () => Navigator.pop(ctx, false),
+                child: const Text('Solo marcar completado'),
+              ),
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: colors.primary,
+                  foregroundColor: colors.onPrimary,
+                ),
+                onPressed: () => Navigator.pop(ctx, true),
+                icon: const Icon(Icons.save, size: 18),
+                label: const Text('Guardar cambios'),
+              ),
+            ] else
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: () => Navigator.pop(ctx, false),
+                child: const Text('Aceptar'),
+              ),
+          ],
+        );
+      },
+    );
+
+    if (guardarCambios != null) {
+      await _persistirFinalizacion(guardarCambios: guardarCambios);
+    }
+
+    if (mounted) {
+      Navigator.of(context).pop();
+    }
+  }
+
+  Future<void> _persistirFinalizacion({required bool guardarCambios}) async {
+    if (widget.uid == null || widget.profileId == null || widget.rutinaId == null) {
+      return;
+    }
+
+    final updatedExercise = Map<String, dynamic>.from(widget.exercise);
+    updatedExercise['finalizado'] = true;
+
+    if (guardarCambios) {
+      updatedExercise['series'] = _sets.length.toString();
+      if (_sets.isNotEmpty) {
+        final last = _sets.last;
+        updatedExercise['peso'] = '${last.weight.toStringAsFixed(1)} kg';
+        updatedExercise['reps'] = last.reps.toString();
+      }
+    }
+
+    try {
+      await updateEjercicioEnRutina(
+        uid: widget.uid!,
+        profileId: widget.profileId!,
+        rutinaId: widget.rutinaId!,
+        ejercicioActualizado: updatedExercise,
+        ejercicioIndex: widget.exerciseIndex,
+      );
+    } catch (e) {
+      debugPrint('Error al persistir ejercicio: $e');
+    }
   }
 
   void _adjustRestTime(int deltaSeconds) {
@@ -118,6 +265,8 @@ class _ExerciseLivePageState extends State<ExerciseLivePage> {
         current.isActive = true;
       }
     });
+
+    _checkAllSetsCompleted();
   }
 
   void _handleAddSet() {
@@ -172,10 +321,16 @@ class _ExerciseLivePageState extends State<ExerciseLivePage> {
       context,
       completedSets: _sets.where((s) => s.isCompleted).length,
       totalSets: _sets.length,
+      canSaveExerciseChanges: widget.uid != null,
     );
 
     if (confirmed == true && mounted) {
-      Navigator.of(context).pop();
+      final allDone = _sets.every((s) => s.isCompleted);
+      if (allDone) {
+        await _finalizarEjercicioCompleto();
+      } else {
+        Navigator.of(context).pop();
+      }
     }
   }
 

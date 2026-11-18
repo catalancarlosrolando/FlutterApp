@@ -110,6 +110,7 @@ class _AddExercisePageState extends State<AddExercisePage> {
             'image': decoded['image']?.toString() ?? '',
             'tiempo': decoded['tiempo']?.toString() ?? '15 Minutos',
             'description': decoded['description']?.toString() ?? '',
+            'finalizado': decoded['finalizado'] == true,
           };
 
           if (decoded['series'] != null) {
@@ -178,6 +179,7 @@ class _AddExercisePageState extends State<AddExercisePage> {
       'peso': '${_pesoCtrl.text.trim()} $_pesoUnit',
       'descanso': _descanso,
       'description': _ejercicio!['description'],
+      'finalizado': _ejercicio!['finalizado'] == true,
     };
 
     Navigator.pop(context, ejercicioFinal);

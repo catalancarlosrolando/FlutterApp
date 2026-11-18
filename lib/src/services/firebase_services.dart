@@ -402,6 +402,47 @@ Future<void> borrarEjercicioDeRutina({
   await docRef.update({'ejercicios': ejercicios});
 }
 
+/// Actualiza un ejercicio específico o la lista de ejercicios de una rutina,
+/// permitiendo modificar campos como finalizado, series, peso, reps, etc.
+Future<void> updateEjercicioEnRutina({
+  required String uid,
+  required String profileId,
+  required String rutinaId,
+  required Map<String, dynamic> ejercicioActualizado,
+  int? ejercicioIndex,
+}) async {
+  final docRef = _db
+      .collection('usuarios')
+      .doc(uid)
+      .collection('perfiles')
+      .doc(profileId)
+      .collection('rutinas')
+      .doc(rutinaId);
+  final snap = await docRef.get();
+  if (!snap.exists) return;
+  final data = snap.data() ?? {};
+  final ejercicios = List<Map<String, dynamic>>.from(
+    (data['ejercicios'] as List<dynamic>? ?? []).map(
+      (e) => Map<String, dynamic>.from(e as Map),
+    ),
+  );
+
+  int targetIndex = -1;
+  if (ejercicioIndex != null && ejercicioIndex >= 0 && ejercicioIndex < ejercicios.length) {
+    targetIndex = ejercicioIndex;
+  } else {
+    final ejId = ejercicioActualizado['id'];
+    if (ejId != null) {
+      targetIndex = ejercicios.indexWhere((e) => e['id'] == ejId);
+    }
+  }
+
+  if (targetIndex != -1) {
+    ejercicios[targetIndex] = ejercicioActualizado;
+    await docRef.update({'ejercicios': ejercicios});
+  }
+}
+
 // ===================== CATÁLOGO DE EJERCICIOS =====================
 
 /// Stream del catálogo compartido (todos los ejercicios disponibles).
@@ -419,6 +460,7 @@ Stream<List<Map<String, dynamic>>> streamCatalogoEjercicios() {
             'image': data['image'] ?? '',
             'tiempo': data['tiempo'] ?? '',
             'description': data['description'] ?? '',
+            'finalizado': false,
           };
         }).toList(),
       );
@@ -435,6 +477,7 @@ Future<List<Map<String, dynamic>>> getCatalogoEjercicios() async {
       'image': data['image'] ?? '',
       'tiempo': data['tiempo'] ?? '',
       'description': data['description'] ?? '',
+      'finalizado': false,
     };
   }).toList();
 }

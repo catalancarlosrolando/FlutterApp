@@ -139,10 +139,18 @@ class _RoutineDetailsState extends State<RoutineDetails> {
               padding: const EdgeInsets.all(16.0),
               itemCount: ejercicios.length,
               itemBuilder: (context, index) {
-                final exercise = ejercicios[index];
+                final exercise = Map<String, dynamic>.from(
+                  ejercicios[index] as Map,
+                );
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 16.0),
-                  child: Exercise(exercise: exercise),
+                  child: Exercise(
+                    exercise: exercise,
+                    uid: widget.uid,
+                    profileId: widget.profileId,
+                    rutinaId: widget.rutina['uid_doc'],
+                    exerciseIndex: index,
+                  ),
                 );
               },
             ),
