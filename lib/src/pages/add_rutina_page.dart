@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_application/src/pages/add_ejercicio_page.dart';
+import 'package:flutter_application/src/pages/add_exercise_page.dart';
 import 'package:flutter_application/src/pages/home_page.dart';
 
 import 'package:flutter_application/src/services/firebase_services.dart';
@@ -86,7 +86,7 @@ class _AddRutinaPageState extends State<AddRutinaPage> {
     final ejercicio = await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const AddEjercicioPage(),
+        builder: (context) => const AddExercisePage(),
         // Si necesitas pasar argumentos sin rutas nombradas,
         // puedes recibirlos directamente en el constructor de AddEjercicioPage.
       ),
@@ -121,7 +121,10 @@ class _AddRutinaPageState extends State<AddRutinaPage> {
           description: _descCtrl.text.trim(),
           tiempo: _tiempoCtrl.text.trim(),
           categoria: _categoria,
-          image: _imagenesPorCategoria[_categoria] ?? widget.rutinaParaEditar!['image'] ?? '',
+          image:
+              _imagenesPorCategoria[_categoria] ??
+              widget.rutinaParaEditar!['image'] ??
+              '',
           ejercicios: _ejercicios,
         );
       } else {
@@ -143,9 +146,11 @@ class _AddRutinaPageState extends State<AddRutinaPage> {
       // 1. Mostrar el Toast / SnackBar de éxito
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(_esEdicion
-              ? '¡Rutina actualizada exitosamente!'
-              : '¡Rutina guardada exitosamente!'),
+          content: Text(
+            _esEdicion
+                ? '¡Rutina actualizada exitosamente!'
+                : '¡Rutina guardada exitosamente!',
+          ),
           backgroundColor: Colors.green,
           duration: const Duration(seconds: 2),
         ),

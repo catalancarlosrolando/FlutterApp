@@ -10,7 +10,7 @@ import 'firebase_options.dart';
 
 // Ajustá los imports a tu estructura de paquetes
 import 'package:flutter_application/src/pages/login_page.dart';
-import 'package:flutter_application/src/pages/add_ejercicio_page.dart';
+import 'package:flutter_application/src/pages/add_exercise_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -63,7 +63,7 @@ class FitAccessApp extends StatelessWidget {
           initialRoute: '/',
           routes: <String, WidgetBuilder>{
             '/': (context) => const Gate(),
-            '/addEjercicio': (context) => const AddEjercicioPage(),
+            '/addEjercicio': (context) => const AddExercisePage(),
           },
         );
       },
