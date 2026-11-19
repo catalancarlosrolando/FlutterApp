@@ -22,22 +22,24 @@ class RoutineDetails extends StatefulWidget {
 class _RoutineDetailsState extends State<RoutineDetails> {
   Future<void> _marcarRutinaFinalizada(Map<String, dynamic> rutina) async {
     try {
-      await setRutinaFinalizada(
+      await resetRutina(
         uid: widget.uid!,
         profileId: widget.profileId!,
         uidDoc: rutina['uid_doc'] as String,
-        finalizada: false,
       );
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('¡Rutina reseteada! 💪')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Rutina reseteada para nuevo ciclo 🔄'),
+            backgroundColor: Theme.of(context).colorScheme.tertiary,
+          ),
+        );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error al marcar como finalizada: $e'),
+            content: Text('Error al resetear rutina: $e'),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );

@@ -184,6 +184,12 @@ class _ExerciseLivePageState extends State<ExerciseLivePage> {
         ejercicioActualizado: updatedExercise,
         ejercicioIndex: widget.exerciseIndex,
       );
+      // Si todos los ejercicios están finalizados, marcar la rutina como completa
+      await checkAndFinalizarRutina(
+        uid: widget.uid!,
+        profileId: widget.profileId!,
+        rutinaId: widget.rutinaId!,
+      );
     } catch (e) {
       debugPrint('Error al persistir ejercicio: $e');
     }
