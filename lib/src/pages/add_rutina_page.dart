@@ -105,9 +105,8 @@ class _AddRutinaPageState extends State<AddRutinaPage> {
     final ejercicioEditado = await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => AddExercisePage(
-          ejercicioParaEditar: _ejercicios[index],
-        ),
+        builder: (context) =>
+            AddExercisePage(ejercicioParaEditar: _ejercicios[index]),
       ),
     );
     if (ejercicioEditado != null && ejercicioEditado is Map<String, dynamic>) {
@@ -268,7 +267,7 @@ class _AddRutinaPageState extends State<AddRutinaPage> {
               padding: const EdgeInsets.only(top: 6, left: 4),
               child: Text(
                 'Nombre válido y disponible',
-                style: TextStyle(color: Colors.green.shade300, fontSize: 12),
+                style: TextStyle(color: colors.tertiary, fontSize: 12),
               ),
             ),
           const SizedBox(height: 24),

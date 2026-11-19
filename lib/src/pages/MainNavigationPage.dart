@@ -4,6 +4,7 @@ import 'package:flutter_application/src/pages/add_rutina_page.dart';
 //import 'package:flutter_application/src/pages/createRoutines_page.dart';
 import 'package:flutter_application/src/pages/home_page.dart';
 import 'package:flutter_application/src/pages/routines_page.dart';
+import 'package:flutter/services.dart' show SystemNavigator;
 
 /// Navegador principal con 3 pestañas: Home, Ver Rutinas, Crear Rutina.
 /// Requiere `uid` del usuario logueado para pasarlo a HomePage y MyRoutines.
@@ -29,18 +30,73 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
     setState(() => _selectedIndex = 2);
   }
 
+  /// Diálogo de confirmación antes de salir de la app.
+  /// Se muestra solo cuando la pestaña activa está en su raíz
+  /// (no hay nada que retroceder dentro de la pestaña).
+  Future<void> _confirmarSalida() async {
+    final colors = Theme.of(context).colorScheme;
+    final salir = await showDialog<bool>(
+      context: context,
+      builder: (dialogCtx) {
+        return AlertDialog(
+          backgroundColor: colors.surfaceContainer,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          title: Text(
+            '¿Salir de la aplicación?',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: colors.onSurface,
+            ),
+          ),
+          content: Text(
+            '¿Está seguro que quiere salir de la aplicación?',
+            style: TextStyle(
+              fontWeight: FontWeight.normal,
+              color: colors.onSurface,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(dialogCtx, false),
+              child: const Text('Cancelar'),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.pop(dialogCtx, true),
+              child: const Text('Salir'),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (salir == true) {
+      // Cierra la app (equivale a salir con el botón atrás del sistema)
+      await SystemNavigator.pop();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
 
-    return NavigatorPopHandler(
-      // Control del botón "Atrás" de Android para retroceder en la pestaña activa
-      onPopWithResult: (void result) {
+    return PopScope(
+      // La app nunca se cierra automáticamente: el pop se decide a mano.
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+
+        // 1. Si la pestaña activa tiene páginas apiladas, retrocede en ella.
         final NavigatorState? currentNavigator =
             _navigatorKeys[_selectedIndex].currentState;
         if (currentNavigator != null && currentNavigator.canPop()) {
           currentNavigator.pop();
+          return;
         }
+
+        // 2. Estamos en la raíz de la pestaña: pedir confirmación antes de salir.
+        _confirmarSalida();
       },
       child: Scaffold(
         // Body con IndexedStack (instantáneo, sin animaciones y guarda el estado)
