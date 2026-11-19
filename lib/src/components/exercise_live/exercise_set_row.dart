@@ -31,8 +31,8 @@ class ExerciseSetRow extends StatelessWidget {
     final Border border = isCompleted
         ? Border.all(color: colors.primary.withAlpha(100), width: 1)
         : (isActive
-            ? Border.all(color: colors.primary, width: 1.5)
-            : Border.all(color: colors.outlineVariant, width: 0.5));
+              ? Border.all(color: colors.primary, width: 1.5)
+              : Border.all(color: colors.outlineVariant, width: 0.5));
 
     return Container(
       width: double.infinity,
@@ -59,34 +59,17 @@ class ExerciseSetRow extends StatelessWidget {
             ),
           ),
 
-          // 2. Previous performance
-          Expanded(
-            flex: 3,
-            child: Text(
-              setItem.previous,
-              style: TextStyle(
-                color: colors.onSurfaceVariant,
-                fontSize: 12,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-          ),
-
-          // 3. Weight (kg)
+          // 2. Weight (kg)
           SetMetricCell(
             value: setItem.weight.toStringAsFixed(1),
             width: 44,
             onTap: onTapWeight,
           ),
 
-          // 4. Reps
-          SetMetricCell(
-            value: '${setItem.reps}',
-            width: 36,
-            onTap: onTapReps,
-          ),
+          // 3. Reps
+          SetMetricCell(value: '${setItem.reps}', width: 36, onTap: onTapReps),
 
-          // 5. Checkbox / Done button
+          // 4. Checkbox / Done button
           SetCheckButton(
             isCompleted: isCompleted,
             isActive: isActive,

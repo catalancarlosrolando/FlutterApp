@@ -25,17 +25,7 @@ class ExerciseTableColumnsHeader extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
-            flex: 3,
-            child: Text(
-              'ANTERIOR',
-              style: TextStyle(
-                color: colors.onSurfaceVariant,
-                fontSize: 11,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
+
           SizedBox(
             width: 40,
             child: Text(
