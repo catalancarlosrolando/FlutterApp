@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/src/components/custom_image_loader.dart';
+import 'package:flutter_application/src/components/add_ejercicio/exercise_qr_dialog.dart';
 import 'package:flutter_application/src/components/iconText.dart';
 import 'package:flutter_application/src/pages/exerciseLive_page.dart';
 
@@ -76,7 +77,7 @@ class Exercise extends StatelessWidget {
                               ),
                             ),
                           ),
-                          if (isFinalizado)
+                          if (isFinalizado) ...[
                             Container(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 8,
@@ -85,12 +86,19 @@ class Exercise extends StatelessWidget {
                               decoration: BoxDecoration(
                                 color: Colors.green.withAlpha(40),
                                 borderRadius: BorderRadius.circular(12),
-                                border: Border.all(color: Colors.green, width: 1),
+                                border: Border.all(
+                                  color: Colors.green,
+                                  width: 1,
+                                ),
                               ),
                               child: const Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Icon(Icons.check_circle, color: Colors.green, size: 14),
+                                  Icon(
+                                    Icons.check_circle,
+                                    color: Colors.green,
+                                    size: 14,
+                                  ),
                                   SizedBox(width: 4),
                                   Text(
                                     'Completado',
@@ -103,6 +111,19 @@ class Exercise extends StatelessWidget {
                                 ],
                               ),
                             ),
+                            const SizedBox(width: 4),
+                          ],
+                          IconButton(
+                            icon: const Icon(Icons.qr_code_2),
+                            tooltip: 'Compartir ejercicio con QR',
+                            iconSize: 22,
+                            visualDensity: VisualDensity.compact,
+                            padding: EdgeInsets.zero,
+                            constraints: const BoxConstraints(),
+                            color: colors.primary,
+                            onPressed: () =>
+                                ExerciseQrDialog.show(context, exercise),
+                          ),
                         ],
                       ),
                       const SizedBox(height: 4),
@@ -110,7 +131,10 @@ class Exercise extends StatelessWidget {
                         icon: Icons.timer,
                         text: "${exercise['series']} series",
                       ),
-                      IconText(icon: Icons.loop, text: "${exercise['reps']} reps"),
+                      IconText(
+                        icon: Icons.loop,
+                        text: "${exercise['reps']} reps",
+                      ),
                       IconText(icon: Icons.add, text: "${exercise['peso']} "),
                       IconText(
                         icon: Icons.timer,
