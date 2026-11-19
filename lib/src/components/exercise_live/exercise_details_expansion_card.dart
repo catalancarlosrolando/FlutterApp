@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/src/components/custom_image_loader.dart';
 import 'package:flutter_application/src/components/exercise_live/exercise_preview_card.dart';
+import 'package:flutter_application/src/components/exercise_qr_dialog.dart';
 
 /// Expandable card displaying exercise details and image (utilizing CustomImageLoader)
 class ExerciseDetailsExpansionCard extends StatefulWidget {
   final String estimatedTime;
   final String? imagePath;
   final String? description;
+  final Map<String, dynamic>? exercise;
 
   const ExerciseDetailsExpansionCard({
     super.key,
     required this.estimatedTime,
     this.imagePath,
     this.description,
+    this.exercise,
   });
 
   @override
@@ -79,6 +82,22 @@ class _ExerciseDetailsExpansionCardState
                     fontSize: 12,
                   ),
                 ),
+                if (widget.exercise != null) ...[
+                  const SizedBox(height: 14),
+                  SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton.icon(
+                      icon: const Icon(Icons.qr_code_2),
+                      label: const Text('Compartir Ejercicio (QR)'),
+                      style: OutlinedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: () => ExerciseQrDialog.show(context, widget.exercise!),
+                    ),
+                  ),
+                ],
               ],
             ),
           ),

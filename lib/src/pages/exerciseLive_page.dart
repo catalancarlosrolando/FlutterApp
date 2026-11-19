@@ -381,6 +381,7 @@ class _ExerciseLivePageState extends State<ExerciseLivePage> {
                 estimatedTime: exercise['tiempo'] ?? '15 Minutos',
                 imagePath: exercise['image'] as String?,
                 description: exercise['description'] as String?,
+                exercise: exercise,
               ),
             ],
           ),
