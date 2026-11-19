@@ -20,6 +20,31 @@ class RoutineDetails extends StatefulWidget {
 }
 
 class _RoutineDetailsState extends State<RoutineDetails> {
+  Future<void> _marcarRutinaFinalizada(Map<String, dynamic> rutina) async {
+    try {
+      await setRutinaFinalizada(
+        uid: widget.uid!,
+        profileId: widget.profileId!,
+        uidDoc: rutina['uid_doc'] as String,
+        finalizada: false,
+      );
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('¡Rutina reseteada! 💪')));
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error al marcar como finalizada: $e'),
+            backgroundColor: Theme.of(context).colorScheme.error,
+          ),
+        );
+      }
+    }
+  }
+
   Future<void> _abrirEditarRutina(Map<String, dynamic> rutinaActual) async {
     await Navigator.push(
       context,
@@ -172,6 +197,11 @@ class _RoutineDetailsState extends State<RoutineDetails> {
                   leadingIcon: const Icon(Icons.edit_outlined),
                   onPressed: () => _abrirEditarRutina(rutina),
                   child: const Text('Editar'),
+                ),
+                MenuItemButton(
+                  leadingIcon: const Icon(Icons.check_circle_outline),
+                  onPressed: () => _marcarRutinaFinalizada(rutina),
+                  child: const Text('Reset'),
                 ),
                 MenuItemButton(
                   leadingIcon: Icon(Icons.delete_outline, color: colors.error),
