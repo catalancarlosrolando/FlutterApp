@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/src/components/custom_image_loader.dart';
 import 'package:flutter_application/src/components/exercise_live/exercise_preview_card.dart';
-import 'package:flutter_application/src/components/exercise_qr_dialog.dart';
+import 'package:flutter_application/src/components/add_ejercicio/exercise_qr_dialog.dart';
 
 /// Expandable card displaying exercise details and image (utilizing CustomImageLoader)
 class ExerciseDetailsExpansionCard extends StatefulWidget {
@@ -58,7 +58,8 @@ class _ExerciseDetailsExpansionCardState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (widget.imagePath != null && widget.imagePath!.isNotEmpty) ...[
+                if (widget.imagePath != null &&
+                    widget.imagePath!.isNotEmpty) ...[
                   CustomImageLoader(
                     imagePath: widget.imagePath!,
                     height: 150,
@@ -94,7 +95,8 @@ class _ExerciseDetailsExpansionCardState
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      onPressed: () => ExerciseQrDialog.show(context, widget.exercise!),
+                      onPressed: () =>
+                          ExerciseQrDialog.show(context, widget.exercise!),
                     ),
                   ),
                 ],

@@ -22,16 +22,53 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // Clave del Scaffold para abrir el Drawer desde el Avatar del AppBar.
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  /// Usuario actual de Firebase (trae photoURL, displayName y email de Google).
+  User? get _user => FirebaseAuth.instance.currentUser;
+
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final user = _user;
+    final photoUrl = user?.photoURL;
+    final displayName = user?.displayName ?? '';
+    final email = user?.email ?? '';
 
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: colors.surface,
       appBar: AppBar(
         backgroundColor: colors.surface,
         elevation: 0,
+        // Reemplaza el ícono hamburguesa por el Avatar del usuario.
+        // Al tocarlo se abre el Drawer.
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 12.0, top: 8.0, bottom: 8.0),
+          child: Tooltip(
+            message: 'Abrir menú',
+            child: InkWell(
+              onTap: () => _scaffoldKey.currentState?.openDrawer(),
+              borderRadius: BorderRadius.circular(20),
+              child: CircleAvatar(
+                radius: 20,
+                backgroundColor: colors.primaryContainer,
+                backgroundImage: (photoUrl != null && photoUrl.isNotEmpty)
+                    ? NetworkImage(photoUrl)
+                    : null,
+                child: (photoUrl == null || photoUrl.isEmpty)
+                    ? Icon(
+                        Icons.person,
+                        size: 22,
+                        color: colors.onPrimaryContainer,
+                      )
+                    : null,
+              ),
+            ),
+          ),
+        ),
         title: const Text('Tu próxima rutina'),
       ),
       drawer: Drawer(
@@ -47,17 +84,44 @@ class _HomePageState extends State<HomePage> {
                   CircleAvatar(
                     backgroundColor: colors.onPrimary,
                     radius: 28,
-                    child: Icon(Icons.person, size: 36, color: colors.primary),
+                    backgroundImage: (photoUrl != null && photoUrl.isNotEmpty)
+                        ? NetworkImage(photoUrl)
+                        : null,
+                    child: (photoUrl == null || photoUrl.isEmpty)
+                        ? Icon(Icons.person, size: 36, color: colors.primary)
+                        : null,
                   ),
                   const SizedBox(height: 12),
-                  Text(
-                    'Menú',
-                    style: TextStyle(
-                      color: colors.onPrimary,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
+                  if (displayName.isNotEmpty)
+                    Text(
+                      displayName,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: colors.onPrimary,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
+                  if (email.isNotEmpty)
+                    Text(
+                      email,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: colors.onPrimary.withAlpha(200),
+                        fontSize: 13,
+                      ),
+                    ),
+                  if (displayName.isEmpty && email.isEmpty)
+                    Text(
+                      'Menú',
+                      style: TextStyle(
+                        color: colors.onPrimary,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                 ],
               ),
             ),
@@ -331,7 +395,10 @@ class _RutinaCard extends StatelessWidget {
               if ((rutina['description'] as String).isNotEmpty)
                 Text(
                   rutina['description'],
-                  style: TextStyle(color: colors.onSurfaceVariant, fontSize: 14),
+                  style: TextStyle(
+                    color: colors.onSurfaceVariant,
+                    fontSize: 14,
+                  ),
                 ),
             ],
           ),
@@ -368,17 +435,18 @@ class _RutinaCard extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 12),
-        ...ejercicios.asMap().entries.map((entry) => Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: Exercise(
-                exercise: Map<String, dynamic>.from(entry.value),
-                uid: uid,
-                profileId: profileId,
-                rutinaId: rutina['uid_doc'],
-                exerciseIndex: entry.key,
-              ),
-            )),
-
+        ...ejercicios.asMap().entries.map(
+          (entry) => Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: Exercise(
+              exercise: Map<String, dynamic>.from(entry.value),
+              uid: uid,
+              profileId: profileId,
+              rutinaId: rutina['uid_doc'],
+              exerciseIndex: entry.key,
+            ),
+          ),
+        ),
       ],
     );
   }
