@@ -379,35 +379,6 @@ class _RutinaCard extends StatelessWidget {
               ),
             )),
 
-        const SizedBox(height: 32),
-
-        // Botón "Marcar como finalizada"
-        FilledButton.icon(
-          onPressed: () async {
-            await setRutinaFinalizada(
-              uid: uid,
-              profileId: profileId,
-              uidDoc: rutina['uid_doc'],
-              finalizada: true,
-            );
-            if (context.mounted) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('¡Rutina completada! 💪')),
-              );
-            }
-          },
-          style: FilledButton.styleFrom(
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-          icon: const Icon(Icons.check),
-          label: const Text(
-            'Marcar como finalizada',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-        ),
       ],
     );
   }

@@ -340,6 +340,64 @@ Future<void> setRutinaFinalizada({
       .update({'finalizada': finalizada});
 }
 
+/// Resetea una rutina: la marca como no finalizada y pone todos sus
+/// ejercicios con [finalizado: false].
+Future<void> resetRutina({
+  required String uid,
+  required String profileId,
+  required String uidDoc,
+}) async {
+  final docRef = _db
+      .collection('usuarios')
+      .doc(uid)
+      .collection('perfiles')
+      .doc(profileId)
+      .collection('rutinas')
+      .doc(uidDoc);
+
+  final snap = await docRef.get();
+  if (!snap.exists) return;
+
+  final data = snap.data() ?? {};
+  final ejercicios = List<Map<String, dynamic>>.from(
+    (data['ejercicios'] as List<dynamic>? ?? []).map(
+      (e) => Map<String, dynamic>.from(e as Map)..['finalizado'] = false,
+    ),
+  );
+
+  await docRef.update({'finalizada': false, 'ejercicios': ejercicios});
+}
+
+/// Verifica si todos los ejercicios de la rutina están finalizados y,
+/// en ese caso, marca la rutina como finalizada automáticamente.
+Future<void> checkAndFinalizarRutina({
+  required String uid,
+  required String profileId,
+  required String rutinaId,
+}) async {
+  final docRef = _db
+      .collection('usuarios')
+      .doc(uid)
+      .collection('perfiles')
+      .doc(profileId)
+      .collection('rutinas')
+      .doc(rutinaId);
+
+  final snap = await docRef.get();
+  if (!snap.exists) return;
+
+  final data = snap.data() ?? {};
+  final ejercicios = List<dynamic>.from(data['ejercicios'] ?? []);
+
+  if (ejercicios.isEmpty) return;
+
+  final allDone = ejercicios.every((e) => (e as Map)['finalizado'] == true);
+
+  if (allDone) {
+    await docRef.update({'finalizada': true});
+  }
+}
+
 // ===================== EJERCICIOS DE UNA RUTINA =====================
 
 /// Stream reactivo de los ejercicios de una rutina del perfil.
@@ -428,7 +486,9 @@ Future<void> updateEjercicioEnRutina({
   );
 
   int targetIndex = -1;
-  if (ejercicioIndex != null && ejercicioIndex >= 0 && ejercicioIndex < ejercicios.length) {
+  if (ejercicioIndex != null &&
+      ejercicioIndex >= 0 &&
+      ejercicioIndex < ejercicios.length) {
     targetIndex = ejercicioIndex;
   } else {
     final ejId = ejercicioActualizado['id'];

@@ -8,6 +8,7 @@ import 'package:flutter_application/src/components/exercise_live/rest_timer_card
 import 'package:flutter_application/src/components/exercise_live/workout_live_header.dart';
 import 'package:flutter_application/src/components/exercise_live/workout_set_model.dart';
 import 'package:flutter_application/src/services/firebase_services.dart';
+import 'package:vibration/vibration.dart';
 
 /// Screen representing US-05 Modo Entrenamiento en Vivo y Rest Timer (Node ID: u5Scr)
 /// Clean, modular, and styled using Material 3 ColorScheme from Theme.of(context).colorScheme
@@ -88,9 +89,21 @@ class _ExerciseLivePageState extends State<ExerciseLivePage> {
         setState(() => _restSecondsRemaining--);
       } else {
         timer.cancel();
-        _onRestCompletedOrCancelled();
+        _onRestFinished();
       }
     });
+  }
+
+  /// Llamado cuando el timer llega a 0: vibra (si haptic está activo) y completa el descanso.
+  Future<void> _onRestFinished() async {
+    if (_isHapticOn) {
+      final hasVibrator = await Vibration.hasVibrator();
+      if (hasVibrator) {
+        // Patrón: tres pulsos cortos para indicar fin de descanso
+        Vibration.vibrate(pattern: [0, 400, 150, 400, 150, 400]);
+      }
+    }
+    _onRestCompletedOrCancelled();
   }
 
   /// Si el descanso termina o el usuario lo reinicia/cancela:
@@ -170,6 +183,12 @@ class _ExerciseLivePageState extends State<ExerciseLivePage> {
         rutinaId: widget.rutinaId!,
         ejercicioActualizado: updatedExercise,
         ejercicioIndex: widget.exerciseIndex,
+      );
+      // Si todos los ejercicios están finalizados, marcar la rutina como completa
+      await checkAndFinalizarRutina(
+        uid: widget.uid!,
+        profileId: widget.profileId!,
+        rutinaId: widget.rutinaId!,
       );
     } catch (e) {
       debugPrint('Error al persistir ejercicio: $e');
