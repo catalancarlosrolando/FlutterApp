@@ -30,6 +30,62 @@ class _RoutineDetailsState extends State<RoutineDetails> {
     );
   }
 
+  Future<void> _confirmarYBorrarRutina(Map<String, dynamic> rutina) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) {
+        final colors = Theme.of(ctx).colorScheme;
+        return AlertDialog(
+          backgroundColor: colors.surfaceContainer,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          title: const Text(
+            '¿Eliminar rutina?',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          content: Text(
+            'Se eliminará la rutina "${rutina['name'] ?? 'esta rutina'}". Esta acción no se puede deshacer.',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: const Text('Cancelar'),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: colors.error,
+                foregroundColor: colors.onError,
+              ),
+              onPressed: () => Navigator.pop(ctx, true),
+              child: const Text('Eliminar'),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (confirmed == true && mounted) {
+      try {
+        await borrarRutina(
+          uid: widget.uid!,
+          profileId: widget.profileId!,
+          uidDoc: rutina['uid_doc'] as String,
+        );
+        if (mounted) Navigator.of(context).pop();
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Error al eliminar: $e'),
+              backgroundColor: Theme.of(context).colorScheme.error,
+            ),
+          );
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
@@ -97,13 +153,35 @@ class _RoutineDetailsState extends State<RoutineDetails> {
         ),
         actions: [
           if (canEdit)
-            Padding(
-              padding: const EdgeInsets.only(right: 12),
-              child: ActionChip(
-                avatar: const Icon(Icons.edit, size: 16),
-                label: const Text('Editar'),
-                onPressed: () => _abrirEditarRutina(rutina),
+            MenuAnchor(
+              style: MenuStyle(
+                shadowColor: WidgetStatePropertyAll(colors.error),
               ),
+              builder: (context, controller, child) => IconButton(
+                icon: const Icon(Icons.more_vert),
+                onPressed: () {
+                  if (controller.isOpen) {
+                    controller.close();
+                  } else {
+                    controller.open();
+                  }
+                },
+              ),
+              menuChildren: [
+                MenuItemButton(
+                  leadingIcon: const Icon(Icons.edit_outlined),
+                  onPressed: () => _abrirEditarRutina(rutina),
+                  child: const Text('Editar'),
+                ),
+                MenuItemButton(
+                  leadingIcon: Icon(Icons.delete_outline, color: colors.error),
+                  onPressed: () => _confirmarYBorrarRutina(rutina),
+                  child: Text(
+                    'Eliminar',
+                    style: TextStyle(color: colors.error),
+                  ),
+                ),
+              ],
             ),
         ],
       ),

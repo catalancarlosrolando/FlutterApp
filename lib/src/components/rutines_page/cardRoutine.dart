@@ -27,6 +27,8 @@ class CardRoutine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(10.0),
@@ -34,10 +36,15 @@ class CardRoutine extends StatelessWidget {
         //margin: EdgeInsets.all(14),
         //height: 325.0,
         decoration: BoxDecoration(
-          color: colors.surfaceContainer,
+          //color: colors.primary,
+          gradient: LinearGradient(
+            colors: isDark
+                ? [colors.surface, colors.primaryContainer]
+                : [colors.surface, colors.outline],
+          ),
           borderRadius: BorderRadius.circular(10.0),
           border: Border.all(
-            color: finalizada ? Colors.green : colors.outline,
+            color: finalizada ? Colors.green : colors.onPrimary,
             width: finalizada ? 1.5 : 1.0,
           ),
         ),

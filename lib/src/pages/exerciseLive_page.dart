@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application/src/components/exercise_live/dialogs/exercise_live_dialogs.dart';
 import 'package:flutter_application/src/components/exercise_live/exercise_details_expansion_card.dart';
@@ -55,7 +56,9 @@ class _ExerciseLivePageState extends State<ExerciseLivePage> {
   }
 
   void _initDataFromExercise() {
-    _restTotalSeconds = ExerciseDataParser.parseSeconds(widget.exercise['descanso']);
+    _restTotalSeconds = ExerciseDataParser.parseSeconds(
+      widget.exercise['descanso'],
+    );
     _restSecondsRemaining = _restTotalSeconds;
     _sets = ExerciseDataParser.createInitialSets(widget.exercise);
   }
@@ -139,67 +142,10 @@ class _ExerciseLivePageState extends State<ExerciseLivePage> {
 
     if (!mounted) return;
 
-    final canPersist = widget.uid != null &&
-        widget.profileId != null &&
-        widget.rutinaId != null;
+    final marcarCompletado = await ExerciseCompletedDialog.show(context);
 
-    final bool? guardarCambios = await showDialog<bool>(
-      context: context,
-      barrierDismissible: false,
-      builder: (ctx) {
-        final colors = Theme.of(ctx).colorScheme;
-        return AlertDialog(
-          backgroundColor: colors.surfaceContainer,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-          title: const Row(
-            children: [
-              Icon(Icons.check_circle, color: Colors.green, size: 28),
-              SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  '¡Ejercicio finalizado!',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-            ],
-          ),
-          content: Text(
-            canPersist
-                ? 'Completaste todas las series con éxito. ¿Deseas guardar los cambios y nuevas series realizadas en tu rutina?'
-                : '¡Completaste todas las series con éxito!',
-            style: TextStyle(color: colors.onSurfaceVariant),
-          ),
-          actions: [
-            if (canPersist) ...[
-              TextButton(
-                onPressed: () => Navigator.pop(ctx, false),
-                child: const Text('Solo marcar completado'),
-              ),
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: colors.primary,
-                  foregroundColor: colors.onPrimary,
-                ),
-                onPressed: () => Navigator.pop(ctx, true),
-                icon: const Icon(Icons.save, size: 18),
-                label: const Text('Guardar cambios'),
-              ),
-            ] else
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  foregroundColor: Colors.white,
-                ),
-                onPressed: () => Navigator.pop(ctx, false),
-                child: const Text('Aceptar'),
-              ),
-          ],
-        );
-      },
-    );
-
-    if (guardarCambios != null) {
-      await _persistirFinalizacion(guardarCambios: guardarCambios);
+    if (marcarCompletado != null) {
+      await _persistirFinalizacion(marcarCompletado: marcarCompletado);
     }
 
     if (mounted) {
@@ -207,22 +153,15 @@ class _ExerciseLivePageState extends State<ExerciseLivePage> {
     }
   }
 
-  Future<void> _persistirFinalizacion({required bool guardarCambios}) async {
-    if (widget.uid == null || widget.profileId == null || widget.rutinaId == null) {
+  Future<void> _persistirFinalizacion({required bool marcarCompletado}) async {
+    if (widget.uid == null ||
+        widget.profileId == null ||
+        widget.rutinaId == null) {
       return;
     }
 
     final updatedExercise = Map<String, dynamic>.from(widget.exercise);
-    updatedExercise['finalizado'] = true;
-
-    if (guardarCambios) {
-      updatedExercise['series'] = _sets.length.toString();
-      if (_sets.isNotEmpty) {
-        final last = _sets.last;
-        updatedExercise['peso'] = '${last.weight.toStringAsFixed(1)} kg';
-        updatedExercise['reps'] = last.reps.toString();
-      }
-    }
+    updatedExercise['finalizado'] = marcarCompletado;
 
     try {
       await updateEjercicioEnRutina(
@@ -321,7 +260,6 @@ class _ExerciseLivePageState extends State<ExerciseLivePage> {
       context,
       completedSets: _sets.where((s) => s.isCompleted).length,
       totalSets: _sets.length,
-      canSaveExerciseChanges: widget.uid != null,
     );
 
     if (confirmed == true && mounted) {
@@ -357,10 +295,12 @@ class _ExerciseLivePageState extends State<ExerciseLivePage> {
 
     final activeSet = _sets.firstWhere(
       (s) => s.isActive,
-      orElse: () => _sets.firstWhere((s) => !s.isCompleted, orElse: () => _sets.last),
+      orElse: () =>
+          _sets.firstWhere((s) => !s.isCompleted, orElse: () => _sets.last),
     );
 
-    final nextSetText = 'Siguiente: Serie ${activeSet.setNumber} con ${activeSet.weight.toStringAsFixed(1)} kg';
+    final nextSetText =
+        'Siguiente: Serie ${activeSet.setNumber} con ${activeSet.weight.toStringAsFixed(1)} kg';
     final exerciseName = exercise['name'] ?? 'Ejercicio';
     final exerciseDescanso = exercise['descanso'] ?? '60 seg';
 
@@ -406,7 +346,8 @@ class _ExerciseLivePageState extends State<ExerciseLivePage> {
               // 3. Ejercicio 1 Live Table (Node u5Ex1Sec)
               ExerciseSetsTable(
                 exerciseName: '1. $exerciseName',
-                exerciseSubtitle: '${_sets.length} series • ${exercise['reps'] ?? "10-12"} reps • Descanso $exerciseDescanso',
+                exerciseSubtitle:
+                    '${_sets.length} series • ${exercise['reps'] ?? "10-12"} reps • Descanso $exerciseDescanso',
                 sets: _sets,
                 onToggleSet: _handleToggleSet,
                 onTapWeight: _editWeight,
