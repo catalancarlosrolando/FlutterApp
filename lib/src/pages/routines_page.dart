@@ -95,40 +95,99 @@ class _MyRoutinesState extends State<MyRoutines> {
                       );
                     }
 
-                    return ListView.builder(
-                      padding: const EdgeInsets.all(16.0),
-                      itemCount: rutinas.length,
-                      itemBuilder: (context, index) {
-                        final rutina = rutinas[index] as Map<String, dynamic>;
-                        final exercisesList =
-                            (rutina["ejercicios"] ?? rutina["exercises"])
-                                as List<dynamic>?;
-                        final exercisesCount = exercisesList?.length ?? 0;
+                    // Adaptativo: teléfono → ListView 1 columna (card horizontal).
+                    // Tablet (ancho > 600) → GridView 2 columnas (card vertical).
+                    return LayoutBuilder(
+                      builder: (context, constraints) {
+                        final esTablet = constraints.maxWidth > 600;
 
-                        final finalizada = (rutina["finalizada"] as bool?) ?? false;
+                        if (esTablet) {
+                          return GridView.builder(
+                            padding: const EdgeInsets.all(16.0),
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  childAspectRatio: 2.78,
+                                  crossAxisSpacing: 12,
+                                  mainAxisSpacing: 12,
+                                ),
+                            itemCount: rutinas.length,
+                            itemBuilder: (context, index) {
+                              final rutina =
+                                  rutinas[index] as Map<String, dynamic>;
+                              final exercisesList =
+                                  (rutina["ejercicios"] ?? rutina["exercises"])
+                                      as List<dynamic>?;
+                              final exercisesCount = exercisesList?.length ?? 0;
+                              final finalizada =
+                                  (rutina["finalizada"] as bool?) ?? false;
 
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 16.0),
-                          child: CardRoutine(
-                            rutinaName: rutina["name"] ?? "",
-                            descripcion: rutina['description'] ?? '',
-                            time: rutina['tiempo'] ?? '',
-                            exercisesCount: exercisesCount.toString(),
-                            image: rutina["image"] ?? "",
-                            finalizada: finalizada,
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute<void>(
-                                  builder: (context) => RoutineDetails(
-                                    rutina: rutina,
-                                    uid: widget.uid,
-                                    profileId: profileId,
-                                  ),
+                              return Padding(
+                                padding: const EdgeInsets.only(bottom: 16.0),
+                                child: CardRoutine(
+                                  rutinaName: rutina["name"] ?? "",
+                                  descripcion: rutina['description'] ?? '',
+                                  time: rutina['tiempo'] ?? '',
+                                  exercisesCount: exercisesCount.toString(),
+                                  image: rutina["image"] ?? "",
+                                  finalizada: finalizada,
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute<void>(
+                                        builder: (context) => RoutineDetails(
+                                          rutina: rutina,
+                                          uid: widget.uid,
+                                          profileId: profileId,
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 ),
                               );
                             },
-                          ),
+                          );
+                        }
+
+                        // Teléfono: lista de 1 columna (comportamiento original)
+                        return ListView.builder(
+                          padding: const EdgeInsets.all(16.0),
+                          itemCount: rutinas.length,
+                          itemBuilder: (context, index) {
+                            final rutina =
+                                rutinas[index] as Map<String, dynamic>;
+                            final exercisesList =
+                                (rutina["ejercicios"] ?? rutina["exercises"])
+                                    as List<dynamic>?;
+                            final exercisesCount = exercisesList?.length ?? 0;
+
+                            final finalizada =
+                                (rutina["finalizada"] as bool?) ?? false;
+
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 16.0),
+                              child: CardRoutine(
+                                rutinaName: rutina["name"] ?? "",
+                                descripcion: rutina['description'] ?? '',
+                                time: rutina['tiempo'] ?? '',
+                                exercisesCount: exercisesCount.toString(),
+                                image: rutina["image"] ?? "",
+                                finalizada: finalizada,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute<void>(
+                                      builder: (context) => RoutineDetails(
+                                        rutina: rutina,
+                                        uid: widget.uid,
+                                        profileId: profileId,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          },
                         );
                       },
                     );

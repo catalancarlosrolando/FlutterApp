@@ -33,7 +33,9 @@ class WorkoutLiveHeader extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: InkWell(
-              onTap: onBackPressed ?? () => Navigator.of(context).maybePop(),
+              onTap:
+                  onBackPressed ??
+                  () => Navigator.of(context).maybePop(), //con fallback
               borderRadius: BorderRadius.circular(9999),
               child: Container(
                 padding: const EdgeInsets.all(8.0),
