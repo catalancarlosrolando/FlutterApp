@@ -4,27 +4,23 @@ import 'package:flutter/material.dart';
 class ConfirmFinishDialog extends StatelessWidget {
   final int completedSets;
   final int totalSets;
-  final bool canSaveExerciseChanges;
 
   const ConfirmFinishDialog({
     super.key,
     required this.completedSets,
     required this.totalSets,
-    this.canSaveExerciseChanges = false,
   });
 
   static Future<bool?> show(
     BuildContext context, {
     required int completedSets,
     required int totalSets,
-    bool canSaveExerciseChanges = false,
   }) {
     return showDialog<bool>(
       context: context,
       builder: (ctx) => ConfirmFinishDialog(
         completedSets: completedSets,
         totalSets: totalSets,
-        canSaveExerciseChanges: canSaveExerciseChanges,
       ),
     );
   }
