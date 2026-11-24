@@ -3,7 +3,7 @@
 // ======================================================
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application/src/components/Drawer.dart';
+import 'package:flutter_application/src/components/homepage/Drawer.dart';
 import 'package:flutter_application/src/components/homepage/proximaRutina.dart';
 import 'package:flutter_application/src/services/firebase_services.dart';
 
@@ -39,6 +39,15 @@ class PerfilDataContent extends StatelessWidget {
         if (snapshot.hasError) {
           return Scaffold(
             key: scaffoldKey,
+            appBar: AppBar(title: const Text('FitAccess')),
+            drawer: MyDrawer(
+              colors: colors,
+              isDark: isDark,
+              uid: uid,
+              photoUrl: user?.photoURL ?? '',
+              displayName: user?.displayName ?? '',
+              email: user?.email ?? '',
+            ),
             body: Center(
               child: Text(
                 'Error al obtener los datos del perfil.',
@@ -53,6 +62,15 @@ class PerfilDataContent extends StatelessWidget {
         if (perfilData == null) {
           return Scaffold(
             key: scaffoldKey,
+            appBar: AppBar(title: const Text('FitAccess')),
+            drawer: MyDrawer(
+              colors: colors,
+              isDark: isDark,
+              uid: uid,
+              photoUrl: user?.photoURL ?? '',
+              displayName: user?.displayName ?? '',
+              email: user?.email ?? '',
+            ),
             body: const Center(
               child: Text('No se encontraron datos del perfil.'),
             ),

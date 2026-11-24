@@ -1,28 +1,28 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_application/src/models/app_user.dart';
 import 'package:flutter_application/src/pages/MainNavigationPage.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_application/src/pages/add_exercise_page.dart';
+import 'package:flutter_application/src/pages/admin_panel_page.dart';
+import 'package:flutter_application/src/pages/biometric_lock_page.dart';
+import 'package:flutter_application/src/pages/login_page.dart';
+import 'package:flutter_application/src/pages/register_page.dart';
+import 'package:flutter_application/src/pages/rejected_page.dart';
+import 'package:flutter_application/src/pages/settings_page.dart';
+import 'package:flutter_application/src/pages/waiting_approval_page.dart';
+import 'package:flutter_application/src/services/auth_gate_notifier.dart';
 import 'package:flutter_application/src/theme/color_sheme.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import 'firebase_options.dart';
-
-// Ajustá los imports a tu estructura de paquetes
-import 'package:flutter_application/src/pages/login_page.dart';
-import 'package:flutter_application/src/pages/add_exercise_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  // ⚠️ NUEVO en google_sign_in 7.x: hay que inicializar el singleton una vez.
-  // El serverClientId es el "Web Client ID" de Firebase (lo conseguís en
-  // Firebase Console → Authentication → Sign-in method → Google → Web SDK configuration).
-  // Sin esto, el accessToken no se obtiene y Firebase Auth falla.
-
   await GoogleSignIn.instance.initialize(
-    // 🔑 Reemplazá con tu Web Client ID de Firebase:
     serverClientId:
         'firebase-adminsdk-fbsvc@flutter-50644.iam.gserviceaccount.com',
   );
@@ -33,61 +33,146 @@ void main() async {
 /// Notificador global para alternar tema claro / oscuro en la app
 final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.system);
 
-class FitAccessApp extends StatelessWidget {
+class FitAccessApp extends StatefulWidget {
   const FitAccessApp({super.key});
+
+  @override
+  State<FitAccessApp> createState() => _FitAccessAppState();
+}
+
+class _FitAccessAppState extends State<FitAccessApp> {
+  late final AuthGateNotifier _authGate;
+  late final GoRouter _router;
+
+  @override
+  void initState() {
+    super.initState();
+    _authGate = AuthGateNotifier();
+    _router = GoRouter(
+      initialLocation: '/loading',
+      refreshListenable: _authGate,
+      redirect: (context, state) {
+        final loc = state.matchedLocation;
+
+        if (_authGate.isLoading) {
+          return loc == '/loading' ? null : '/loading';
+        }
+
+        if (!_authGate.isSignedIn) {
+          if (loc == '/login' || loc == '/register') return null;
+          return '/login';
+        }
+
+        if (_authGate.status == UserStatus.pending) {
+          return loc == '/waiting' ? null : '/waiting';
+        }
+
+        if (_authGate.status == UserStatus.rejected) {
+          return loc == '/rejected' ? null : '/rejected';
+        }
+
+        // status == approved
+        if (_authGate.needsBiometricUnlock) {
+          return loc == '/biometric-lock' ? null : '/biometric-lock';
+        }
+
+        if (loc == '/admin' && !_authGate.isAdmin) {
+          return '/home';
+        }
+
+        const gateRoutes = {
+          '/',
+          '/loading',
+          '/login',
+          '/register',
+          '/waiting',
+          '/rejected',
+          '/biometric-lock',
+        };
+        if (gateRoutes.contains(loc)) {
+          return '/home';
+        }
+
+        return null;
+      },
+      routes: [
+        GoRoute(
+          path: '/loading',
+          builder: (context, state) => const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          ),
+        ),
+        GoRoute(
+          path: '/login',
+          builder: (context, state) => LoginPage(authGate: _authGate),
+        ),
+        GoRoute(
+          path: '/register',
+          builder: (context, state) => RegisterPage(authGate: _authGate),
+        ),
+        GoRoute(
+          path: '/waiting',
+          builder: (context, state) => const WaitingApprovalPage(),
+        ),
+        GoRoute(
+          path: '/rejected',
+          builder: (context, state) => const RejectedPage(),
+        ),
+        GoRoute(
+          path: '/biometric-lock',
+          builder: (context, state) => BiometricLockPage(authGate: _authGate),
+        ),
+        GoRoute(
+          path: '/home',
+          builder: (context, state) => MainNavigationPage(
+            uid: _authGate.firebaseUser?.uid ?? '',
+          ),
+        ),
+        GoRoute(
+          path: '/admin',
+          builder: (context, state) => const AdminPanelPage(),
+        ),
+        GoRoute(
+          path: '/settings',
+          builder: (context, state) => SettingsPage(authGate: _authGate),
+        ),
+        GoRoute(
+          path: '/addEjercicio',
+          builder: (context, state) => const AddExercisePage(),
+        ),
+      ],
+    );
+  }
+
+  @override
+  void dispose() {
+    _router.dispose();
+    _authGate.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: themeNotifier,
       builder: (context, currentMode, child) {
-        return MaterialApp(
+        return MaterialApp.router(
           title: 'FitAccess',
-          // Dark theme como el de tus mockups
-          // Tema Claro
           theme: ThemeData(
             useMaterial3: true,
             colorScheme: lightColorScheme,
+            scaffoldBackgroundColor: lightColorScheme.surface,
             textTheme: GoogleFonts.nunitoTextTheme(),
           ),
-
-          // Tema Oscuro
           darkTheme: ThemeData(
             useMaterial3: true,
             colorScheme: darkColorScheme,
+            scaffoldBackgroundColor: darkColorScheme.surface,
             textTheme: GoogleFonts.nunitoTextTheme(),
           ),
-
           themeMode: currentMode,
-
-          initialRoute: '/',
-          routes: <String, WidgetBuilder>{
-            '/': (context) => const Gate(),
-            '/addEjercicio': (context) => const AddExercisePage(),
-          },
+          routerConfig: _router,
         );
-      },
-    );
-  }
-}
-
-/// Gate: muestra LoginPage si no hay sesión, HomePage si la hay.
-/// Reacciona en tiempo real a login/logout (StreamBuilder).
-class Gate extends StatelessWidget {
-  const Gate({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<User?>(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, snap) {
-        if (snap.connectionState == ConnectionState.waiting) {
-          return const Scaffold(
-            body: Center(child: CircularProgressIndicator()),
-          );
-        }
-        if (snap.data == null) return const LoginPage();
-        return MainNavigationPage(uid: snap.data!.uid);
       },
     );
   }

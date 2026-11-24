@@ -1,9 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/main.dart';
 import 'package:flutter_application/src/pages/edit_profile_page.dart';
 import 'package:flutter_application/src/pages/profile_selection_page.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_application/src/services/auth_service.dart';
+import 'package:go_router/go_router.dart';
 
 class MyDrawer extends StatefulWidget {
   final ColorScheme? colors;
@@ -127,20 +128,44 @@ class _MyDrawerState extends State<MyDrawer> {
             },
           ),
           const Divider(),
+          StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+            stream: FirebaseFirestore.instance
+                .collection('users')
+                .doc(widget.uid)
+                .snapshots(),
+            builder: (context, snap) {
+              final isAdmin = snap.data?.data()?['role'] == 'admin';
+              if (!isAdmin) return const SizedBox.shrink();
+              return ListTile(
+                leading: const Icon(Icons.admin_panel_settings),
+                title: const Text('Panel de administración'),
+                onTap: () {
+                  Navigator.pop(context);
+                  context.push('/admin');
+                },
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.settings),
+            title: const Text('Configuración'),
+            onTap: () {
+              Navigator.pop(context);
+              context.push('/settings');
+            },
+          ),
           ListTile(
             leading: IconButton(
               icon: Icon(Icons.logout, color: colors.error),
               onPressed: () async {
                 Navigator.pop(context);
-                await GoogleSignIn.instance.disconnect();
-                await FirebaseAuth.instance.signOut();
+                await AuthService.instance.signOut();
               },
             ),
             title: Text('Cerrar sesión', style: TextStyle(color: colors.error)),
             onTap: () async {
               Navigator.pop(context);
-              await GoogleSignIn.instance.disconnect();
-              await FirebaseAuth.instance.signOut();
+              await AuthService.instance.signOut();
             },
           ),
         ],

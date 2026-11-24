@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application/src/components/Drawer.dart';
+import 'package:flutter_application/src/components/homepage/Drawer.dart';
 import 'package:flutter_application/src/services/firebase_services.dart';
 
 class PerfilDrawer extends StatelessWidget {
