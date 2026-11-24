@@ -1,0 +1,67 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function userDoc() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.admin == true ||
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+          userDoc().role == 'admin')
+      );
+    }
+
+    function isApproved() {
+      return isSignedIn() &&
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        userDoc().status == 'approved';
+    }
+
+    // User profile & access-control documents
+    match /users/{uid} {
+      // Users can read only their own doc; admins can read all
+      allow read: if isSignedIn() && (request.auth.uid == uid || isAdmin());
+
+      // On first sign-in, user can create own doc ONLY as role: 'user', status: 'pending'
+      allow create: if isSignedIn() && (
+        isAdmin() ||
+        (request.auth.uid == uid &&
+          request.resource.data.uid == uid &&
+          request.resource.data.role == 'user' &&
+          request.resource.data.status == 'pending')
+      );
+
+      // Users can update only cosmetic fields (never role, status, approvedAt, approvedBy, uid)
+      allow update: if isAdmin() || (
+        isSignedIn() &&
+        request.auth.uid == uid &&
+        !request.resource.data.diff(resource.data).affectedKeys()
+          .hasAny(['role', 'status', 'approvedAt', 'approvedBy', 'uid'])
+      );
+
+      allow delete: if isAdmin();
+    }
+
+    // Protected gym profiles & routines (gated by status == 'approved')
+    match /usuarios/{uid} {
+      allow read, write: if isApproved() && (request.auth.uid == uid || isAdmin());
+
+      match /{document=**} {
+        allow read, write: if isApproved() && (request.auth.uid == uid || isAdmin());
+      }
+    }
+
+    // Shared exercises catalog (read only for approved users, write for admins)
+    match /ejercicios/{id} {
+      allow read: if isApproved();
+      allow write: if isAdmin();
+    }
+  }
+}
