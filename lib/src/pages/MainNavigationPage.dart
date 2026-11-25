@@ -4,9 +4,10 @@ import 'package:flutter_application/src/pages/add_rutina_page.dart';
 //import 'package:flutter_application/src/pages/createRoutines_page.dart';
 import 'package:flutter_application/src/pages/home_page.dart';
 import 'package:flutter_application/src/pages/routines_page.dart';
+import 'package:flutter_application/src/pages/statistics_page.dart';
 import 'package:flutter/services.dart' show SystemNavigator;
 
-/// Navegador principal con 3 pestañas: Home, Ver Rutinas, Crear Rutina.
+/// Navegador principal con pestañas de inicio, rutinas y estadísticas.
 /// Requiere `uid` del usuario logueado para pasarlo a HomePage y MyRoutines.
 class MainNavigationPage extends StatefulWidget {
   final String uid;
@@ -19,15 +20,16 @@ class MainNavigationPage extends StatefulWidget {
 class _MainNavigationPageState extends State<MainNavigationPage> {
   int _selectedIndex = 0;
 
-  // 1. Claves de navegación independientes por cada pestaña
+  // Claves de navegación independientes por cada pestaña.
   final List<GlobalKey<NavigatorState>> _navigatorKeys = [
     GlobalKey<NavigatorState>(), // Pestaña 0 - Home
     GlobalKey<NavigatorState>(), // Pestaña 1 - Ver Rutinas
-    GlobalKey<NavigatorState>(), // Pestaña 2 - Crear Rutina
+    GlobalKey<NavigatorState>(), // Pestaña 2 - Estadísticas
+    GlobalKey<NavigatorState>(), // Pestaña 3 - Crear Rutina
   ];
 
   void _goToCreateTab() {
-    setState(() => _selectedIndex = 2);
+    setState(() => _selectedIndex = 3);
   }
 
   /// Diálogo de confirmación antes de salir de la app.
@@ -107,6 +109,10 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
             _buildTabNavigator(_navigatorKeys[1], MyRoutines(uid: widget.uid)),
             _buildTabNavigator(
               _navigatorKeys[2],
+              StatisticsPage(uid: widget.uid),
+            ),
+            _buildTabNavigator(
+              _navigatorKeys[3],
               AddRutinaPage(
                 uid: widget.uid,
                 onRutinaCreada: () {
@@ -129,7 +135,7 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
 
         // Barra de navegación inferior
         bottomNavigationBar: MyNavigationBar(
-          currentIndex: _selectedIndex,
+          currentIndex: _selectedIndex == 3 ? -1 : _selectedIndex,
           onDestinationSelected: (int index) {
             setState(() {
               _selectedIndex = index;

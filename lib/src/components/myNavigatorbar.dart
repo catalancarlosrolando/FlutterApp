@@ -25,21 +25,33 @@ class MyNavigationBar extends StatelessWidget {
           border: Border.all(color: colors.outline, width: 0.5),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              MyButtonNavigator(
-                text: 'Home',
-                icon: Icons.home,
-                isSelected: currentIndex == 0,
-                onTap: () => onDestinationSelected(0),
+              Expanded(
+                child: MyButtonNavigator(
+                  text: 'Home',
+                  icon: Icons.home,
+                  isSelected: currentIndex == 0,
+                  onTap: () => onDestinationSelected(0),
+                ),
               ),
-              MyButtonNavigator(
-                text: 'Rutinas',
-                icon: Icons.list,
-                isSelected: currentIndex == 1,
-                onTap: () => onDestinationSelected(1),
+              Expanded(
+                child: MyButtonNavigator(
+                  text: 'Rutinas',
+                  icon: Icons.list,
+                  isSelected: currentIndex == 1,
+                  onTap: () => onDestinationSelected(1),
+                ),
+              ),
+              const SizedBox(width: 56),
+              Expanded(
+                child: MyButtonNavigator(
+                  text: 'Estadísticas',
+                  icon: Icons.insights,
+                  isSelected: currentIndex == 2,
+                  onTap: () => onDestinationSelected(2),
+                ),
               ),
             ],
           ),

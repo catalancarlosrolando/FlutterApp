@@ -18,22 +18,36 @@ class MyButtonNavigator extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
 
-    return TextButton.icon(
+    return TextButton(
       style: TextButton.styleFrom(
         backgroundColor: isSelected ? colors.surfaceBright : Colors.transparent,
         foregroundColor: isSelected ? colors.onPrimary : colors.onSurface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+        padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 2.0),
+        minimumSize: Size.zero,
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
       onPressed: onTap, // 👈 Le avisa al padre que se presionó este botón
-      icon: Icon(
-        icon,
-        size: 20.0,
-        color: isSelected ? colors.onSurface : colors.onSurface,
-      ),
-      label: Text(
-        text,
-        style: TextStyle(fontWeight: FontWeight.bold, color: colors.onSurface),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
+            size: 20.0,
+            color: isSelected ? colors.primary : colors.onSurfaceVariant,
+          ),
+          const SizedBox(height: 2),
+          Text(
+            text,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 10,
+              color: colors.onSurface,
+            ),
+          ),
+        ],
       ),
     );
   }
