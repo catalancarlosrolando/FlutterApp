@@ -98,9 +98,8 @@ class _FitAccessAppState extends State<FitAccessApp> {
       routes: [
         GoRoute(
           path: '/loading',
-          builder: (context, state) => const Scaffold(
-            body: Center(child: CircularProgressIndicator()),
-          ),
+          builder: (context, state) =>
+              const Scaffold(body: Center(child: CircularProgressIndicator())),
         ),
         GoRoute(
           path: '/login',
@@ -124,9 +123,8 @@ class _FitAccessAppState extends State<FitAccessApp> {
         ),
         GoRoute(
           path: '/home',
-          builder: (context, state) => MainNavigationPage(
-            uid: _authGate.firebaseUser?.uid ?? '',
-          ),
+          builder: (context, state) =>
+              MainNavigationPage(uid: _authGate.firebaseUser?.uid ?? ''),
         ),
         GoRoute(
           path: '/admin',
@@ -168,7 +166,10 @@ class _FitAccessAppState extends State<FitAccessApp> {
             useMaterial3: true,
             colorScheme: darkColorScheme,
             scaffoldBackgroundColor: darkColorScheme.surface,
-            textTheme: GoogleFonts.nunitoTextTheme(),
+            textTheme: GoogleFonts.nunitoTextTheme().apply(
+              bodyColor: darkColorScheme.onSurface,
+              displayColor: darkColorScheme.onSurface,
+            ),
           ),
           themeMode: currentMode,
           routerConfig: _router,

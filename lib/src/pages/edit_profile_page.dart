@@ -40,7 +40,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         final data = await getPerfil(widget.uid, pid);
         if (data != null && mounted) {
           _profileId = pid;
-          _nombreCtrl.text = data['nombre'] ?? '';
+          _nombreCtrl.text = data['name'] ?? '';
           _imagenCtrl.text = data['image'] ?? '';
           _descCtrl.text = data['descripcion'] ?? '';
         }

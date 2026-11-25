@@ -15,25 +15,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  bool _ensuringProfile = false;
 
   User? get _user => FirebaseAuth.instance.currentUser;
-
-  Future<void> _ensureUserProfile() async {
-    if (_ensuringProfile || widget.uid.isEmpty) return;
-    _ensuringProfile = true;
-    try {
-      final user = _user;
-      await crearUsuario(
-        uid: widget.uid,
-        email: user?.email ?? '',
-        nombre: user?.displayName ?? (user?.email ?? '').split('@').first,
-        photoUrl: user?.photoURL ?? '',
-      );
-    } catch (_) {
-      // Handled by stream state if Firestore rules deny access
-    }
-  }
 
   Widget _estado(String mensaje, {bool loading = false}) {
     final colors = Theme.of(context).colorScheme;
@@ -72,7 +55,6 @@ class _HomePageState extends State<HomePage> {
         final profileId = snapshot.data;
 
         if (profileId == null || profileId.isEmpty) {
-          _ensureUserProfile();
           return _estado('Preparando tu perfil...', loading: true);
         }
 

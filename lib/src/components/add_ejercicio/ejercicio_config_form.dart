@@ -1,25 +1,41 @@
 import 'package:flutter/material.dart';
 
-class EjercicioConfigForm extends StatelessWidget {
-  final TextEditingController seriesCtrl;
+class SerieConfigItem {
   final TextEditingController repsCtrl;
   final TextEditingController pesoCtrl;
-  final String pesoUnit;
+  String pesoUnit;
+
+  SerieConfigItem({
+    String reps = '10',
+    String peso = '40',
+    this.pesoUnit = 'kg',
+  })  : repsCtrl = TextEditingController(text: reps),
+        pesoCtrl = TextEditingController(text: peso);
+
+  void dispose() {
+    repsCtrl.dispose();
+    pesoCtrl.dispose();
+  }
+}
+
+class EjercicioConfigForm extends StatelessWidget {
+  final List<SerieConfigItem> series;
   final String descanso;
-  final ValueChanged<String> onUnitChanged;
+  final VoidCallback onAddSerie;
+  final ValueChanged<int> onRemoveSerie;
   final ValueChanged<String> onDescansoChanged;
+  final void Function(int index, String unit) onUnitChanged;
 
   static const chipsDescanso = ['45 seg', '60 seg', '90 seg', '120 seg', '5 min'];
 
   const EjercicioConfigForm({
     super.key,
-    required this.seriesCtrl,
-    required this.repsCtrl,
-    required this.pesoCtrl,
-    required this.pesoUnit,
+    required this.series,
     required this.descanso,
-    required this.onUnitChanged,
+    required this.onAddSerie,
+    required this.onRemoveSerie,
     required this.onDescansoChanged,
+    required this.onUnitChanged,
   });
 
   @override
@@ -29,49 +45,171 @@ class EjercicioConfigForm extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // SERIES
-        _label(colors, 'Series'),
-        TextField(
-          controller: seriesCtrl,
-          keyboardType: TextInputType.number,
-          style: TextStyle(color: colors.onSurface),
-          decoration: _inputDecoration(colors),
-        ),
-        const SizedBox(height: 16),
-
-        // REPS
-        _label(colors, 'Reps'),
-        TextField(
-          controller: repsCtrl,
-          style: TextStyle(color: colors.onSurface),
-          decoration: _inputDecoration(colors).copyWith(
-            hintText: 'Ej: 10-12',
-          ),
-        ),
-        const SizedBox(height: 16),
-
-        // PESO
-        _label(colors, 'Peso objetivo'),
+        // Encabezado de Series
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(
-              child: TextField(
-                controller: pesoCtrl,
-                keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                style: TextStyle(color: colors.onSurface),
-                decoration: _inputDecoration(colors).copyWith(
-                  hintText: '80.0',
-                ),
+            Text(
+              'Series (${series.length})',
+              style: TextStyle(
+                color: colors.onSurface,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(width: 12),
-            _unitToggle(colors),
+            Text(
+              'Reps y Peso por serie',
+              style: TextStyle(color: colors.onSurfaceVariant, fontSize: 12),
+            ),
           ],
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 12),
+
+        // Lista de series una a una
+        ...series.asMap().entries.map((entry) {
+          final index = entry.key;
+          final item = entry.value;
+          return Container(
+            margin: const EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            decoration: BoxDecoration(
+              color: colors.surfaceContainerHigh,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: colors.outlineVariant.withAlpha(100),
+                width: 1,
+              ),
+            ),
+            child: Row(
+              children: [
+                // Número de serie
+                Container(
+                  width: 34,
+                  height: 34,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: colors.primary.withAlpha(35),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    '${index + 1}',
+                    style: TextStyle(
+                      color: colors.primary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+
+                // Repeticiones
+                Expanded(
+                  flex: 2,
+                  child: TextField(
+                    controller: item.repsCtrl,
+                    keyboardType: TextInputType.number,
+                    style: TextStyle(color: colors.onSurface, fontSize: 14),
+                    decoration: InputDecoration(
+                      isDense: true,
+                      labelText: 'Reps',
+                      labelStyle: TextStyle(
+                        color: colors.onSurfaceVariant,
+                        fontSize: 12,
+                      ),
+                      filled: true,
+                      fillColor: colors.surfaceContainer,
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 10,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+
+                // Peso
+                Expanded(
+                  flex: 3,
+                  child: TextField(
+                    controller: item.pesoCtrl,
+                    keyboardType: const TextInputType.numberWithOptions(
+                      decimal: true,
+                    ),
+                    style: TextStyle(color: colors.onSurface, fontSize: 14),
+                    decoration: InputDecoration(
+                      isDense: true,
+                      labelText: 'Peso',
+                      labelStyle: TextStyle(
+                        color: colors.onSurfaceVariant,
+                        fontSize: 12,
+                      ),
+                      filled: true,
+                      fillColor: colors.surfaceContainer,
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 10,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 6),
+
+                // Selector de unidad (kg / lbs)
+                _unitToggle(colors, item.pesoUnit, (u) => onUnitChanged(index, u)),
+
+                // Botón eliminar serie
+                if (series.length > 1)
+                  IconButton(
+                    icon: const Icon(Icons.delete_outline, size: 20),
+                    color: colors.error,
+                    tooltip: 'Eliminar serie',
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                    onPressed: () => onRemoveSerie(index),
+                  ),
+              ],
+            ),
+          );
+        }),
+
+        const SizedBox(height: 6),
+
+        // Botón agregar serie de una a una
+        SizedBox(
+          width: double.infinity,
+          child: OutlinedButton.icon(
+            onPressed: onAddSerie,
+            icon: const Icon(Icons.add, size: 20),
+            label: const Text(
+              'Agregar serie',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            style: OutlinedButton.styleFrom(
+              foregroundColor: colors.primary,
+              side: BorderSide(
+                color: colors.primary.withAlpha(160),
+                width: 1.5,
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+          ),
+        ),
+
+        const SizedBox(height: 24),
 
         // DESCANSO
-        _label(colors, 'Descanso'),
+        _label(colors, 'Descanso entre series'),
         Wrap(
           spacing: 8,
           runSpacing: 8,
@@ -104,47 +242,23 @@ class EjercicioConfigForm extends StatelessWidget {
     );
   }
 
-  Widget _unitToggle(ColorScheme colors) {
-    return Container(
-      decoration: BoxDecoration(
-        color: colors.surfaceContainerHigh,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      padding: const EdgeInsets.all(4),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: ['kg', 'lbs'].map((u) {
-          final selected = pesoUnit == u;
-          return GestureDetector(
-            onTap: () => onUnitChanged(u),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 150),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              decoration: BoxDecoration(
-                color: selected ? colors.primary : Colors.transparent,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Text(
-                u,
-                style: TextStyle(
-                  color: selected ? colors.onPrimary : colors.onSurfaceVariant,
-                  fontWeight: selected ? FontWeight.bold : FontWeight.normal,
-                ),
-              ),
-            ),
-          );
-        }).toList(),
-      ),
-    );
-  }
-
-  InputDecoration _inputDecoration(ColorScheme colors) {
-    return InputDecoration(
-      filled: true,
-      fillColor: colors.surfaceContainerHigh,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide.none,
+  Widget _unitToggle(ColorScheme colors, String currentUnit, ValueChanged<String> onChanged) {
+    return GestureDetector(
+      onTap: () => onChanged(currentUnit == 'kg' ? 'lbs' : 'kg'),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        decoration: BoxDecoration(
+          color: colors.surfaceContainerHighest,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Text(
+          currentUnit,
+          style: TextStyle(
+            color: colors.primary,
+            fontWeight: FontWeight.bold,
+            fontSize: 12,
+          ),
+        ),
       ),
     );
   }

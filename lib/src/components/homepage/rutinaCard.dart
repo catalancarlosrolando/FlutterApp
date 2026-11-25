@@ -18,7 +18,7 @@ class RutinaCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ejercicios = List.from(rutina['ejercicios'] ?? []);
+    final ejercicios = List.from(rutina['exercises'] ?? []);
     return ListView(
       padding: const EdgeInsets.all(20),
       children: [
@@ -84,7 +84,9 @@ class RutinaCard extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
-                          (rutina['categoria'] ?? '').toString().toUpperCase(),
+                          (rutina['category'] ?? 'nada')
+                              .toString()
+                              .toUpperCase(),
                           style: TextStyle(
                             color: colors.onPrimary,
                             fontWeight: FontWeight.bold,
@@ -118,63 +120,16 @@ class RutinaCard extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                '${rutina['tiempo']} · ${ejercicios.length} ejercicios · Ver detalles',
+                '${rutina['time']} · ${ejercicios.length} ejercicios · Ver detalles',
                 style: TextStyle(color: colors.primary, fontSize: 14),
               ),
               const SizedBox(height: 12),
               if ((rutina['description'] as String).isNotEmpty)
                 Text(
                   rutina['description'],
-                  style: TextStyle(
-                    color: colors.onSurfaceVariant,
-                    fontSize: 14,
-                  ),
+                  style: TextStyle(color: colors.onSurface, fontSize: 14),
                 ),
             ],
-          ),
-        ),
-        const SizedBox(height: 24),
-
-        // Lista de ejercicios
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Ejercicios',
-              style: TextStyle(
-                color: colors.onSurface,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => RoutineDetails(
-                      rutina: rutina,
-                      uid: uid,
-                      profileId: profileId,
-                    ),
-                  ),
-                );
-              },
-              child: const Text('Ver todos'),
-            ),
-          ],
-        ),
-        const SizedBox(height: 12),
-        ...ejercicios.asMap().entries.map(
-          (entry) => Padding(
-            padding: const EdgeInsets.only(bottom: 12),
-            child: Exercise(
-              exercise: Map<String, dynamic>.from(entry.value),
-              uid: uid,
-              profileId: profileId,
-              rutinaId: rutina['uid_doc'],
-              exerciseIndex: entry.key,
-            ),
           ),
         ),
       ],

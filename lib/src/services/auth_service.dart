@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application/src/models/app_user.dart';
 import 'package:flutter_application/src/services/biometric_service.dart';
-import 'package:flutter_application/src/services/firebase_services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthFailure implements Exception {
@@ -44,18 +43,7 @@ class AuthService {
         provider: 'password',
         overrideDisplayName: displayName.trim(),
       );
-      try {
-        await crearUsuario(
-          uid: user.uid,
-          email: user.email ?? email.trim(),
-          nombre: displayName.trim().isNotEmpty
-              ? displayName.trim()
-              : (user.email ?? '').split('@').first,
-          photoUrl: user.photoURL ?? '',
-        );
-      } catch (_) {
-        // usuarios/{uid} may be gated until approved; HomePage ensures it exists.
-      }
+
       return cred;
     } on FirebaseAuthException catch (e) {
       throw AuthFailure(_mapAuthError(e));
@@ -74,14 +62,6 @@ class AuthService {
       );
       final user = cred.user!;
       await syncUserDoc(user, provider: 'password');
-      try {
-        await crearUsuario(
-          uid: user.uid,
-          email: user.email ?? email.trim(),
-          nombre: user.displayName ?? (user.email ?? '').split('@').first,
-          photoUrl: user.photoURL ?? '',
-        );
-      } catch (_) {}
       await BiometricService.instance.updateCredentialsIfEnabled(
         uid: user.uid,
         email: email.trim(),
@@ -99,20 +79,10 @@ class AuthService {
     try {
       final googleUser = await GoogleSignIn.instance.authenticate();
       final auth = googleUser.authentication;
-      final credential = GoogleAuthProvider.credential(
-        idToken: auth.idToken,
-      );
+      final credential = GoogleAuthProvider.credential(idToken: auth.idToken);
       final cred = await _auth.signInWithCredential(credential);
       final user = cred.user!;
       await syncUserDoc(user, provider: 'google');
-      try {
-        await crearUsuario(
-          uid: user.uid,
-          email: user.email ?? '',
-          nombre: user.displayName ?? '',
-          photoUrl: user.photoURL ?? '',
-        );
-      } catch (_) {}
       return cred;
     } on FirebaseAuthException catch (e) {
       throw AuthFailure(_mapAuthError(e));
@@ -147,6 +117,19 @@ class AuthService {
           .map((e) => e.toLowerCase())
           .contains(email);
 
+      // Crear perfil predeterminado en subcolección users/{uid}/perfiles
+      final profileRef = docRef.collection('profiles').doc();
+      final defaultProfileName = displayName.isNotEmpty
+          ? displayName
+          : (email.isNotEmpty ? email.split('@').first : 'Principal');
+
+      await profileRef.set({
+        'name': defaultProfileName,
+        'image': photoUrl,
+        'descripcion': 'Perfil predeterminado',
+        'createdAt': FieldValue.serverTimestamp(),
+      });
+
       await docRef.set({
         'uid': user.uid,
         'email': email,
@@ -154,6 +137,7 @@ class AuthService {
         'photoUrl': photoUrl,
         'provider': provider,
         'providers': [provider],
+        'defaultProfileId': profileRef.id,
         'role': isBootstrapAdmin ? 'admin' : 'user',
         'status': isBootstrapAdmin ? 'approved' : 'pending',
         'createdAt': FieldValue.serverTimestamp(),
@@ -163,7 +147,7 @@ class AuthService {
       return;
     }
 
-    // Existing doc: only merge cosmetic fields & providers array.
+    // Existing doc: merge cosmetic fields & providers array, and guarantee defaultProfileId.
     final updateData = <String, dynamic>{
       'provider': provider,
       'providers': FieldValue.arrayUnion([provider]),
@@ -171,6 +155,27 @@ class AuthService {
     if (email.isNotEmpty) updateData['email'] = email;
     if (displayName.isNotEmpty) updateData['displayName'] = displayName;
     if (photoUrl.isNotEmpty) updateData['photoUrl'] = photoUrl;
+
+    final existingData = snap.data();
+    final currentProfileId = existingData?['defaultProfileId'] as String?;
+    if (currentProfileId == null || currentProfileId.isEmpty) {
+      final perfilesSnap = await docRef.collection('profiles').limit(1).get();
+      if (perfilesSnap.docs.isNotEmpty) {
+        updateData['defaultProfileId'] = perfilesSnap.docs.first.id;
+      } else {
+        final profileRef = docRef.collection('profiles').doc();
+        final defaultProfileName = displayName.isNotEmpty
+            ? displayName
+            : (email.isNotEmpty ? email.split('@').first : 'Principal');
+        await profileRef.set({
+          'name': defaultProfileName,
+          'image': photoUrl,
+          'descripcion': 'Perfil predeterminado',
+          'createdAt': FieldValue.serverTimestamp(),
+        });
+        updateData['defaultProfileId'] = profileRef.id;
+      }
+    }
 
     await docRef.set(updateData, SetOptions(merge: true));
   }
@@ -214,8 +219,11 @@ class AuthService {
         .snapshots()
         .map((q) {
           final list = q.docs.map(AppUser.fromDoc).toList();
-          list.sort((a, b) =>
-              (b.createdAt ?? DateTime(0)).compareTo(a.createdAt ?? DateTime(0)));
+          list.sort(
+            (a, b) => (b.createdAt ?? DateTime(0)).compareTo(
+              a.createdAt ?? DateTime(0),
+            ),
+          );
           return list;
         });
   }
@@ -223,8 +231,10 @@ class AuthService {
   Stream<List<AppUser>> streamAllUsers() {
     return _db.collection('users').snapshots().map((q) {
       final list = q.docs.map(AppUser.fromDoc).toList();
-      list.sort((a, b) =>
-          (b.createdAt ?? DateTime(0)).compareTo(a.createdAt ?? DateTime(0)));
+      list.sort(
+        (a, b) =>
+            (b.createdAt ?? DateTime(0)).compareTo(a.createdAt ?? DateTime(0)),
+      );
       return list;
     });
   }
@@ -255,9 +265,7 @@ class AuthService {
     required String targetUid,
     required UserRole role,
   }) async {
-    await _db.collection('users').doc(targetUid).update({
-      'role': role.name,
-    });
+    await _db.collection('users').doc(targetUid).update({'role': role.name});
   }
 
   String _mapAuthError(FirebaseAuthException e) {

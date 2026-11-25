@@ -25,13 +25,13 @@ class BotonBlack extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       ),
       onPressed: onPressed,
-      icon: iconEnable ? Icon(icon, color: colors.onSurfaceVariant) : null,
+      icon: iconEnable ? Icon(icon, color: colors.onSurface) : null,
       label: Text(
         text,
         style: TextStyle(
           fontSize: 16.0,
           fontWeight: FontWeight.normal,
-          color: success ? colors.onTertiary : colors.onSurfaceVariant,
+          color: success ? colors.onTertiary : colors.onSurface,
         ),
       ),
     );

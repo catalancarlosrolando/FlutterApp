@@ -147,23 +147,23 @@ class _AddRutinaPageState extends State<AddRutinaPage> {
           uidDoc: uidDoc,
           name: _nameCtrl.text.trim(),
           description: _descCtrl.text.trim(),
-          tiempo: _tiempoCtrl.text.trim(),
+          time: _tiempoCtrl.text.trim(),
           categoria: _categoria,
           image:
               _imagenesPorCategoria[_categoria] ??
               widget.rutinaParaEditar!['image'] ??
               '',
-          ejercicios: _ejercicios,
+          exercises: _ejercicios,
         );
       } else {
         await addRutina(
           uid: uid,
           profileId: profileId,
-          categoria: _categoria,
+          category: _categoria,
           name: _nameCtrl.text.trim(),
           description: _descCtrl.text.trim(),
           image: _imagenesPorCategoria[_categoria] ?? '',
-          tiempo: _tiempoCtrl.text.trim(),
+          time: _tiempoCtrl.text.trim(),
           ejercicios: _ejercicios,
         );
       }
@@ -520,7 +520,7 @@ class _EjercicioCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '${ejercicio['series']} series · ${ejercicio['reps']} reps\n'
+                      '${ejercicio['series'] is List ? (ejercicio['series'] as List).length : ejercicio['series']} series · ${ejercicio['reps']} reps\n'
                       '${ejercicio['peso']} · descanso ${ejercicio['descanso']}',
                       style: TextStyle(
                         color: colors.onSurfaceVariant,

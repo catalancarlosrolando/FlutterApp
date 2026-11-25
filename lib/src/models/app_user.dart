@@ -43,6 +43,7 @@ class AppUser {
   final List<String> providers;
   final UserRole role;
   final UserStatus status;
+  final String? defaultProfileId;
   final DateTime? createdAt;
   final DateTime? approvedAt;
   final String? approvedBy;
@@ -55,6 +56,7 @@ class AppUser {
     required this.providers,
     required this.role,
     required this.status,
+    this.defaultProfileId,
     this.createdAt,
     this.approvedAt,
     this.approvedBy,
@@ -71,7 +73,8 @@ class AppUser {
     final List<String> providers;
     if (rawProviders is Iterable) {
       providers = rawProviders.map((e) => e.toString()).toList();
-    } else if (data['provider'] is String && (data['provider'] as String).isNotEmpty) {
+    } else if (data['provider'] is String &&
+        (data['provider'] as String).isNotEmpty) {
       providers = [data['provider'] as String];
     } else {
       providers = const [];
@@ -85,6 +88,7 @@ class AppUser {
       providers: providers,
       role: UserRole.fromString(data['role'] as String?),
       status: UserStatus.fromString(data['status'] as String?),
+      defaultProfileId: data['defaultProfileId'] as String?,
       createdAt: (data['createdAt'] as Timestamp?)?.toDate(),
       approvedAt: (data['approvedAt'] as Timestamp?)?.toDate(),
       approvedBy: data['approvedBy'] as String?,

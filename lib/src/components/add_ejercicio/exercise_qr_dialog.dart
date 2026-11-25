@@ -23,7 +23,7 @@ class ExerciseQrDialog extends StatelessWidget {
       'name': exercise['name'] ?? '',
       'image': exercise['image'] ?? '',
       'tiempo': exercise['tiempo'] ?? '',
-      'series': exercise['series']?.toString() ?? '',
+      'series': exercise['series'],
       'reps': exercise['reps']?.toString() ?? '',
       'peso': exercise['peso']?.toString() ?? '',
       'descanso': exercise['descanso']?.toString() ?? '',

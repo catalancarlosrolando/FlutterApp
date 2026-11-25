@@ -120,14 +120,14 @@ class _MyRoutinesState extends State<MyRoutines> {
                                       as List<dynamic>?;
                               final exercisesCount = exercisesList?.length ?? 0;
                               final finalizada =
-                                  (rutina["finalizada"] as bool?) ?? false;
+                                  (rutina["completed"] as bool?) ?? false;
 
                               return Padding(
                                 padding: const EdgeInsets.only(bottom: 16.0),
                                 child: CardRoutine(
                                   rutinaName: rutina["name"] ?? "",
                                   descripcion: rutina['description'] ?? '',
-                                  time: rutina['tiempo'] ?? '',
+                                  time: rutina['time'] ?? 'nada',
                                   exercisesCount: exercisesCount.toString(),
                                   image: rutina["image"] ?? "",
                                   finalizada: finalizada,
@@ -169,7 +169,7 @@ class _MyRoutinesState extends State<MyRoutines> {
                               child: CardRoutine(
                                 rutinaName: rutina["name"] ?? "",
                                 descripcion: rutina['description'] ?? '',
-                                time: rutina['tiempo'] ?? '',
+                                time: rutina['time'] ?? '',
                                 exercisesCount: exercisesCount.toString(),
                                 image: rutina["image"] ?? "",
                                 finalizada: finalizada,

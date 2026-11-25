@@ -20,7 +20,7 @@ class PerfilDrawer extends StatelessWidget {
         return MyDrawer(
           uid: uid,
           photoUrl: perfil?['image'] as String? ?? user?.photoURL ?? '',
-          displayName: perfil?['nombre'] as String? ?? user?.displayName ?? '',
+          displayName: perfil?['name'] as String? ?? user?.displayName ?? '',
           email: user?.email ?? '',
           colors: Theme.of(context).colorScheme,
           isDark: Theme.of(context).brightness == Brightness.dark,

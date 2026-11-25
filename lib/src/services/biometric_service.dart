@@ -87,7 +87,10 @@ class BiometricService {
     if (!await isEnabled()) return null;
     final email = await _storage.read(key: _keyEmail);
     final password = await _storage.read(key: _keyPassword);
-    if (email == null || email.isEmpty || password == null || password.isEmpty) {
+    if (email == null ||
+        email.isEmpty ||
+        password == null ||
+        password.isEmpty) {
       return null;
     }
     return (email: email, password: password);
