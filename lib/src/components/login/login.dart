@@ -262,6 +262,7 @@ class _LoginState extends State<Login> {
             ],
             // Section 1: Email / Password
             TextFormField(
+              style: TextStyle(color: colors.onSurface),
               controller: _emailCtrl,
               enabled: !_loading,
               keyboardType: TextInputType.emailAddress,
@@ -281,6 +282,7 @@ class _LoginState extends State<Login> {
             ),
             const SizedBox(height: 12),
             TextFormField(
+              style: TextStyle(color: colors.onSurface),
               controller: _passwordCtrl,
               enabled: !_loading,
               obscureText: _obscurePassword,
@@ -365,7 +367,10 @@ class _LoginState extends State<Login> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('¿No tenés cuenta?'),
+                Text(
+                  '¿No tenés cuenta?',
+                  style: TextStyle(color: colors.onSurface),
+                ),
                 TextButton(
                   onPressed: _loading ? null : () => context.go('/register'),
                   child: const Text('Registrate'),

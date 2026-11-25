@@ -74,14 +74,12 @@ class _RegisterPageState extends State<RegisterPage> {
                 children: [
                   Text(
                     'Registrate en FitAccess',
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.headlineSmall
+                        ?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    'Tu cuenta quedará pendiente de aprobación por un administrador.',
-                    style: TextStyle(color: colors.onSurfaceVariant),
+                    'Tu cuenta quedará pendiente de aprobación por un administrador',
                   ),
                   const SizedBox(height: 20),
                   if (_error != null) ...[
@@ -100,6 +98,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     const SizedBox(height: 16),
                   ],
                   TextFormField(
+                    style: TextStyle(color: colors.onSurface),
                     controller: _nameCtrl,
                     enabled: !_loading,
                     textInputAction: TextInputAction.next,
@@ -111,6 +110,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   const SizedBox(height: 12),
                   TextFormField(
+                    style: TextStyle(color: colors.onSurface),
                     controller: _emailCtrl,
                     enabled: !_loading,
                     keyboardType: TextInputType.emailAddress,
@@ -124,12 +124,14 @@ class _RegisterPageState extends State<RegisterPage> {
                       final val = (v ?? '').trim();
                       if (val.isEmpty) return 'Ingresá tu correo';
                       final regex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
-                      if (!regex.hasMatch(val)) return 'Formato de correo inválido';
+                      if (!regex.hasMatch(val))
+                        return 'Formato de correo inválido';
                       return null;
                     },
                   ),
                   const SizedBox(height: 12),
                   TextFormField(
+                    style: TextStyle(color: colors.onSurface),
                     controller: _passwordCtrl,
                     enabled: !_loading,
                     obscureText: _obscurePass,
@@ -163,6 +165,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   const SizedBox(height: 12),
                   TextFormField(
+                    style: TextStyle(color: colors.onSurface),
                     controller: _confirmCtrl,
                     enabled: !_loading,
                     obscureText: _obscureConfirm,

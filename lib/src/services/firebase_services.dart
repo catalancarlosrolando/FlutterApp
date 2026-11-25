@@ -1,80 +1,38 @@
 // firebase_services.dart — Patrón cátedra: funciones sueltas.
 //
 // Colecciones:
-//   usuarios/{uid}                                  → { nombre, email, defaultProfileId }
-//   usuarios/{uid}/perfiles/{profileId}             → { nombre, createdAt }
-//   usuarios/{uid}/perfiles/{profileId}/rutinas/{id} → { categoria, name, description, image, tiempo, finalizada, ejercicios: [...] }
+//   users/{uid}                                     → { displayName, email, defaultProfileId, ... }
+//   users/{uid}/profiles/{profileId}                → { nombre, image, descripcion, createdAt }
+//   users/{uid}/profiles/{profileId}/rutinas/{id}   → { categoria, name, description, image, tiempo, finalizada, ejercicios: [...] }
 //   ejercicios/{id}                                 → { id, name, image (URL Cloudinary), tiempo, description }
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-// ===================== USUARIOS Y PERFILES =====================
-
-/// Flujo completo:
-/// 1. Si el usuario ya existe en Firestore, devuelve su defaultProfileId.
-/// 2. Si no existe, crea perfil inicial "Principal" en subcolección perfiles
-///    y guarda su id en defaultProfileId del usuario.
-Future<String> crearUsuario({
-  required String uid,
-  required String email,
-  required String nombre,
-  String photoUrl = '',
-}) async {
-  final userRef = _db.collection('usuarios').doc(uid);
-  final snap = await userRef.get();
-
-  if (snap.exists) {
-    final data = snap.data();
-    final profileId = data?['defaultProfileId'] as String?;
-    if (profileId != null && profileId.isNotEmpty) {
-      return profileId;
-    }
-  }
-
-  // Crear perfil predeterminado en subcolección
-  final perfilRef = userRef.collection('perfiles').doc();
-  await perfilRef.set({
-    'nombre': 'Principal',
-    'image': photoUrl,
-    'descripcion': 'Perfil predeterminado',
-    'createdAt': FieldValue.serverTimestamp(),
-  });
-
-  // Guardar documento del usuario con su perfil activo
-  await userRef.set({
-    'nombre': nombre,
-    'email': email,
-    'photoUrl': photoUrl,
-    'defaultProfileId': perfilRef.id,
-    'createdAt': FieldValue.serverTimestamp(),
-  }, SetOptions(merge: true));
-
-  return perfilRef.id;
-}
+// ===================== USUARIOS Y profiles =====================
 
 /// Obtiene el defaultProfileId activo actual (Future).
 Future<String?> getPerfilActivoId(String uid) async {
-  final snap = await _db.collection('usuarios').doc(uid).get();
+  final snap = await _db.collection('users').doc(uid).get();
   if (!snap.exists) return null;
   return snap.data()?['defaultProfileId'] as String?;
 }
 
 /// Stream reactivo del profileId activo del usuario.
 Stream<String?> streamPerfilActivoId(String uid) {
-  return _db.collection('usuarios').doc(uid).snapshots().map((snap) {
+  return _db.collection('users').doc(uid).snapshots().map((snap) {
     if (!snap.exists) return null;
     return snap.data()?['defaultProfileId'] as String?;
   });
 }
 
-/// Stream con la lista de todos los perfiles creados por el usuario.
-Stream<List<Map<String, dynamic>>> streamPerfiles(String uid) {
+/// Stream con la lista de todos los profiles creados por el usuario.
+Stream<List<Map<String, dynamic>>> streamprofiles(String uid) {
   return _db
-      .collection('usuarios')
+      .collection('users')
       .doc(uid)
-      .collection('perfiles')
+      .collection('profiles')
       .orderBy('createdAt', descending: false)
       .snapshots()
       .map((q) => q.docs.map((doc) => {'id': doc.id, ...doc.data()}).toList());
@@ -87,25 +45,23 @@ Future<String> crearNuevoPerfil(
   String image = '',
   String descripcion = '',
 }) async {
-  final ref = await _db
-      .collection('usuarios')
-      .doc(uid)
-      .collection('perfiles')
-      .add({
-        'nombre': nombrePerfil,
-        'image': image,
-        'descripcion': descripcion,
-        'createdAt': FieldValue.serverTimestamp(),
-      });
+  final ref = await _db.collection('users').doc(uid).collection('profiles').add(
+    {
+      'name': nombrePerfil,
+      'image': image,
+      'descripcion': descripcion,
+      'createdAt': FieldValue.serverTimestamp(),
+    },
+  );
   return ref.id;
 }
 
 /// Obtiene los datos del perfil activo.
 Future<Map<String, dynamic>?> getPerfil(String uid, String profileId) async {
   final snap = await _db
-      .collection('usuarios')
+      .collection('users')
       .doc(uid)
-      .collection('perfiles')
+      .collection('profiles')
       .doc(profileId)
       .get();
   if (!snap.exists) return null;
@@ -115,9 +71,9 @@ Future<Map<String, dynamic>?> getPerfil(String uid, String profileId) async {
 /// Stream de los datos del perfil activo en tiempo real.
 Stream<Map<String, dynamic>?> streamPerfil(String uid, String profileId) {
   return _db
-      .collection('usuarios')
+      .collection('users')
       .doc(uid)
-      .collection('perfiles')
+      .collection('profiles')
       .doc(profileId)
       .snapshots()
       .map((snap) => snap.exists ? {'id': snap.id, ...snap.data()!} : null);
@@ -132,12 +88,12 @@ Future<void> updatePerfil({
   required String descripcion,
 }) async {
   await _db
-      .collection('usuarios')
+      .collection('users')
       .doc(uid)
-      .collection('perfiles')
+      .collection('profiles')
       .doc(profileId)
       .set({
-        'nombre': nombre,
+        'name': nombre,
         'image': image,
         'descripcion': descripcion,
         'updatedAt': FieldValue.serverTimestamp(),
@@ -146,7 +102,7 @@ Future<void> updatePerfil({
 
 /// Cambia el perfil activo del usuario.
 Future<void> cambiarPerfilActivo(String uid, String profileId) async {
-  await _db.collection('usuarios').doc(uid).update({
+  await _db.collection('users').doc(uid).update({
     'defaultProfileId': profileId,
   });
 }
@@ -160,9 +116,9 @@ Stream<Map<String, List>> streamRutinasPorCategoria(
   String profileId,
 ) {
   return _db
-      .collection('usuarios')
+      .collection('users')
       .doc(uid)
-      .collection('perfiles')
+      .collection('profiles')
       .doc(profileId)
       .collection('rutinas')
       .snapshots()
@@ -175,7 +131,7 @@ Stream<Map<String, List>> streamRutinasPorCategoria(
         };
         for (var doc in query.docs) {
           final data = doc.data();
-          final cat = data['categoria'] ?? 'push';
+          final cat = data['category'] ?? 'push';
           out.putIfAbsent(cat, () => []);
           out[cat]!.add(_rutinaFromDoc(doc));
         }
@@ -186,9 +142,9 @@ Stream<Map<String, List>> streamRutinasPorCategoria(
 /// Stream reactivo de TODAS las rutinas del perfil (lista plana).
 Stream<List<Map<String, dynamic>>> streamRutinas(String uid, String profileId) {
   return _db
-      .collection('usuarios')
+      .collection('users')
       .doc(uid)
-      .collection('perfiles')
+      .collection('profiles')
       .doc(profileId)
       .collection('rutinas')
       .orderBy('createdAt', descending: true)
@@ -202,12 +158,12 @@ Stream<Map<String, dynamic>?> streamProximaRutina(
   String profileId,
 ) {
   return _db
-      .collection('usuarios')
+      .collection('users')
       .doc(uid)
-      .collection('perfiles')
+      .collection('profiles')
       .doc(profileId)
       .collection('rutinas')
-      .where('finalizada', isEqualTo: false)
+      .where('completed', isEqualTo: false)
       .orderBy('createdAt')
       .limit(1)
       .snapshots()
@@ -221,9 +177,9 @@ Stream<Map<String, dynamic>?> streamRutina({
   required String rutinaId,
 }) {
   return _db
-      .collection('usuarios')
+      .collection('users')
       .doc(uid)
-      .collection('perfiles')
+      .collection('profiles')
       .doc(profileId)
       .collection('rutinas')
       .doc(rutinaId)
@@ -235,13 +191,13 @@ Map<String, dynamic> _rutinaFromDoc(DocumentSnapshot doc) {
   final data = doc.data() as Map<String, dynamic>;
   return {
     'uid_doc': doc.id,
-    'categoria': data['categoria'] ?? 'push',
+    'category': data['category'] ?? 'push',
     'name': data['name'] ?? '',
     'description': data['description'] ?? '',
     'image': data['image'] ?? '',
-    'tiempo': data['tiempo'] ?? '',
-    'finalizada': data['finalizada'] ?? false,
-    'ejercicios': data['ejercicios'] ?? [],
+    'time': data['time'] ?? '',
+    'completed': data['completed'] ?? false,
+    'exercises': data['exercises'] ?? [],
   };
 }
 
@@ -251,27 +207,27 @@ Map<String, dynamic> _rutinaFromDoc(DocumentSnapshot doc) {
 Future<String> addRutina({
   required String uid,
   required String profileId,
-  required String categoria,
+  required String category,
   required String name,
   required String description,
   required String image,
-  required String tiempo,
+  required String time,
   List<Map<String, dynamic>> ejercicios = const [],
 }) async {
   final ref = await _db
-      .collection('usuarios')
+      .collection('users')
       .doc(uid)
-      .collection('perfiles')
+      .collection('profiles')
       .doc(profileId)
       .collection('rutinas')
       .add({
-        'categoria': categoria,
+        'category': category,
         'name': name,
         'description': description,
         'image': image,
-        'tiempo': tiempo,
-        'finalizada': false,
-        'ejercicios': ejercicios,
+        'time': time,
+        'completed': false,
+        'exercises': ejercicios,
         'createdAt': FieldValue.serverTimestamp(),
       });
   return ref.id;
@@ -283,25 +239,25 @@ Future<void> updateRutina({
   required String uidDoc,
   required String name,
   required String description,
-  required String tiempo,
+  required String time,
   String? categoria,
   String? image,
-  List<Map<String, dynamic>>? ejercicios,
+  List<Map<String, dynamic>>? exercises,
 }) async {
   final Map<String, dynamic> data = {
     'name': name,
     'description': description,
-    'tiempo': tiempo,
+    'time': time,
     'updatedAt': FieldValue.serverTimestamp(),
   };
-  if (categoria != null) data['categoria'] = categoria;
+  if (categoria != null) data['category'] = categoria;
   if (image != null) data['image'] = image;
-  if (ejercicios != null) data['ejercicios'] = ejercicios;
+  if (exercises != null) data['exercises'] = exercises;
 
   await _db
-      .collection('usuarios')
+      .collection('users')
       .doc(uid)
-      .collection('perfiles')
+      .collection('profiles')
       .doc(profileId)
       .collection('rutinas')
       .doc(uidDoc)
@@ -314,9 +270,9 @@ Future<void> borrarRutina({
   required String uidDoc,
 }) async {
   await _db
-      .collection('usuarios')
+      .collection('users')
       .doc(uid)
-      .collection('perfiles')
+      .collection('profiles')
       .doc(profileId)
       .collection('rutinas')
       .doc(uidDoc)
@@ -331,13 +287,13 @@ Future<void> setRutinaFinalizada({
   required bool finalizada,
 }) async {
   await _db
-      .collection('usuarios')
+      .collection('users')
       .doc(uid)
-      .collection('perfiles')
+      .collection('profiles')
       .doc(profileId)
       .collection('rutinas')
       .doc(uidDoc)
-      .update({'finalizada': finalizada});
+      .update({'completed': finalizada});
 }
 
 /// Resetea una rutina: la marca como no finalizada y pone todos sus
@@ -348,9 +304,9 @@ Future<void> resetRutina({
   required String uidDoc,
 }) async {
   final docRef = _db
-      .collection('usuarios')
+      .collection('users')
       .doc(uid)
-      .collection('perfiles')
+      .collection('profiles')
       .doc(profileId)
       .collection('rutinas')
       .doc(uidDoc);
@@ -359,13 +315,13 @@ Future<void> resetRutina({
   if (!snap.exists) return;
 
   final data = snap.data() ?? {};
-  final ejercicios = List<Map<String, dynamic>>.from(
-    (data['ejercicios'] as List<dynamic>? ?? []).map(
+  final exercises = List<Map<String, dynamic>>.from(
+    (data['exercises'] as List<dynamic>? ?? []).map(
       (e) => Map<String, dynamic>.from(e as Map)..['finalizado'] = false,
     ),
   );
 
-  await docRef.update({'finalizada': false, 'ejercicios': ejercicios});
+  await docRef.update({'completed': false, 'exercises': exercises});
 }
 
 /// Verifica si todos los ejercicios de la rutina están finalizados y,
@@ -376,9 +332,9 @@ Future<void> checkAndFinalizarRutina({
   required String rutinaId,
 }) async {
   final docRef = _db
-      .collection('usuarios')
+      .collection('users')
       .doc(uid)
-      .collection('perfiles')
+      .collection('profiles')
       .doc(profileId)
       .collection('rutinas')
       .doc(rutinaId);
@@ -387,14 +343,14 @@ Future<void> checkAndFinalizarRutina({
   if (!snap.exists) return;
 
   final data = snap.data() ?? {};
-  final ejercicios = List<dynamic>.from(data['ejercicios'] ?? []);
+  final exercises = List<dynamic>.from(data['exercises'] ?? []);
 
-  if (ejercicios.isEmpty) return;
+  if (exercises.isEmpty) return;
 
-  final allDone = ejercicios.every((e) => (e as Map)['finalizado'] == true);
+  final allDone = exercises.every((e) => (e as Map)['completed'] == true);
 
   if (allDone) {
-    await docRef.update({'finalizada': true});
+    await docRef.update({'completed': true});
   }
 }
 
@@ -407,9 +363,9 @@ Stream<List<Map<String, dynamic>>> streamEjerciciosDeRutina({
   required String rutinaId,
 }) {
   return _db
-      .collection('usuarios')
+      .collection('users')
       .doc(uid)
-      .collection('perfiles')
+      .collection('profiles')
       .doc(profileId)
       .collection('rutinas')
       .doc(rutinaId)
@@ -417,7 +373,7 @@ Stream<List<Map<String, dynamic>>> streamEjerciciosDeRutina({
       .map((doc) {
         if (!doc.exists) return <Map<String, dynamic>>[];
         final data = doc.data() as Map<String, dynamic>;
-        return List<Map<String, dynamic>>.from(data['ejercicios'] ?? []);
+        return List<Map<String, dynamic>>.from(data['exercises'] ?? []);
       });
 }
 
@@ -429,14 +385,14 @@ Future<void> addEjercicioARutina({
   required Map<String, dynamic> ejercicio,
 }) async {
   await _db
-      .collection('usuarios')
+      .collection('users')
       .doc(uid)
-      .collection('perfiles')
+      .collection('profiles')
       .doc(profileId)
       .collection('rutinas')
       .doc(rutinaId)
       .update({
-        'ejercicios': FieldValue.arrayUnion([ejercicio]),
+        'exercises': FieldValue.arrayUnion([ejercicio]),
       });
 }
 
@@ -447,17 +403,17 @@ Future<void> borrarEjercicioDeRutina({
   required String ejercicioId,
 }) async {
   final docRef = _db
-      .collection('usuarios')
+      .collection('users')
       .doc(uid)
-      .collection('perfiles')
+      .collection('profiles')
       .doc(profileId)
       .collection('rutinas')
       .doc(rutinaId);
   final snap = await docRef.get();
   final data = snap.data() ?? {};
-  final ejercicios = List.from(data['ejercicios'] ?? []);
+  final ejercicios = List.from(data['exercises'] ?? []);
   ejercicios.removeWhere((e) => e['id'] == ejercicioId);
-  await docRef.update({'ejercicios': ejercicios});
+  await docRef.update({'exercises': ejercicios});
 }
 
 /// Actualiza un ejercicio específico o la lista de ejercicios de una rutina,
@@ -470,9 +426,9 @@ Future<void> updateEjercicioEnRutina({
   int? ejercicioIndex,
 }) async {
   final docRef = _db
-      .collection('usuarios')
+      .collection('users')
       .doc(uid)
-      .collection('perfiles')
+      .collection('profiles')
       .doc(profileId)
       .collection('rutinas')
       .doc(rutinaId);
@@ -480,7 +436,7 @@ Future<void> updateEjercicioEnRutina({
   if (!snap.exists) return;
   final data = snap.data() ?? {};
   final ejercicios = List<Map<String, dynamic>>.from(
-    (data['ejercicios'] as List<dynamic>? ?? []).map(
+    (data['exercises'] as List<dynamic>? ?? []).map(
       (e) => Map<String, dynamic>.from(e as Map),
     ),
   );
@@ -499,7 +455,7 @@ Future<void> updateEjercicioEnRutina({
 
   if (targetIndex != -1) {
     ejercicios[targetIndex] = ejercicioActualizado;
-    await docRef.update({'ejercicios': ejercicios});
+    await docRef.update({'exercises': ejercicios});
   }
 }
 
@@ -518,9 +474,9 @@ Stream<List<Map<String, dynamic>>> streamCatalogoEjercicios() {
             'id': doc.id,
             'name': data['name'] ?? '',
             'image': data['image'] ?? '',
-            'tiempo': data['tiempo'] ?? '',
+            'time': data['tiempo'] ?? '',
             'description': data['description'] ?? '',
-            'finalizado': false,
+            'completed': false,
           };
         }).toList(),
       );
@@ -535,9 +491,44 @@ Future<List<Map<String, dynamic>>> getCatalogoEjercicios() async {
       'id': doc.id,
       'name': data['name'] ?? '',
       'image': data['image'] ?? '',
-      'tiempo': data['tiempo'] ?? '',
+      'time': data['time'] ?? '',
       'description': data['description'] ?? '',
-      'finalizado': false,
+      'completed': false,
     };
   }).toList();
+}
+
+// ===================== HISTORIAL DE SESIONES =====================
+
+/// Guarda el registro de una sesión de entrenamiento completada o finalizada
+/// en la subcolección `users/{uid}/profiles/{profileId}/historial`.
+Future<String> guardarHistorialSesion({
+  required String uid,
+  required String profileId,
+  required Map<String, dynamic> sesion,
+}) async {
+  final ref = await _db
+      .collection('users')
+      .doc(uid)
+      .collection('profiles')
+      .doc(profileId)
+      .collection('historial')
+      .add({...sesion, 'createdAt': FieldValue.serverTimestamp()});
+  return ref.id;
+}
+
+/// Stream reactivo del historial de sesiones de un perfil, ordenado por fecha descendente.
+Stream<List<Map<String, dynamic>>> streamHistorialSesiones({
+  required String uid,
+  required String profileId,
+}) {
+  return _db
+      .collection('users')
+      .doc(uid)
+      .collection('profiles')
+      .doc(profileId)
+      .collection('historial')
+      .orderBy('createdAt', descending: true)
+      .snapshots()
+      .map((q) => q.docs.map((doc) => {'id': doc.id, ...doc.data()}).toList());
 }

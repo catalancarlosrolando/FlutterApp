@@ -129,7 +129,7 @@ class Exercise extends StatelessWidget {
                       const SizedBox(height: 4),
                       IconText(
                         icon: Icons.timer,
-                        text: "${exercise['series']} series",
+                        text: "${exercise['series'] is List ? (exercise['series'] as List).length : exercise['series']} series",
                       ),
                       IconText(
                         icon: Icons.loop,

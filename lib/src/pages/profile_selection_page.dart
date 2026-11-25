@@ -17,7 +17,7 @@ class ProfileSelectionPage extends StatelessWidget {
           final perfilActivoId = activeSnap.data;
 
           return StreamBuilder<List<Map<String, dynamic>>>(
-            stream: streamPerfiles(uid),
+            stream: streamprofiles(uid),
             builder: (context, snap) {
               if (snap.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
@@ -50,7 +50,7 @@ class ProfileSelectionPage extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final perfil = perfiles[index];
                   final id = perfil['id'] as String;
-                  final nombre = perfil['nombre'] ?? 'Sin nombre';
+                  final nombre = perfil['name'] ?? 'Sin nombre';
                   final esActivo = id == perfilActivoId;
 
                   return ListTile(

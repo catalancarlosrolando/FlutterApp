@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/src/components/exercise_live/dialogs/exercise_live_dialogs.dart';
 import 'package:flutter_application/src/components/exercise_live/exercise_details_expansion_card.dart';
@@ -159,6 +160,7 @@ class _ExerciseLivePageState extends State<ExerciseLivePage> {
 
     if (marcarCompletado != null) {
       await _persistirFinalizacion(marcarCompletado: marcarCompletado);
+      await _guardarHistorialSesion(marcarCompletado: marcarCompletado);
     }
 
     if (mounted) {
@@ -192,6 +194,61 @@ class _ExerciseLivePageState extends State<ExerciseLivePage> {
       );
     } catch (e) {
       debugPrint('Error al persistir ejercicio: $e');
+    }
+  }
+
+  Future<void> _guardarHistorialSesion({required bool marcarCompletado}) async {
+    String? resolvedUid = widget.uid;
+    String? resolvedProfileId = widget.profileId;
+
+    if (resolvedUid == null || resolvedUid.isEmpty) {
+      resolvedUid = FirebaseAuth.instance.currentUser?.uid;
+    }
+    if (resolvedProfileId == null || resolvedProfileId.isEmpty) {
+      if (resolvedUid != null) {
+        resolvedProfileId = await getPerfilActivoId(resolvedUid);
+      }
+    }
+
+    if (resolvedUid == null || resolvedProfileId == null) {
+      debugPrint(
+        'No se pudo guardar historial: uid o profileId no disponibles',
+      );
+      return;
+    }
+
+    final mins = (_workoutElapsedSeconds ~/ 60).toString().padLeft(2, '0');
+    final secs = (_workoutElapsedSeconds % 60).toString().padLeft(2, '0');
+
+    final sesionData = <String, dynamic>{
+      'ejercicioId': widget.exercise['id'] ?? '',
+      'ejercicioNombre': widget.exercise['name'] ?? 'Ejercicio',
+      'ejercicioImage': widget.exercise['image'] ?? '',
+      'rutinaId': widget.rutinaId ?? '',
+      'duracionSegundos': _workoutElapsedSeconds,
+      'totalSeries': _sets.length,
+      //'seriesCompletadas': _sets.where((s) => s.isCompleted).length,
+      'descanso': widget.exercise['descanso'] ?? '60 seg',
+      'series': _sets
+          .map(
+            (s) => {
+              'set': s.setNumber,
+              'weight': s.weight,
+              'reps': s.reps,
+              //'isCompleted': s.isCompleted,
+            },
+          )
+          .toList(),
+    };
+
+    try {
+      await guardarHistorialSesion(
+        uid: resolvedUid,
+        profileId: resolvedProfileId,
+        sesion: sesionData,
+      );
+    } catch (e) {
+      debugPrint('Error al guardar historial de sesión: $e');
     }
   }
 
@@ -286,7 +343,12 @@ class _ExerciseLivePageState extends State<ExerciseLivePage> {
       if (allDone) {
         await _finalizarEjercicioCompleto();
       } else {
-        Navigator.of(context).pop();
+        _workoutTimer?.cancel();
+        _restTimer?.cancel();
+        await _guardarHistorialSesion(marcarCompletado: false);
+        if (mounted) {
+          Navigator.of(context).pop();
+        }
       }
     }
   }

@@ -59,11 +59,33 @@ class ExerciseDataParser {
 
   static int parseSeriesCount(dynamic val) {
     if (val == null) return 4;
+    if (val is List) return val.length;
     final match = RegExp(r'\d+').firstMatch(val.toString());
     return match != null ? (int.tryParse(match.group(0)!) ?? 4) : 4;
   }
 
   static List<WorkoutSetItem> createInitialSets(Map<String, dynamic> exercise) {
+    final rawSeries = exercise['series'];
+    if (rawSeries is List && rawSeries.isNotEmpty) {
+      return rawSeries.asMap().entries.map((entry) {
+        final index = entry.key;
+        final s = entry.value;
+        final map = s is Map ? Map<String, dynamic>.from(s) : <String, dynamic>{};
+        final weight = parseWeight(map['weight'] ?? map['weigth'] ?? map['peso'] ?? exercise['peso']);
+        final reps = parseReps(map['reps'] ?? exercise['reps']);
+        final setNum = (map['set'] as num?)?.toInt() ?? (map['setNumber'] as num?)?.toInt() ?? (index + 1);
+
+        return WorkoutSetItem(
+          setNumber: setNum,
+          previous: '${weight.toStringAsFixed(1)} kg x $reps',
+          weight: weight,
+          reps: reps,
+          isCompleted: false,
+          isActive: index == 0,
+        );
+      }).toList();
+    }
+
     final seriesCount = parseSeriesCount(exercise['series']);
     final defaultWeight = parseWeight(exercise['peso']);
     final defaultReps = parseReps(exercise['reps']);

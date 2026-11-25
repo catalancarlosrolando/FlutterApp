@@ -38,11 +38,8 @@ class _AddExercisePageState extends State<AddExercisePage> {
   // Ejercicio seleccionado (catálogo o QR)
   Map<String, dynamic>? _ejercicio;
 
-  // Controladores y estados editables
-  late final TextEditingController _seriesCtrl;
-  late final TextEditingController _repsCtrl;
-  late final TextEditingController _pesoCtrl;
-  String _pesoUnit = 'kg';
+  // Lista de series configuradas una a una
+  final List<SerieConfigItem> _seriesList = [];
   String _descanso = '90 seg';
 
   bool get _esEdicion => widget.ejercicioParaEditar != null;
@@ -53,38 +50,83 @@ class _AddExercisePageState extends State<AddExercisePage> {
     final edit = widget.ejercicioParaEditar;
     if (edit != null) {
       _ejercicio = Map<String, dynamic>.from(edit);
-      _seriesCtrl = TextEditingController(
-        text: edit['series']?.toString() ?? '4',
-      );
-      _repsCtrl = TextEditingController(
-        text: edit['reps']?.toString() ?? '10-12',
-      );
 
-      final pStr = edit['peso']?.toString() ?? '80 kg';
-      final partes = pStr.trim().split(' ');
-      _pesoCtrl = TextEditingController(
-        text: partes.isNotEmpty ? partes.first : '80',
-      );
-      if (partes.length > 1 && (partes[1] == 'lbs' || partes[1] == 'kg')) {
-        _pesoUnit = partes[1];
+      final rawSeries = edit['series'];
+      if (rawSeries is List && rawSeries.isNotEmpty) {
+        for (var s in rawSeries) {
+          final map = s is Map ? Map<String, dynamic>.from(s) : <String, dynamic>{};
+          final reps = map['reps']?.toString() ?? '10';
+          final peso = (map['peso'] ?? map['weight'] ?? map['weigth'])?.toString() ?? '40';
+          final unit = map['unit']?.toString() ?? 'kg';
+          _seriesList.add(SerieConfigItem(reps: reps, peso: peso, pesoUnit: unit));
+        }
+      } else {
+        final seriesCount = int.tryParse(edit['series']?.toString() ?? '') ?? 4;
+        final repsStr = edit['reps']?.toString() ?? '10';
+        final pStr = edit['peso']?.toString() ?? '40 kg';
+        final partes = pStr.trim().split(' ');
+        final pesoVal = partes.isNotEmpty ? partes.first : '40';
+        final unitVal = partes.length > 1 && (partes[1] == 'lbs' || partes[1] == 'kg')
+            ? partes[1]
+            : 'kg';
+
+        for (int i = 0; i < seriesCount; i++) {
+          _seriesList.add(
+            SerieConfigItem(reps: repsStr, peso: pesoVal, pesoUnit: unitVal),
+          );
+        }
       }
 
       if (edit['descanso'] != null) {
         _descanso = edit['descanso'].toString();
       }
     } else {
-      _seriesCtrl = TextEditingController(text: '4');
-      _repsCtrl = TextEditingController(text: '10-12');
-      _pesoCtrl = TextEditingController(text: '80');
+      // 3 series iniciales por defecto que el usuario puede editar o agregar más de una a una
+      _seriesList.addAll([
+        SerieConfigItem(reps: '12', peso: '40', pesoUnit: 'kg'),
+        SerieConfigItem(reps: '10', peso: '45', pesoUnit: 'kg'),
+        SerieConfigItem(reps: '8', peso: '50', pesoUnit: 'kg'),
+      ]);
     }
   }
 
   @override
   void dispose() {
-    _seriesCtrl.dispose();
-    _repsCtrl.dispose();
-    _pesoCtrl.dispose();
+    for (var s in _seriesList) {
+      s.dispose();
+    }
     super.dispose();
+  }
+
+  void _agregarSerie() {
+    setState(() {
+      final last = _seriesList.isNotEmpty ? _seriesList.last : null;
+      _seriesList.add(
+        SerieConfigItem(
+          reps: last?.repsCtrl.text.trim().isNotEmpty == true
+              ? last!.repsCtrl.text.trim()
+              : '10',
+          peso: last?.pesoCtrl.text.trim().isNotEmpty == true
+              ? last!.pesoCtrl.text.trim()
+              : '40',
+          pesoUnit: last?.pesoUnit ?? 'kg',
+        ),
+      );
+    });
+  }
+
+  void _quitarSerie(int index) {
+    if (_seriesList.length <= 1) return;
+    setState(() {
+      final removed = _seriesList.removeAt(index);
+      removed.dispose();
+    });
+  }
+
+  void _cambiarUnidad(int index, String unit) {
+    setState(() {
+      _seriesList[index].pesoUnit = unit;
+    });
   }
 
   Future<void> _abrirEscannerQR() async {
@@ -113,21 +155,37 @@ class _AddExercisePageState extends State<AddExercisePage> {
             'finalizado': decoded['finalizado'] == true,
           };
 
-          if (decoded['series'] != null) {
-            _seriesCtrl.text = decoded['series'].toString();
+          for (var s in _seriesList) {
+            s.dispose();
           }
-          if (decoded['reps'] != null) {
-            _repsCtrl.text = decoded['reps'].toString();
-          }
-          if (decoded['peso'] != null) {
-            final pStr = decoded['peso'].toString();
-            final partes = pStr.split(' ');
-            _pesoCtrl.text = partes.first;
-            if (partes.length > 1 &&
-                (partes[1] == 'lbs' || partes[1] == 'kg')) {
-              _pesoUnit = partes[1];
+          _seriesList.clear();
+
+          final rawSeries = decoded['series'];
+          if (rawSeries is List && rawSeries.isNotEmpty) {
+            for (var s in rawSeries) {
+              final map = s is Map ? Map<String, dynamic>.from(s) : <String, dynamic>{};
+              final reps = map['reps']?.toString() ?? '10';
+              final peso = (map['peso'] ?? map['weight'] ?? map['weigth'])?.toString() ?? '40';
+              final unit = map['unit']?.toString() ?? 'kg';
+              _seriesList.add(SerieConfigItem(reps: reps, peso: peso, pesoUnit: unit));
+            }
+          } else {
+            final seriesCount = int.tryParse(decoded['series']?.toString() ?? '') ?? 4;
+            final repsStr = decoded['reps']?.toString() ?? '10';
+            final pStr = decoded['peso']?.toString() ?? '40 kg';
+            final partes = pStr.trim().split(' ');
+            final pesoVal = partes.isNotEmpty ? partes.first : '40';
+            final unitVal = partes.length > 1 && (partes[1] == 'lbs' || partes[1] == 'kg')
+                ? partes[1]
+                : 'kg';
+
+            for (int i = 0; i < seriesCount; i++) {
+              _seriesList.add(
+                SerieConfigItem(reps: repsStr, peso: pesoVal, pesoUnit: unitVal),
+              );
             }
           }
+
           if (decoded['descanso'] != null) {
             _descanso = decoded['descanso'].toString();
           }
@@ -169,14 +227,43 @@ class _AddExercisePageState extends State<AddExercisePage> {
       return;
     }
 
+    if (_seriesList.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Agrega al menos una serie al ejercicio'),
+        ),
+      );
+      return;
+    }
+
+    final seriesArray = _seriesList.asMap().entries.map((entry) {
+      final index = entry.key;
+      final item = entry.value;
+      final repsVal = int.tryParse(item.repsCtrl.text.trim()) ?? 10;
+      final pesoVal = double.tryParse(item.pesoCtrl.text.trim()) ?? 0.0;
+      return <String, dynamic>{
+        'set': index + 1,
+        'reps': repsVal,
+        'peso': pesoVal,
+        'weight': pesoVal,
+        'weigth': pesoVal,
+        'unit': item.pesoUnit,
+      };
+    }).toList();
+
+    final repsSummary = seriesArray.map((s) => s['reps'].toString()).toSet().join('-');
+    final pesoSummary = seriesArray.isNotEmpty
+        ? '${seriesArray.first['peso']} ${seriesArray.first['unit']}'
+        : '0 kg';
+
     final ejercicioFinal = <String, dynamic>{
       'id': _ejercicio!['id'],
       'name': _ejercicio!['name'],
       'image': _ejercicio!['image'],
       'tiempo': _ejercicio!['tiempo'],
-      'series': _seriesCtrl.text.trim(),
-      'reps': _repsCtrl.text.trim(),
-      'peso': '${_pesoCtrl.text.trim()} $_pesoUnit',
+      'series': seriesArray,
+      'reps': repsSummary.isNotEmpty ? repsSummary : '10',
+      'peso': pesoSummary,
       'descanso': _descanso,
       'description': _ejercicio!['description'],
       'finalizado': _ejercicio!['finalizado'] == true,
@@ -321,13 +408,12 @@ class _AddExercisePageState extends State<AddExercisePage> {
 
           // Formulario de parámetros
           EjercicioConfigForm(
-            seriesCtrl: _seriesCtrl,
-            repsCtrl: _repsCtrl,
-            pesoCtrl: _pesoCtrl,
-            pesoUnit: _pesoUnit,
+            series: _seriesList,
             descanso: _descanso,
-            onUnitChanged: (u) => setState(() => _pesoUnit = u),
+            onAddSerie: _agregarSerie,
+            onRemoveSerie: _quitarSerie,
             onDescansoChanged: (d) => setState(() => _descanso = d),
+            onUnitChanged: _cambiarUnidad,
           ),
           const SizedBox(height: 40),
 

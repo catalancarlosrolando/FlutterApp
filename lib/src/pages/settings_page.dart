@@ -168,8 +168,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     _loadingBio
                         ? 'Comprobando hardware...'
                         : (_bioAvailable
-                            ? 'Protegé la app con huella o Face ID'
-                            : 'No disponible o sin biometría configurada en este dispositivo'),
+                              ? 'Protegé la app con huella o Face ID'
+                              : 'No disponible o sin biometría configurada en este dispositivo'),
                   ),
                   value: _bioEnabled,
                   onChanged: (!_bioAvailable || _loadingBio)
@@ -182,7 +182,9 @@ class _SettingsPageState extends State<SettingsPage> {
                   title: Text(isDark ? 'Modo oscuro' : 'Modo claro'),
                   value: isDark,
                   onChanged: (val) {
-                    themeNotifier.value = val ? ThemeMode.dark : ThemeMode.light;
+                    themeNotifier.value = val
+                        ? ThemeMode.dark
+                        : ThemeMode.light;
                   },
                 ),
               ],
