@@ -7,7 +7,7 @@
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import '../helpers/historial_helpers.dart';
+import 'package:flutter_application/src/helpers/historial_helpers.dart';
 
 class VolumeSparkline extends StatelessWidget {
   final List<WeeklyVolume> data;
