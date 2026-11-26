@@ -5,7 +5,7 @@
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import '../helpers/historial_helpers.dart';
+import 'package:flutter_application/src/helpers/historial_helpers.dart';
 
 class ScatterWeightRepsChart extends StatelessWidget {
   final List<SetPoint> data;
@@ -58,10 +58,10 @@ class ScatterWeightRepsChart extends StatelessWidget {
         maxY: maxR + rPad,
         gridData: FlGridData(
           show: true,
-          getDrawingHorizontalLine:
-              (_) => FlLine(color: colors.outline.withOpacity(0.3), strokeWidth: 1),
-          getDrawingVerticalLine:
-              (_) => FlLine(color: colors.outline.withOpacity(0.3), strokeWidth: 1),
+          getDrawingHorizontalLine: (_) =>
+              FlLine(color: colors.outline.withOpacity(0.3), strokeWidth: 1),
+          getDrawingVerticalLine: (_) =>
+              FlLine(color: colors.outline.withOpacity(0.3), strokeWidth: 1),
         ),
         borderData: FlBorderData(show: false),
         titlesData: FlTitlesData(
@@ -74,7 +74,8 @@ class ScatterWeightRepsChart extends StatelessWidget {
               showTitles: true,
               reservedSize: 36,
               getTitlesWidget: (val, meta) {
-                if (val == meta.min || val == meta.max) return const SizedBox.shrink();
+                if (val == meta.min || val == meta.max)
+                  return const SizedBox.shrink();
                 return Text(
                   val.toStringAsFixed(0),
                   style: TextStyle(fontSize: 9, color: colors.onSurfaceVariant),
@@ -91,7 +92,8 @@ class ScatterWeightRepsChart extends StatelessWidget {
               showTitles: true,
               reservedSize: 24,
               getTitlesWidget: (val, meta) {
-                if (val == meta.min || val == meta.max) return const SizedBox.shrink();
+                if (val == meta.min || val == meta.max)
+                  return const SizedBox.shrink();
                 return Text(
                   '${val.toStringAsFixed(0)} kg',
                   style: TextStyle(fontSize: 9, color: colors.onSurfaceVariant),
@@ -99,8 +101,12 @@ class ScatterWeightRepsChart extends StatelessWidget {
               },
             ),
           ),
-          topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-          rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          topTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          rightTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
         ),
         scatterTouchData: ScatterTouchData(
           touchTooltipData: ScatterTouchTooltipData(

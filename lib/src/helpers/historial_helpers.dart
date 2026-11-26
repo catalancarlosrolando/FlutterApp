@@ -85,9 +85,7 @@ List<Map<String, dynamic>> filterByExercise(
 // ── Transformaciones ─────────────────────────────────────────
 
 /// Volumen semanal: Σ weight × reps, agrupado por semana (lunes).
-List<WeeklyVolume> computeWeeklyVolume(
-  List<Map<String, dynamic>> historial,
-) {
+List<WeeklyVolume> computeWeeklyVolume(List<Map<String, dynamic>> historial) {
   final map = <DateTime, double>{};
 
   for (final sesion in historial) {
@@ -149,8 +147,11 @@ List<SetPoint> computeScatterPoints(List<Map<String, dynamic>> historial) {
 /// Retorna p.ej. +12.3 o -8.0 (porcentaje). null si no hay datos.
 double? computeWeeklyVariationPct(List<WeeklyVolume> volumes) {
   if (volumes.length < 2) return null;
-  final last = volumes[volumes.length - 1].volume;
-  final prev = volumes[volumes.length - 2].volume;
+  final latest = volumes[volumes.length - 1];
+  final previous = volumes[volumes.length - 2];
+  if (latest.weekStart.difference(previous.weekStart).inDays != 7) return null;
+  final last = latest.volume;
+  final prev = previous.volume;
   if (prev == 0) return null;
   return ((last - prev) / prev) * 100;
 }

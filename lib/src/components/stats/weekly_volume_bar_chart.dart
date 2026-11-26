@@ -5,8 +5,8 @@
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application/src/helpers/historial_helpers.dart';
 import 'package:intl/intl.dart';
-import '../helpers/historial_helpers.dart';
 
 class WeeklyVolumeBarChart extends StatelessWidget {
   final List<WeeklyVolume> data;
@@ -46,8 +46,8 @@ class WeeklyVolumeBarChart extends StatelessWidget {
           show: true,
           drawVerticalLine: false,
           horizontalInterval: maxY / 4 == 0 ? 1 : maxY / 4,
-          getDrawingHorizontalLine:
-              (_) => FlLine(color: colors.outline.withOpacity(0.3), strokeWidth: 1),
+          getDrawingHorizontalLine: (_) =>
+              FlLine(color: colors.outline.withOpacity(0.3), strokeWidth: 1),
         ),
         borderData: FlBorderData(show: false),
         titlesData: FlTitlesData(
@@ -56,7 +56,8 @@ class WeeklyVolumeBarChart extends StatelessWidget {
               showTitles: true,
               reservedSize: 48,
               getTitlesWidget: (val, meta) {
-                if (val == meta.min || val == meta.max) return const SizedBox.shrink();
+                if (val == meta.min || val == meta.max)
+                  return const SizedBox.shrink();
                 return Text(
                   _formatVol(val),
                   style: TextStyle(
@@ -79,14 +80,21 @@ class WeeklyVolumeBarChart extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 4),
                   child: Text(
                     label,
-                    style: TextStyle(fontSize: 9, color: colors.onSurfaceVariant),
+                    style: TextStyle(
+                      fontSize: 9,
+                      color: colors.onSurfaceVariant,
+                    ),
                   ),
                 );
               },
             ),
           ),
-          topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-          rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          topTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          rightTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
         ),
         barTouchData: BarTouchData(
           touchTooltipData: BarTouchTooltipData(
